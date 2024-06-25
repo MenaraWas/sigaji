@@ -36,8 +36,8 @@ class Slip_Gaji extends CI_Controller {
 	$tahun = $this->input->post('tahun');
 	$bulantahun =$bulan.$tahun;
 
-	$data['print_slip'] = $this->db->query("SELECT data_pegawai.nip,data_pegawai.nama_pegawai,data_jabatan.nama_jabatan,data_jabatan.gaji_pokok,data_jabatan.tj_transport,data_jabatan.uang_makan,data_kehadiran.alpha,data_kehadiran.bulan FROM data_pegawai INNER JOIN data_kehadiran ON data_kehadiran.nip=data_pegawai.nip
-		INNER JOIN data_jabatan ON data_jabatan.nama_jabatan=data_pegawai.jabatan
+	$data['print_slip'] = $this->db->query("SELECT data_pegawai.nip,data_pegawai.nama_pegawai,data_pegawai.jabatan,data_pegawai.gaji_pokok,data_kehadiran.alpha,data_kehadiran.bulan FROM data_pegawai INNER JOIN data_kehadiran ON data_kehadiran.nip=data_pegawai.nip
+		
 		WHERE data_kehadiran.bulan='$bulantahun' AND data_kehadiran.nama_pegawai='$nama'")->result();
 	$this->load->view('template_admin/header',$data);
 	$this->load->view('admin/gaji/cetak_slip_gaji', $data);

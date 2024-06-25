@@ -50,7 +50,7 @@
             <a class="collapse-item" href="<?php echo base_url('admin/potongan_gaji') ?>">Setting Potongan Gaji</a>
             <a class="collapse-item" href="<?php echo base_url('admin/data_tunjangan') ?>">Data Tunjangan</a>
             <hr>
-            <a class="collapse-item" href="<?php echo base_url('admin/data_penggajian') ?>">Data Gaji</a>
+            <a class="collapse-item" href="<?php echo base_url('admin/input_gaji') ?>">Data Gaji</a>
   
           </div>
         </div>

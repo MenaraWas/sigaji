@@ -32,7 +32,20 @@ class input_gaji extends CI_Controller {
 
 		$data['pegawai'] = $this->ModelPenggajian->get_data('data_pegawai')->result();
 		$data['gaji'] = $this->ModelPenggajian->get_data('data_gaji')->result();
-		// $data['gaji'] = $this->db->query("");
+		$data['gaji'] = $this->db->query("SELECT data_gaji.*, data_pegawai.nip,
+                                    data_pegawai.nama_pegawai, data_pegawai.gaji_pokok,
+                                    data_kehadiran.hadir,
+                                    data_kehadiran.alpha,
+                                    data_kehadiran.sakit
+                                FROM
+                                    data_pegawai
+                                INNER JOIN
+                                    data_kehadiran ON data_pegawai.nip = data_kehadiran.nip
+                                INNER JOIN
+                                    data_gaji ON data_kehadiran.id_kehadiran = data_gaji.id_kehadiran
+                                WHERE
+                                    data_pegawai.nip = '215610048'")->result();
+
 
 		$this->load->view('template_admin/header', $data);
 		$this->load->view('template_admin/sidebar');
@@ -50,8 +63,9 @@ class input_gaji extends CI_Controller {
 	
 	
 	public function input_gaji(){
-
+		
 	}
+	
 	
 
 }

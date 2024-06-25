@@ -3,7 +3,7 @@
         <h1 class="h3 mb-0 text-gray-800"><?php echo $title?></h1>
     </div>
     <a class="btn btn-sm btn-success mb-3" href="#" data-toggle="modal" data-target="#modalTambah"><i
-            class="fas fa-plus"></i> Tambah Pegawai</a>
+            class="fas fa-plus"></i> Tambah Data Gaji</a>
     <?php echo $this->session->flashdata('pesan')?>
 </div>
 
@@ -27,6 +27,7 @@
                             <th class="text-center">Gaji Bersih</th>
                             <th class="text-center">Total Presensi</th>
                             <th class="text-center">Status Pengajuan</th>
+                            <th class="text-center">catatan</th>
                             <th class="text-center">Actions</th>
                         </tr>
                     </thead>
@@ -38,12 +39,14 @@
                             <td class="text-center"><?php echo $p->nip ?></td>
                             <td class="text-center"><?php echo $p->nama_pegawai ?></td>
                             <td class="text-center"><?php echo $p->tgl_gaji ?></td>
-                            <td class="text-center"><?php echo $p->tot_gapok ?></td>
+                            <td class="text-center"><?php echo number_format($p->gaji_pokok)?></td>
                             <td class="text-center"><?php echo $p->tot_tunjangan ?></td>
                             <td class="text-center"><?php echo $p->tot_potongan ?></td>
                             <td class="text-center"><?php echo $p->tot_bonus ?></td>
-                            <td class="text-center"><?php echo $p->gaji_kotor ?></td>
-                            <td class="text-center"><?php echo $p->gaji_Bersih ?></td>
+			                <td class="text-center">Rp. <?php echo number_format($p->gaji_pokok + $p->tot_tunjangan + $p->tot_potongan + $p->tot_bonus,0,',','.') ?></td>
+			                <td class="text-center">Rp. <?php echo number_format($p->gaji_pokok + $p->tot_tunjangan + $p->tot_potongan + $p->tot_bonus,0,',','.') ?></td>
+						    <td class="text-center"><?php echo "Hadir: " . $p->hadir . ", Sakit: " . $p->sakit . ", Alpha: " . $p->alpha; ?></td>
+                            
                             <td class="text-center"><?php echo $p->status_pengajuan ?></td>
                             <td class="text-center"><?php echo $p->catatan ?></td>
                             <td>

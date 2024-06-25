@@ -52,7 +52,7 @@
 	<table class="table">
 		<tr>
 			<th class="text-center">No</th>
-			<th class="text-center">NIK</th>
+			<th class="text-center">NIP</th>
 			<th class="text-center">Nama Pegawai</th>
 			<th class="text-center">Jenis Kelamin</th>
 			<th class="text-center">Jabatan</th>
@@ -72,10 +72,10 @@
 		?>
 		<tr>
 			<td class="text-center"><?php echo $no++ ?></td>
-			<td class="text-center"><?php echo $g->nik ?></td>
+			<td class="text-center"><?php echo $g->nip ?></td>
 			<td class="text-center"><?php echo $g->nama_pegawai ?></td>
 			<td class="text-center"><?php echo $g->jenis_kelamin ?></td>
-			<td class="text-center"><?php echo $g->nama_jabatan ?></td>
+			<td class="text-center"><?php echo $g->jabatan ?></td>
 			<td class="text-center">Rp. <?php echo number_format($g->gaji_pokok,0,',','.') ?></td>
 			<td class="text-center">Rp. <?php echo number_format($g->tj_transport,0,',','.') ?></td>
 			<td class="text-center">Rp. <?php echo number_format($g->uang_makan,0,',','.') ?></td>

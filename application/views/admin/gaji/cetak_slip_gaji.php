@@ -32,14 +32,14 @@
 			<td><?php echo $ps->nama_pegawai?></td>
 		</tr>
 		<tr>
-			<td>NIK</td>
+			<td>NIP</td>
 			<td>:</td>
-			<td><?php echo $ps->nik?></td>
+			<td><?php echo $ps->nip?></td>
 		</tr>
 		<tr>
 			<td>Jabatan</td>
 			<td>:</td>
-			<td><?php echo $ps->nama_jabatan?></td>
+			<td><?php echo $ps->jabatan?></td>
 		</tr>
 		<tr>
 			<td>Bulan</td>
