@@ -34,7 +34,7 @@ class Login extends CI_Controller {
             $this->session->set_userdata('nama_pegawai', $cek->nama_pegawai);
             $this->session->set_userdata('photo', $cek->photo);
             $this->session->set_userdata('id_pegawai', $cek->id_pegawai);
-            $this->session->set_userdata('nik', $cek->nik);
+            $this->session->set_userdata('nip', $cek->nip);
 
             switch ($cek->hak_akses) {
                 case 1:

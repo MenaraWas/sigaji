@@ -13,11 +13,11 @@
 	<div class="card-body">
 		<form method="POST" action="<?php echo base_url('admin/data_pegawai/tambah_data_aksi')?>" enctype="multipart/form-data">
 			
-		<div class="form-group">
-			<label>NIP</label>
-			<input type="number" name="nip" class="form-control" value="<?php echo $next_nip; ?>" readonly>
-			<?php echo form_error('nip', '<div class="text-small text-danger"> </div>')?>
-		</div>
+			<div class="form-group">
+				<label>NIK</label>
+				<input type="number" name="nik" class="form-control">
+				<?php echo form_error('nik', '<div class="text-small text-danger"> </div>')?>
+			</div>
 
 			<div class="form-group">
 				<label>Nama Pegawai</label>
@@ -26,9 +26,9 @@
 			</div>
 
 			<div class="form-group">
-				<label>Username</label>
-				<input type="text" name="username" class="form-control">
-				<?php echo form_error('username', '<div class="text-small text-danger"> </div>')?>
+				<label>email</label>
+				<input type="text" name="email" class="form-control">
+				<?php echo form_error('email', '<div class="text-small text-danger"> </div>')?>
 			</div>
 
 			<div class="form-group">
@@ -59,19 +59,10 @@
 
 			<div class="form-group">
 				<label>Tanggal Masuk</label>
-				<input type="date" name="tanggal_masuk" class="form-control">
-				<?php echo form_error('tanggal_masuk', '<div class="text-small text-danger"> </div>')?>
+				<input type="date" name="tgl_lahir" class="form-control">
+				<?php echo form_error('tgl_lahir', '<div class="text-small text-danger"> </div>')?>
 			</div>
 
-			<div class="form-group">
-				<label>Status</label>
-				<select name="status" class="form-control">
-					<option value="">--Pilih Status--</option>
-					<option value="Karyawan Tetap">Karyawan Tetap</option>
-					<option value="Karyawan Tidak Tetap">Karyawan Tidak Tetap</option>
-				</select>
-				<?php echo form_error('status', '<div class="text-small text-danger"> </div>')?>
-			</div>
 
 			<div class="form-group">
 				<label>Hak Akses</label>

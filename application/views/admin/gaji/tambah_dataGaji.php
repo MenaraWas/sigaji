@@ -1,11 +1,14 @@
+<!-- Begin Page Content -->
 <div class="container-fluid">
+
+  <!-- Page Heading -->
   <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h1 class="h3 mb-0 text-gray-800"><?php echo $title?></h1>
   </div>
 
   <div class="card mb-3">
   <div class="card-header bg-primary text-white">
-    Filter Data Absensi Pegawai
+    Input Absensi Pegawai
   </div>
   <div class="card-body">
     <form class="form-inline">
@@ -39,11 +42,9 @@
 	    </select>
 	  </div>
 	  
-	  <button type="submit" class="btn btn-primary mb-2 ml-auto"><i class="fas fa-eye"></i> Tampilkan Data</button>
-	  <a href="<?php echo base_url('admin/data_absensi/input_absensi') ?>" class="btn btn-success mb-2 ml-3"><i class="fas fa-plus"></i> Input Kehadiran</a>
+	  <button type="submit" class="btn btn-primary mb-2 ml-auto"><i class="fas fa-eye"></i> Generate Form</button>
 	</form>
   </div>
-</div>
 </div>
 	
 	<?php
@@ -58,55 +59,45 @@
 		}
 	?>
 
-
 	<div class="alert alert-info">
 		Menampilkan Data Kehadiran Pegawai Bulan: <span class="font-weight-bold"><?php echo $bulan ?></span> Tahun: <span class="font-weight-bold"><?php echo $tahun ?></span>
 	</div>
-
-	<?php
-
-	$jml_data = count($absensi);
-	if($jml_data > 0 ) { ?>
-
-		<div class="container-fluid">
-		  <div class="card shadow mb-4">
-		   <div class="card-body">
-		     <div class="table-responsive">
-		       <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-		         <thead class="thead-dark">
-		           <tr>
-		              	<td class="text-center">No</td>
+	<form method="POST">
+	<button class="btn btn-success mb-3" type="submit" name="submit" value="submit">Simpan</button>
+	<table class="table table-bordered table-striped">
+		<tr>
+        <td class="text-center">No Slip Gaji</td>
 						<td class="text-center">NIP</td>
 						<td class="text-center">Nama Pegawai</td>
-						<td class="text-center">Jenias Kalamin</td>
-						<td class="text-center">Jabatan</td>
-						<td class="text-center">Hadir</td>
-						<td class="text-center">Sakit</td>
-						<td class="text-center">Alpha</td>
-		           </tr>
-		         </thead>
-		         <tbody>
-		           <?php $no=1; foreach($absensi as $a) :?>
-					<tr>
-						<td class="text-center"><?php echo $no++?></td>
-						<td class="text-center"><?php echo $a->nip?></td>
-						<td class="text-center"><?php echo $a->nama_pegawai?></td>
-						<td class="text-center"><?php echo $a->jenis_kelamin?></td>
-						<td class="text-center"><?php echo $a->nama_jabatan?></td>
-						<td class="text-center"><?php echo $a->hadir?></td>
-						<td class="text-center"><?php echo $a->sakit?></td>
-						<td class="text-center"><?php echo $a->alpha?></td>
-					</tr>
-		            </tr>
-		          <?php endforeach; ?>
-		         </tbody>
-		       </table>
-		     </div>
-		   </div>
-		  </div>
-		</div>
+						<td class="text-center">Tanggal Gaji</td>
+						<td class="text-center">Total Gapok</td>
+						<td class="text-center">Total Tunjangan</td>
+						<td class="text-center">Total Bonus</td>
+						<td class="text-center">Gaji Bersih</td>
+						<td class="text-center">Gaji Kotor</td>
+						<td class="text-center">Status Pengajuan</td>
+						<td class="text-center">Catatan</td>
+		</tr>
+		<?php $no=1; foreach($input_absensi as $a) :?>
+			<tr>
+				<input type="hidden" name="bulan[]" class="form-control" value="<?php echo $bulantahun?>">
+				<input type="hidden" name="nip[]" class="form-control" value="<?php echo $a->nip?>">
+				<input type="hidden" name="nama_pegawai[]" class="form-control" value="<?php echo $a->nama_pegawai?>">
+				<input type="hidden" name="jenis_kelamin[]" class="form-control" value="<?php echo $a->jenis_kelamin?>">
+				<input type="hidden" name="nama_jabatan[]" class="form-control" value="<?php echo $a->nama_jabatan?>">
 
-	<?php }else { ?>
-		<span class="badge badge-danger"><i class="fas fa-info-circle"></i> Data masih kosong, silakan input data kehadiran pada bulan dan tahun yang anda pilih</span>
-	<?php } ?>
+
+				<td><?php echo $no++?></td>
+				<td><?php echo $a->nip?></td>
+				<td><?php echo $a->nama_pegawai?></td>
+				<td><?php echo $a->jenis_kelamin?></td>
+				<td><?php echo $a->nama_jabatan?></td>
+				<td><input type="number" name="hadir[]" class="form-control" value="0"></td>
+				<td><input type="number" name="sakit[]" class="form-control" value="0"></td>
+				<td><input type="number" name="alpha[]" class="form-control" value="0"></td>
+		<?php endforeach; ?>
+	</table><br></br><br></br>
+	</form>
+
 </div>
+<!-- /.container-fluid -->

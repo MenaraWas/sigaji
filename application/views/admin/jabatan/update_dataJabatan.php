@@ -21,24 +21,6 @@
 				<?php echo form_error('nama_jabatan', '<div class="text-small text-danger"> </div>')?>
 			</div>
 
-			<div class="form-group">
-				<label>Gaji Pokok</label>
-				<input type="number" name="gaji_pokok" class="form-control" value="<?php echo $j->gaji_pokok?>">
-				<?php echo form_error('gaji_pokok', '<div class="text-small text-danger"> </div>')?>
-			</div>
-
-			<div class="form-group">
-				<label>Tunjangan Transport</label>
-				<input type="number" name="tj_transport" class="form-control" value="<?php echo $j->tj_transport?>">
-				<?php echo form_error('tj_transport', '<div class="text-small text-danger"> </div>')?>
-			</div>
-
-			<div class="form-group">
-				<label>Uang Makan</label>
-				<input type="number" name="uang_makan" class="form-control" value="<?php echo $j->uang_makan?>">
-				<?php echo form_error('uang_makan', '<div class="text-small text-danger"> </div>')?>
-			</div>
-
 			<button type="submit" class="btn btn-success" >Simpan</button>
 			<a href="<?php echo base_url('admin/data_jabatan')?>" class="btn btn-warning">Kembali</a>
 

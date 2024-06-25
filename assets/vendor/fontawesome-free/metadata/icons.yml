@@ -13386,22 +13386,22 @@ octopus-deploy:
     - brands
   unicode: e082
   voted: false
-odnoklassnipi:
+odnoklassniki:
   changes:
     - '4.4'
     - 5.0.0
-  label: Odnoklassnipi
+  label: Odnoklassniki
   search:
     terms: []
   styles:
     - brands
   unicode: f263
   voted: false
-odnoklassnipi-square:
+odnoklassniki-square:
   changes:
     - '4.4'
     - 5.0.0
-  label: Odnoklassnipi Square
+  label: Odnoklassniki Square
   search:
     terms: []
   styles:

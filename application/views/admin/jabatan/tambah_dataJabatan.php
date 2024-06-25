@@ -19,6 +19,7 @@
 				<?php echo form_error('nama_jabatan', '<div class="text-small text-danger"> </div>')?>
 			</div>
 
+ 
 			<button type="submit" class="btn btn-success" >Simpan</button>
 			<button type="reset" class="btn btn-danger" >Reset</button>
 			<a href="<?php echo base_url('admin/data_jabatan')?>" class="btn btn-warning">Kembali</a>

@@ -37,22 +37,22 @@ class Data_Jabatan extends CI_Controller {
 		$this->load->view('template_admin/footer');
 	}
 
-	public function tambah_data_aksi()
-	{
+	public function tambah_data_aksi() {
 		$this->_rules();
 
-		if ($this->form_validation->run() == FALSE) {
+		if($this->form_validation->run() == FALSE) {
 			$this->tambah_data();
 		} else {
-			$nama_jabatan   = $this->input->post('nama_jabatan');
+			$nama_jabatan	= $this->input->post('nama_jabatan');
+			
 
 			$data = array(
-				'nama_jabatan'  => $nama_jabatan,
+				'nama_jabatan' 	=> $nama_jabatan,
+				
 			);
 
 			$this->ModelPenggajian->insert_data($data, 'data_jabatan');
-
-			$this->session->set_flashdata('pesan', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+			$this->session->set_flashdata('pesan','<div class="alert alert-success alert-dismissible fade show" role="alert">
 				<strong>Data berhasil ditambahkan!</strong>
 				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 				<span aria-hidden="true">&times;</span>
@@ -61,7 +61,6 @@ class Data_Jabatan extends CI_Controller {
 			redirect('admin/data_jabatan');
 		}
 	}
-
 
 	public function update_data($id) 
 	{
@@ -83,17 +82,11 @@ class Data_Jabatan extends CI_Controller {
 		} else {
 			$id				= $this->input->post('id_jabatan');
 			$nama_jabatan	= $this->input->post('nama_jabatan');
-			$gaji_pokok		= $this->input->post('gaji_pokok');
-			$tj_transport	= $this->input->post('tj_transport');
-			$uang_makan		= $this->input->post('uang_makan');
 
 			$data = array(
-				'nama_jabatan' 	=> $nama_jabatan,
-				'gaji_pokok' 	=> $gaji_pokok,
-				'tj_transport' 	=> $tj_transport,
-				'uang_makan' 	=> $uang_makan,
+				'nama_jabatan' 	=> $nama_jabatan
 			);
-
+ 
 			$where = array(
 				'id_jabatan' => $id
 			);

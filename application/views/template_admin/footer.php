@@ -27,7 +27,7 @@
 <script src="<?php echo base_url(); ?>assets/js/demo/datatables-demo.js"></script>
 <link href="<?php echo base_url(); ?>assets/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
-<script type="text/javascript">
+<!-- <script type="text/javascript">
 // Pie Chart Example
 var ctx = document.getElementById("myPieChart");
 var myPieChart = new Chart(ctx, {
@@ -61,7 +61,7 @@ var myPieChart = new Chart(ctx, {
     cutoutPercentage: 80,
   },
 });
-</script>
+</script> -->
 
 <script type="text/javascript">
 // Area Chart Example
@@ -92,6 +92,21 @@ var myBarChart = new Chart(ctx, {
   }
 });
 </script>
+
+<script>
+    $(document).ready(function() {
+        // Mengambil data terbaru untuk no slip gaji
+        $.ajax({
+            type: "GET",
+            url: "<?php echo base_url('admin/data_input/get_latest_no_slip_gaji')?>",
+            success: function(response) {
+                // Mengisi nilai input no slip gaji dengan data terbaru
+                $("input[name='no_slip_gaji']").val(response);
+            }
+        });
+    });
+</script>
+
 
 </body>
 

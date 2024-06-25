@@ -39,11 +39,6 @@
 	  				<td><?php echo $p->tanggal_masuk?></td>
 	  			</tr>
 
-	  			<tr>
-	  				<td>Status</td>
-	  				<td>:</td>
-	  				<td><?php echo $p->status?></td>
-	  			</tr>
 	  		</table>
 	  	</div>
   	</div>

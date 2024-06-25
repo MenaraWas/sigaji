@@ -66,13 +66,16 @@ public function tambah_data_aksi()
         $this->tambah_data();
     } else {
         $nama_pegawai   = $this->input->post('nama_pegawai');
-        $username       = $this->input->post('username');
+        $email       = $this->input->post('email');
         $password       = md5($this->input->post('password'));
         $jenis_kelamin  = $this->input->post('jenis_kelamin');
         $jabatan        = $this->input->post('jabatan');
-        $tanggal_masuk  = $this->input->post('tanggal_masuk');
+        $tgl_lahir  = $this->input->post('tgl_lahir');
         $status         = $this->input->post('status');
         $hak_akses      = $this->input->post('hak_akses');
+        $alamat      = $this->input->post('alamat');
+        $gaji_pokok      = $this->input->post('gaji_pokok');
+        $no_telp     = $this->input->post('no_telp');
         $photo          = $_FILES['photo']['name'];
 
         // Ambil NIP terakhir
@@ -89,18 +92,31 @@ public function tambah_data_aksi()
         $data = array(
             'nip'           => $nip,
             'nama_pegawai'  => $nama_pegawai,
-            'username'      => $username,
+            'email'      => $email,
             'password'      => $password,
             'jenis_kelamin' => $jenis_kelamin,
             'jabatan'       => $jabatan,
-            'tanggal_masuk' => $tanggal_masuk,
+            'tgl_lahir' => $tgl_lahir,
             'status'        => $status,
             'hak_akses'     => $hak_akses,
+            'no_telp'     => $no_telp,
+            'alamat'     => $alamat,
+            'gaji_pokok'     => $gaji_pokok,
             'photo'         => $photo,
         );
 
         // Simpan data ke database
         $this->ModelPenggajian->insert_data($data, 'data_pegawai');
+
+		// Proses pengisian data user
+        $data_to_user = array(
+            'id_user'      => '',
+            'email'        => $email,
+            'password'     => $password,
+            'Level'        => $hak_akses,
+        );
+
+        $this->ModelPenggajian->insert_data_to_user($data_to_user, 'data_user');
 
         // Tambahkan data pengguna (user) jika diperlukan
         // ...
@@ -118,39 +134,39 @@ public function tambah_data_aksi()
 
 
 
-	public function add_user(){
+	// public function add_user(){
 
-		$this->_rules();
-		$username       = $this->input->post('username');
-		$password       = md5($this->input->post('password'));
-		$hak_akses      = $this->input->post('hak_akses');
+	// 	$this->_rules();
+	// 	$email       = $this->input->post('email');
+	// 	$password       = md5($this->input->post('password'));
+	// 	$hak_akses      = $this->input->post('hak_akses');
 
-		$data_to_user = array(
-			'id_user'      => '',
-			'username'      => $username,
-			'password'      => $password,
-			'Level'     => $hak_akses,
-		);
+	// 	$data_to_user = array(
+	// 		'id_user'      => '',
+	// 		'email'      => $email,
+	// 		'password'      => $password,
+	// 		'Level'     => $hak_akses,
+	// 	);
 
-		$this->ModelPenggajian->insert_data_to_user($data_to_user, 'data_user');
-		$this->session->set_flashdata('pesan','<div class="alert alert-success alert-dismissible fade show" role="alert">
-				<strong>Data berhasil ditambahkan!</strong>
-				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-				<span aria-hidden="true">&times;</span>
-				</button>
-				</div>');
+	// 	$this->ModelPenggajian->insert_data_to_user($data_to_user, 'data_user');
+	// 	$this->session->set_flashdata('pesan','<div class="alert alert-success alert-dismissible fade show" role="alert">
+	// 			<strong>Data berhasil ditambahkan!</strong>
+	// 			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+	// 			<span aria-hidden="true">&times;</span>
+	// 			</button>
+	// 			</div>');
 			
-			redirect('admin/data_user');
+	// 		redirect('admin/data_user');
 		
-	}
+	// }
 	
 
 	public function update_data($id) 
 	{
-		$where = array('id_pegawai' => $id);
+		$where = array('nip' => $id);
 		$data['title'] = "update Data Pegawai";
 		$data['jabatan'] = $this->ModelPenggajian->get_data('data_jabatan')->result();
-		$data['pegawai'] = $this->db->query("SELECT * FROM data_pegawai WHERE id_pegawai='$id'")->result();
+		$data['pegawai'] = $this->db->query("SELECT * FROM data_pegawai WHERE nip='$id'")->result();
 		
 		$this->load->view('template_admin/header', $data);
 		$this->load->view('template_admin/sidebar');
@@ -164,16 +180,19 @@ public function tambah_data_aksi()
 		if($this->form_validation->run() == FALSE) {
 			$this->update_data();
 		} else {
-			$id				= $this->input->post('id_pegawai');
+			
 			$nip			= $this->input->post('nip');
 			$nama_pegawai	= $this->input->post('nama_pegawai');
-			$username		= $this->input->post('username');
+			$email		= $this->input->post('email');
 			$password		= md5($this->input->post('password'));
 			$jenis_kelamin	= $this->input->post('jenis_kelamin');
 			$jabatan		= $this->input->post('jabatan');
-			$tanggal_masuk	= $this->input->post('tanggal_masuk');
+			$tgl_lahir	= $this->input->post('tgl_lahir');
 			$status			= $this->input->post('status');
 			$hak_akses		= $this->input->post('hak_akses');
+			$alamat      = $this->input->post('alamat');
+			$gaji_pokok      = $this->input->post('gaji_pokok');
+			$no_telp     = $this->input->post('no_telp');
 			$photo			= $_FILES['photo']['name'];
 			if($photo){
 				$config['upload_path'] 		= './photo';
@@ -192,21 +211,37 @@ public function tambah_data_aksi()
 			$data = array(
 				'nip' 			=> $nip,
 				'nama_pegawai' 	=> $nama_pegawai,
-				'username' 		=> $username,
+				'email' 		=> $email,
 				'password' 		=> $password,
 				'jenis_kelamin' => $jenis_kelamin,
 				'jabatan' 		=> $jabatan,
-				'tanggal_masuk' => $tanggal_masuk,
+				'tgl_lahir' => $tgl_lahir,
 				'status' 		=> $status,
 				'hak_akses' 	=> $hak_akses,
+				'no_telp'     => $no_telp,
+				'alamat'     => $alamat,
+				'gaji_pokok'     => $gaji_pokok,
+				'photo'         => $photo,
 			);
 
 			$where = array(
-				'id_pegawai' => $id
+				'nip' => $nip
 
 			);
-
 			$this->ModelPenggajian->update_data('data_pegawai', $data, $where);
+
+			$data_to_user = array (
+				'email'        => $email,
+            'password'     => $password,
+            'Level'        => $hak_akses,
+			);
+
+			$whereUser = array (
+				'email' => $email
+			);
+				
+			$this->ModelPenggajian->update_data_to_user('data_user', $data_to_user, $whereUser);
+
 			$this->session->set_flashdata('pesan','<div class="alert alert-success alert-dismissible fade show" role="alert">
 				<strong>Data berhasil diupdate!</strong>
 				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -221,13 +256,13 @@ public function tambah_data_aksi()
 		$this->form_validation->set_rules('nip','nip','required');
 		$this->form_validation->set_rules('nama_pegawai','Nama Pegawai','required');
 		$this->form_validation->set_rules('jenis_kelamin','Jenis Kelamin','required');
-		$this->form_validation->set_rules('tanggal_masuk','Tanggal Masuk','required');
+		$this->form_validation->set_rules('tgl_lahir','Tanggal Masuk','required');
 		$this->form_validation->set_rules('jabatan','Jabatan','required');
 		$this->form_validation->set_rules('status','Status','required');
 	}
 
 	public function delete_data($id) {
-		$where = array('id_pegawai' => $id);
+		$where = array('nip' => $id);
 		$this->ModelPenggajian->delete_data($where, 'data_pegawai');
 		$this->session->set_flashdata('pesan','<div class="alert alert-danger alert-dismissible fade show" role="alert">
 				<strong>Data berhasil dihapus!</strong>

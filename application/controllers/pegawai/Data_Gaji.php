@@ -18,7 +18,7 @@ class Data_Gaji extends CI_Controller {
 	public function index() 
 	{
 		$data['title'] = "Data Gaji";
-		$nik=$this->session->userdata('nik');
+		$nip=$this->session->userdata('nip');
 		$data['potongan'] = $this->ModelPenggajian->get_data('potongan_gaji')->result();
 		$data['gaji'] = $this->db->query("SELECT data_pegawai.nama_pegawai,data_pegawai.nip,
 			data_jabatan.gaji_pokok,data_jabatan.tj_transport,data_jabatan.uang_makan,
@@ -26,7 +26,7 @@ class Data_Gaji extends CI_Controller {
 			FROM data_pegawai
 			INNER JOIN data_kehadiran ON data_kehadiran.nip = data_pegawai.nip
 			INNER JOIN data_jabatan ON data_jabatan.nama_jabatan = data_pegawai.jabatan
-			WHERE data_kehadiran.nip = '$nik'
+			WHERE data_kehadiran.nip = '$nip'
 			ORDER BY data_kehadiran.bulan DESC")->result();
 
 		$this->load->view('template_pegawai/header',$data);

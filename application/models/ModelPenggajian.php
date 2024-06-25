@@ -14,6 +14,10 @@ class ModelPenggajian extends CI_model{
         $this->db->insert($table, $data_to_user);
     }
 
+    public function update_data_to_user($table, $data, $whare){
+		$this->db->update($table, $data, $whare);
+	}
+
 	public function update_data($table, $data, $whare){
 		$this->db->update($table, $data, $whare);
 	}
@@ -30,9 +34,9 @@ class ModelPenggajian extends CI_model{
 		}
 	}
 
-	public function cek_login($username, $password)
+	public function cek_login($email, $password)
 {
-    $result = $this->db->where('username', $username)
+    $result = $this->db->where('email', $email)
                         ->where('password', md5($password))
                         ->limit(1)
                         ->get('data_pegawai');
@@ -43,9 +47,20 @@ class ModelPenggajian extends CI_model{
     }
 }
 
-public function cek_login_user_only($username, $password)
+public function get_kehadiran_gaji_pegawai($nip) {
+    $this->db->select('data_pegawai.nip, data_pegawai.nama_pegawai, data_kehadiran.hadir, data_kehadiran.alpha, data_kehadiran.sakit, data_gaji.*');
+    $this->db->from('data_pegawai');
+    $this->db->join('data_kehadiran', 'data_pegawai.nip = data_kehadiran.nip');
+    $this->db->join('data_gaji', 'data_kehadiran.id = data_gaji.id_presensi');
+    $this->db->where('data_pegawai.nip', $nip);
+    $query = $this->db->get();
+    return $query->result();
+}
+
+
+public function cek_login_user_only($email, $password)
 {
-    $result = $this->db->where('username', $username)
+    $result = $this->db->where('email', $email)
                         ->where('password', md5($password))
                         ->limit(1)
                         ->get('data_user');

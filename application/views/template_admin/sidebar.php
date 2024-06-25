@@ -33,6 +33,7 @@
             <a class="collapse-item" href="<?php echo base_url('admin/data_jabatan') ?>">Data Jabatan</a>
             <a class="collapse-item" href="<?php echo base_url('admin/data_user') ?>">Data User</a>
             <a class="collapse-item" href="<?php echo base_url('admin/data_bonus') ?>">Data Bonus</a>
+            <a class="collapse-item" href="<?php echo base_url('admin/data_akses') ?>">Hak Akses</a>
           </div>
         </div>
       </li>
@@ -47,9 +48,9 @@
           <div class="bg-white py-2 collapse-inner rounded">
             <a class="collapse-item" href="<?php echo base_url('admin/data_absensi') ?>">Data Absensi</a>
             <a class="collapse-item" href="<?php echo base_url('admin/potongan_gaji') ?>">Setting Potongan Gaji</a>
-            <a class="collapse-item" href="<?php echo base_url('admin/data_penggajian') ?>">Data Gaji</a>
-            <a class="collapse-item" href="<?php echo base_url('admin/detail_gaji') ?>">Detail Gaji</a>
             <a class="collapse-item" href="<?php echo base_url('admin/data_tunjangan') ?>">Data Tunjangan</a>
+            <hr>
+            <a class="collapse-item" href="<?php echo base_url('admin/data_penggajian') ?>">Data Gaji</a>
   
           </div>
         </div>

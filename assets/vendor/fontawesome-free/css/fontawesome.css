@@ -2844,10 +2844,10 @@ readers do not read off random characters that represent icons */
 .fa-octopus-deploy:before {
   content: "\e082"; }
 
-.fa-odnoklassnipi:before {
+.fa-odnoklassniki:before {
   content: "\f263"; }
 
-.fa-odnoklassnipi-square:before {
+.fa-odnoklassniki-square:before {
   content: "\f264"; }
 
 .fa-oil-can:before {
