@@ -35,10 +35,10 @@ class Detail_Gaji extends CI_Controller {
             $data['next_id'] = 1;
         }
 
-        $this->load->view('template_admin/header', $data);
-        $this->load->view('template_admin/sidebar');
+        $this->load->view('template_manager/header', $data);
+        $this->load->view('template_manager/sidebar');
         $this->load->view('admin/Detail_Gaji', $data);
-        $this->load->view('template_admin/footer');
+        $this->load->view('template_manager/footer');
     }
 
     public function tambah_data() {
@@ -56,10 +56,10 @@ class Detail_Gaji extends CI_Controller {
             $data['next_id'] = 1;
         }
 
-        $this->load->view('template_admin/header', $data);
-        $this->load->view('template_admin/sidebar');
+        $this->load->view('template_manager/header', $data);
+        $this->load->view('template_manager/sidebar');
         $this->load->view('admin/penggajian/tambah_gaji', $data);
-        $this->load->view('template_admin/footer');
+        $this->load->view('template_manager/footer');
     }
 
     public function tambah_data_aksi() {

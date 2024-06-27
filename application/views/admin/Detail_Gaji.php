@@ -23,14 +23,14 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php $no = 1; foreach ($detail_gaji as $p) : ?>
+                        <?php $no = 1; foreach ($dg as $p) : ?>
                         <tr>
                             <td class="text-center"><?php echo $no++; ?></td>
                             <td class="text-center"><?php echo $p->id_detail_gaji ?></td>
                             <td class="text-center"><?php echo $p->no_slip_gaji; ?></td>
-                            <td class="text-center"><?php echo $p->Nama_Tunjangan; ?></td>
-                            <td class="text-center"><?php echo $p->potongan; ?></td>
-                            <td class="text-center"><?php echo $p->Nama_Bonus; ?></td>
+                            <td class="text-center"><?php echo $p->id_tunjangan; ?></td>
+                            <td class="text-center"><?php echo $p->id_potongan; ?></td>
+                            <td class="text-center"><?php echo $p->id_bonus; ?></td>
                             <td class="text-center">
                                 <a class="btn btn-sm btn-info" href="<?php echo base_url('admin/detail_gaji/update_data/'.$p->id_detail_gaji); ?>"><i class="fas fa-edit"></i></a>
                                 <a class="btn btn-sm btn-danger" href="<?php echo base_url('admin/detail_gaji/delete_data/'.$p->id_detail_gaji); ?>" onclick="return confirm('Yakin ingin menghapus data?');"><i class="fas fa-trash"></i></a>
@@ -79,7 +79,7 @@
                     <select name="id_tunjangan" class="form-control">
                         <option value="">--Pilih Tunjangan--</option>
                         <?php foreach ($tunjangan as $t) : ?>
-                            <option value="<?php echo $t->Kode_Tunjangan; ?>"><?php echo $t->Nama_Tunjangan; ?></option>
+                            <option value="<?php echo $t->Jumlah_Tunjangan; ?>"><?php echo $t->Nama_Tunjangan; ?></option>
                         <?php endforeach; ?>
                     </select>
                     <?php echo form_error('id_tunjangan', '<div class="text-small text-danger"> </div>')?>
@@ -90,7 +90,7 @@
                     <select name="id_potongan" class="form-control">
                         <option value="">--Pilih Potongan--</option>
                         <?php foreach ($potongan as $pt) : ?>
-                            <option value="<?php echo $pt->id; ?>"><?php echo $pt->potongan; ?></option>
+                            <option value="<?php echo $pt->jml_potongan; ?>"><?php echo $pt->potongan; ?></option>
                         <?php endforeach; ?>
                     </select>
                     <?php echo form_error('id_potongan', '<div class="text-small text-danger"> </div>')?>
@@ -101,7 +101,7 @@
                     <select name="id_bonus" class="form-control">
                         <option value="">--Pilih Bonus--</option>
                         <?php foreach ($bonus as $b) : ?>
-                            <option value="<?php echo $b->Kode_Bonus; ?>"><?php echo $b->Nama_Bonus; ?></option>
+                            <option value="<?php echo $b->Jumlah_Bonus; ?>"><?php echo $b->Nama_Bonus; ?></option>
                         <?php endforeach; ?>
                     </select>
                     <?php echo form_error('id_bonus', '<div class="text-small text-danger"> </div>')?>

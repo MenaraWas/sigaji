@@ -181,7 +181,7 @@
                         <div class="body">
                            <div class="title"><font size="4"><b><i>Halaman Manager</font></b></i></div>
                            <div id="flip5"><font color="white">Baca Selengkapnya</font></div>
-                           <div id="panel5">ini role manajer</div>
+                           <div id="panel5">Manager merupakan user yang mempunyai akses untuk memberikan persetujuan dan/atau revisi gaji yang diajukan oleh admin dan dapat melihat dan mencetak semua laporan yang ada didalam sistem</div>
                         </div>
                      </div>
                   </div>
@@ -262,7 +262,7 @@
          <div class="container">
             <div class="row">
                <div class="col-12 text-center my-3">
-                  Copyright &copy; Abid Taufiqur Rohman | Penggajian 2022 - All Rights Reserved
+                  Copyright &copy; Menarawas by Naravi | Penggajian 2024 - All Rights Reserved
                </div>
             </div>
          </div>

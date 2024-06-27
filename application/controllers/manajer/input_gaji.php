@@ -6,7 +6,7 @@ class Input_gaji extends CI_Controller {
 	public function __construct(){
 		parent::__construct();
 
-		if($this->session->userdata('hak_akses') != '1'){
+		if($this->session->userdata('hak_akses') != '3'){
 			$this->session->set_flashdata('pesan','<div class="alert alert-danger alert-dismissible fade show" role="alert">
 				<strong>Anda Belum Login!</strong>
 				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -47,10 +47,10 @@ class Input_gaji extends CI_Controller {
 	// print_r($data['gaji']);
 	// exit;
 
-	$this->load->view('template_admin/header', $data);
-	$this->load->view('template_admin/sidebar');
+	$this->load->view('template_manager/header', $data);
+	$this->load->view('template_manager/sidebar');
 	$this->load->view('admin/penggajian/data_gaji', $data);
-	$this->load->view('template_admin/footer');
+	$this->load->view('template_manager/footer');
 }
 
 	
@@ -67,10 +67,10 @@ class Input_gaji extends CI_Controller {
 			$data['next_no_slip'] = 1;
 		}
 
-		$this->load->view('template_admin/header', $data);
-		$this->load->view('template_admin/sidebar');
+		$this->load->view('template_manager/header', $data);
+		$this->load->view('template_manager/sidebar');
 		$this->load->view('admin/penggajian/tambah_gaji', $data);
-		$this->load->view('template_admin/footer');
+		$this->load->view('template_manager/footer');
 	}
 
 	public function tambah_data_aksi(){
@@ -148,10 +148,10 @@ class Input_gaji extends CI_Controller {
 		$data['pegawai'] = $this->ModelPenggajian->get_data('data_pegawai')->result();
 		$data['gaji'] = $this->ModelPenggajian->get_data_by_id($nip, 'data_gaji')->row();
 
-		$this->load->view('template_admin/header', $data);
-		$this->load->view('template_admin/sidebar');
+		$this->load->view('template_manager/header', $data);
+		$this->load->view('template_manager/sidebar');
 		$this->load->view('admin/penggajian/update_gaji', $data);
-		$this->load->view('template_admin/footer');
+		$this->load->view('template_manager/footer');
 	}
 
 	public function update_data_aksi(){

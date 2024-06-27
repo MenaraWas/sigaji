@@ -25,11 +25,11 @@
   	<?php $pot_gaji = $g->alpha * $potongan ?>
   	<tr>
   		<td><?php echo $g->bulan ?></td>
-  		<td>Rp. <?php echo number_format($g->gaji_pokok,0,',','.') ?></td>
-  		<td>Rp. <?php echo number_format($g->tj_transport,0,',','.') ?></td>
-  		<td>Rp. <?php echo number_format($g->uang_makan,0,',','.') ?></td>
-  		<td>Rp. <?php echo number_format($pot_gaji,0,',','.') ?></td>
-  		<td>Rp. <?php echo number_format($g->gaji_pokok+$g->tj_transport+$g->uang_makan-$pot_gaji,0,',','.') ?></td>
+  		<td>Rp. <?php echo number_format($g->tot_gapok,0,',','.') ?></td>
+  		<td>Rp. <?php echo number_format($g->id_tunjangan,0,',','.') ?></td>
+  		<td>Rp. <?php echo number_format($g->id_bonus,0,',','.') ?></td>
+  		<td>Rp. <?php echo number_format($g->id_potongan,0,',','.') ?></td>
+  		<td>Rp. <?php echo number_format($g->tot_gapok+$g->id_tunjangan+$g->id_bonus-$id_potongan,0,',','.') ?></td>
   		<td>
   			<center>
   				<a class="btn btn-sm btn-primary" href="<?php echo base_url('pegawai/data_gaji/cetak_slip/'.$g->id_kehadiran)?>"><i class="fas fa-print"></i></a>

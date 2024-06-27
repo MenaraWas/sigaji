@@ -5,7 +5,7 @@ class Laporan_Absensi extends CI_Controller {
 	public function __construct(){
 		parent::__construct();
 
-		if($this->session->userdata('hak_akses') != '1'){
+		if($this->session->userdata('hak_akses') != '3'){
 			$this->session->set_flashdata('pesan','<div class="alert alert-danger alert-dismissible fade show" role="alert">
 				<strong>Anda Belum Login!</strong>
 				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -19,10 +19,10 @@ class Laporan_Absensi extends CI_Controller {
 	public function index() {	
 		$data['title'] = "Laporan Absensi Pegawai";
 
-		$this->load->view('template_admin/header',$data);
-		$this->load->view('template_admin/sidebar');
+		$this->load->view('template_manager/header',$data);
+		$this->load->view('template_manager/sidebar');
 		$this->load->view('admin/absensi/laporan_absensi');
-		$this->load->view('template_admin/footer');
+		$this->load->view('template_manager/footer');
 	}
 
 	public function cetak_laporan_absensi(){
@@ -41,7 +41,7 @@ class Laporan_Absensi extends CI_Controller {
 		FROM data_kehadiran 
 		INNER JOIN data_pegawai ON data_kehadiran.nip=data_pegawai.nip
 		WHERE bulan='$bulantahun' ORDER BY nama_pegawai ASC")->result();
-	$this->load->view('template_admin/header',$data);
+	$this->load->view('template_manager/header',$data);
 	$this->load->view('admin/absensi/cetak_absensi', $data);
 	}
 }
