@@ -140,6 +140,7 @@
                      display: none;
                    }
                    </style>
+                   
                   <div class="col-md-6 col-lg-4 col-xl-3 ">
                      <div class="card">
                         <div class="CardImage"><img src="<?php echo base_url(); ?>assets/img/administrator.svg"></div>
@@ -173,6 +174,41 @@
                      display: none;
                    }
                    </style>
+
+                  <div class="col-md-6 col-lg-4 col-xl-3 ">
+                     <div class="card">
+                        <div class="CardImage"><img src="<?php echo base_url(); ?>assets/img/administrator.svg"></div>
+                        <div class="body">
+                           <div class="title"><font size="4"><b><i>Halaman Manager</font></b></i></div>
+                           <div id="flip5"><font color="white">Baca Selengkapnya</font></div>
+                           <div id="panel5">ini role manajer</div>
+                        </div>
+                     </div>
+                  </div>
+
+                  <script src="<?php echo base_url(); ?>assets/vendor/jquery/jquery.min.js"></script>
+                  <script> 
+                   $(document).ready(function(){
+                     $("#flip5").click(function(){
+                       $("#panel5").slideToggle("slow");
+                     });
+                   });
+                   </script>
+                   <style> 
+                   #panel5, #flip5 {
+                     padding: 5px;
+                     text-align: center;
+                     background-color: #00BFD8;
+                     border: solid 1px #c3c3c3;
+                     border-radius: 10px 10px 10px 10px;
+                   }
+
+                   #panel5 {
+                     padding: 10px;
+                     display: none;
+                   }
+                   </style>
+
                   <div class="col-md-6 col-lg-4 col-xl-3 ">
                      <div class="card">
                         <div class="CardImage"><img src="<?php echo base_url(); ?>assets/img/karyawan.svg"></div>
@@ -220,41 +256,7 @@
             </div>
          </div>
       </div>
-      <!-- Team Section -->
-      <div class="Team" id="AboutMe">
-         <div class="Section">
-            <div class="text-center">
-               <h2><b>About Me</b></h2>
-               <br>
-            </div>
-            <div class="content">
-               <div class="team row">
-                  <div class="team-memeber col-md-6 col-lg-4 col-xl-3">
-                     <div class="card">
-                        <div class="TopImg">
-                           <img src="<?php echo base_url(); ?>assets/img/logogaji.png" class="rounded-circle w-100 d-block">
-                        </div>
-                        <div class="TeamInfo text-center">
-                           <div class="Name">PENGGAJIAN KARYAWAN</div>
-                           <div class="Job">PT. Multimedia Adiautama Asia</div>
-                           <div class="social_links">
-                              <div class="social">
-                                 <a class="" href="www.github.com"><i class="fab fa-github" aria-hidden="true"></i></a>
-                              </div>
-                              <div class="social">
-                                 <a class="" href="www.instagram.com"><i class="fab fa-instagram" aria-hidden="true"></i></a>
-                              </div>
-                              <div class="social">
-                                 <a class="" href="www.youtube.com"><i class="fab fa-youtube" aria-hidden="true"></i></a>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </div>
+      
       <!-- Footer Section -->
       <div class="Footer" id="Footer">
          <div class="container">

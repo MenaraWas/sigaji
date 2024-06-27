@@ -76,12 +76,12 @@
 		         <thead class="thead-dark">
 		           <tr>
 		              	<td class="text-center">No</td>
+						<td class="text-center">Id_Absensi</td>
 						<td class="text-center">NIP</td>
 						<td class="text-center">Nama Pegawai</td>
-						<td class="text-center">Jenias Kalamin</td>
-						<td class="text-center">Jabatan</td>
 						<td class="text-center">Hadir</td>
 						<td class="text-center">Sakit</td>
+						<td class="text-center">Ijin</td>
 						<td class="text-center">Alpha</td>
 		           </tr>
 		         </thead>
@@ -89,12 +89,12 @@
 		           <?php $no=1; foreach($absensi as $a) :?>
 					<tr>
 						<td class="text-center"><?php echo $no++?></td>
+						<td class="text-center"><?php echo $a->id_kehadiran?></td>
 						<td class="text-center"><?php echo $a->nip?></td>
 						<td class="text-center"><?php echo $a->nama_pegawai?></td>
-						<td class="text-center"><?php echo $a->jenis_kelamin?></td>
-						<td class="text-center"><?php echo $a->nama_jabatan?></td>
 						<td class="text-center"><?php echo $a->hadir?></td>
 						<td class="text-center"><?php echo $a->sakit?></td>
+						<td class="text-center"><?php echo $a->ijin?></td>
 						<td class="text-center"><?php echo $a->alpha?></td>
 					</tr>
 		            </tr>

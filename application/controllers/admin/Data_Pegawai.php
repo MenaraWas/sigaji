@@ -40,7 +40,7 @@ class Data_Pegawai extends CI_Controller {
 	public function tambah_data()
 {
     $data['title'] = "Tambah Data Pegawai";
-    $data['jabatan'] = $this->ModelPenggajian->get_data('data_jabatan')->result();
+    $data['jabatan'] = $this->ModelPenggajian->get_data('data_jabatan')->result(); 
 
     $last_nip_query = $this->db->select('nip')->order_by('nip', 'DESC')->limit(1)->get('data_pegawai');
     if ($last_nip_query->num_rows() > 0) {
@@ -66,13 +66,13 @@ public function tambah_data_aksi()
         $this->tambah_data();
     } else {
         $nama_pegawai   = $this->input->post('nama_pegawai');
-        $email       = $this->input->post('email');
-        $password       = md5($this->input->post('password'));
+        // $email       = $this->input->post('email');
+        // $password       = md5($this->input->post('password'));
         $jenis_kelamin  = $this->input->post('jenis_kelamin');
         $jabatan        = $this->input->post('jabatan');
         $tgl_lahir  = $this->input->post('tgl_lahir');
         $status         = $this->input->post('status');
-        $hak_akses      = $this->input->post('hak_akses');
+        // $hak_akses      = $this->input->post('hak_akses');
         $alamat      = $this->input->post('alamat');
         $gaji_pokok      = $this->input->post('gaji_pokok');
         $no_telp     = $this->input->post('no_telp');
@@ -92,13 +92,13 @@ public function tambah_data_aksi()
         $data = array(
             'nip'           => $nip,
             'nama_pegawai'  => $nama_pegawai,
-            'email'      => $email,
-            'password'      => $password,
+            // 'email'      => $email,
+            // 'password'      => $password,
             'jenis_kelamin' => $jenis_kelamin,
             'jabatan'       => $jabatan,
             'tgl_lahir' => $tgl_lahir,
             'status'        => $status,
-            'hak_akses'     => $hak_akses,
+            // 'hak_akses'     => $hak_akses,
             'no_telp'     => $no_telp,
             'alamat'     => $alamat,
             'gaji_pokok'     => $gaji_pokok,
@@ -109,14 +109,14 @@ public function tambah_data_aksi()
         $this->ModelPenggajian->insert_data($data, 'data_pegawai');
 
 		// Proses pengisian data user
-        $data_to_user = array(
-            'id_user'      => '',
-            'email'        => $email,
-            'password'     => $password,
-            'Level'        => $hak_akses,
-        );
+        // $data_to_user = array(
+        //     'id_user'      => '',
+        //     'email'        => $email,
+        //     'password'     => $password,
+        //     'Level'        => $hak_akses,
+        // );
 
-        $this->ModelPenggajian->insert_data_to_user($data_to_user, 'data_user');
+        // $this->ModelPenggajian->insert_data_to_user($data_to_user, 'data_user');
 
         // Tambahkan data pengguna (user) jika diperlukan
         // ...
@@ -183,13 +183,13 @@ public function tambah_data_aksi()
 			
 			$nip			= $this->input->post('nip');
 			$nama_pegawai	= $this->input->post('nama_pegawai');
-			$email		= $this->input->post('email');
-			$password		= md5($this->input->post('password'));
+			// $email		= $this->input->post('email');
+			// $password		= md5($this->input->post('password'));
 			$jenis_kelamin	= $this->input->post('jenis_kelamin');
 			$jabatan		= $this->input->post('jabatan');
 			$tgl_lahir	= $this->input->post('tgl_lahir');
 			$status			= $this->input->post('status');
-			$hak_akses		= $this->input->post('hak_akses');
+			// $hak_akses		= $this->input->post('hak_akses');
 			$alamat      = $this->input->post('alamat');
 			$gaji_pokok      = $this->input->post('gaji_pokok');
 			$no_telp     = $this->input->post('no_telp');
@@ -211,13 +211,11 @@ public function tambah_data_aksi()
 			$data = array(
 				'nip' 			=> $nip,
 				'nama_pegawai' 	=> $nama_pegawai,
-				'email' 		=> $email,
-				'password' 		=> $password,
 				'jenis_kelamin' => $jenis_kelamin,
 				'jabatan' 		=> $jabatan,
 				'tgl_lahir' => $tgl_lahir,
 				'status' 		=> $status,
-				'hak_akses' 	=> $hak_akses,
+				// 'hak_akses' 	=> $hak_akses,
 				'no_telp'     => $no_telp,
 				'alamat'     => $alamat,
 				'gaji_pokok'     => $gaji_pokok,
@@ -230,17 +228,17 @@ public function tambah_data_aksi()
 			);
 			$this->ModelPenggajian->update_data('data_pegawai', $data, $where);
 
-			$data_to_user = array (
-				'email'        => $email,
-            'password'     => $password,
-            'Level'        => $hak_akses,
-			);
+			// $data_to_user = array (
+			// 	'email'        => $email,
+            // 'password'     => $password,
+            // 'Level'        => $hak_akses,
+			// );
 
 			$whereUser = array (
 				'email' => $email
 			);
 				
-			$this->ModelPenggajian->update_data_to_user('data_user', $data_to_user, $whereUser);
+			// $this->ModelPenggajian->update_data_to_user('data_user', $data_to_user, $whereUser);
 
 			$this->session->set_flashdata('pesan','<div class="alert alert-success alert-dismissible fade show" role="alert">
 				<strong>Data berhasil diupdate!</strong>

@@ -1,5 +1,5 @@
 <?php
-
+ 
 class Data_Penggajian extends CI_Controller {
 
 	public function __construct(){

@@ -22,7 +22,6 @@
                             <th class="text-center">Alamat</th>
                             <th class="text-center">No. Telp</th>
                             <th class="text-center">Tanggal Lahir</th>
-                            <th class="text-center">Hak Akses</th>
                             <th class="text-center">Actions</th>
                         </tr>
                     </thead>
@@ -37,13 +36,7 @@
                             <td class="text-center"><?php echo $p->alamat ?></td>
                             <td class="text-center"><?php echo $p->no_telp ?></td>
                             <td class="text-center"><?php echo $p->tgl_lahir ?></td>
-                            <?php if($p->hak_akses == '1') { ?>
-                            <td>Admin</td>
-                            <?php } else if($p->hak_akses == '2') { ?>
-                            <td>Pegawai</td>
-                            <?php } else { ?>
-                            <td>Manajer</td>
-                            <?php } ?>
+                            
 
                             <td>
                                 <center>
@@ -78,7 +71,7 @@
             <div class="modal-body">
                 <!-- Isi modal -->
                 <form method="POST" action="<?php echo base_url('admin/data_pegawai/tambah_data_aksi')?>"
-                    enctype="multipart/form-data">
+                    enctype="multipart/form-data"> 
                     <!-- Form input -->
                     <div class="form-row">
                         <div class="form-group col-md-6">
@@ -94,18 +87,7 @@
                         </div>
                     </div>
 
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label>Email</label>
-                            <input type="email" name="email" class="form-control">
-                            <?php echo form_error('email', '<div class="text-small text-danger"> </div>')?>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label>Password</label>
-                            <input type="password" name="password" class="form-control">
-                            <?php echo form_error('password', '<div class="text-small text-danger"> </div>')?>
-                        </div>
-                    </div>
+                    
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label>No. Telpon</label>
@@ -163,15 +145,7 @@
                     </div>
 
                     <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label>Hak Akses</label>
-                            <select name="hak_akses" class="form-control">
-                                <option value="">--Pilih Hak Akses--</option>
-                                <option value="1">Admin</option>
-                                <option value="2">Pegawai</option>
-                                <option value="3">Manajer</option>
-                            </select>
-                        </div>
+                        
                         <div class="form-group col-md-6">
                             <label>Photo</label>
                             <input type="file" name="photo" class="form-control">

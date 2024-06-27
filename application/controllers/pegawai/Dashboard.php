@@ -18,8 +18,8 @@ class Dashboard extends CI_Controller {
 	public function index() 
 	{
 		$data['title'] = "Dashboard";
-		$id=$this->session->userdata('id_pegawai');
-		$data['pegawai'] = $this->db->query("SELECT * FROM data_pegawai WHERE id_pegawai='$id'")->result();
+		$id=$this->session->userdata('nip');
+		$data['pegawai'] = $this->db->query("SELECT * FROM data_pegawai WHERE nip='$id'")->result();
 
 		$this->load->view('template_pegawai/header',$data);
 		$this->load->view('template_pegawai/sidebar');

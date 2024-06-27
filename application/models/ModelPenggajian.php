@@ -13,6 +13,12 @@ class ModelPenggajian extends CI_model{
     public function insert_data_to_user($data_to_user, $table){
         $this->db->insert($table, $data_to_user);
     }
+    public function update_data_to_pegawai($data_to_pegawai, $table, $whare){
+        $this->db->update($table, $data_to_pegawai, $whare);
+    }
+    public function update_data_to_gaji($data_to_gaji, $table, $whare){
+        $this->db->update($table, $data_to_gaji, $whare);
+    }
 
     public function update_data_to_user($table, $data, $whare){
 		$this->db->update($table, $data, $whare);

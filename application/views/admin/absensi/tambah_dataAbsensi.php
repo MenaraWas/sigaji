@@ -69,10 +69,9 @@
 			<td class="text-center">No</td>
 			<td class="text-center">NIP</td>
 			<td class="text-center">Nama Pegawai</td>
-			<td class="text-center">Jenias Kalamin</td>
-			<td class="text-center">Jabatan</td>
 			<td class="text-center" width="8%">Hadir</td>
 			<td class="text-center" width="8%">Sakit</td>
+			<td class="text-center" width="8%">Ijin</td>
 			<td class="text-center" width="8%">Alpha</td>
 		</tr>
 		<?php $no=1; foreach($input_absensi as $a) :?>
@@ -80,17 +79,14 @@
 				<input type="hidden" name="bulan[]" class="form-control" value="<?php echo $bulantahun?>">
 				<input type="hidden" name="nip[]" class="form-control" value="<?php echo $a->nip?>">
 				<input type="hidden" name="nama_pegawai[]" class="form-control" value="<?php echo $a->nama_pegawai?>">
-				<input type="hidden" name="jenis_kelamin[]" class="form-control" value="<?php echo $a->jenis_kelamin?>">
-				<input type="hidden" name="nama_jabatan[]" class="form-control" value="<?php echo $a->nama_jabatan?>">
 
 
 				<td><?php echo $no++?></td>
 				<td><?php echo $a->nip?></td>
 				<td><?php echo $a->nama_pegawai?></td>
-				<td><?php echo $a->jenis_kelamin?></td>
-				<td><?php echo $a->nama_jabatan?></td>
 				<td><input type="number" name="hadir[]" class="form-control" value="0"></td>
 				<td><input type="number" name="sakit[]" class="form-control" value="0"></td>
+				<td><input type="number" name="ijin[]" class="form-control" value="0"></td>
 				<td><input type="number" name="alpha[]" class="form-control" value="0"></td>
 		<?php endforeach; ?>
 	</table><br></br><br></br>

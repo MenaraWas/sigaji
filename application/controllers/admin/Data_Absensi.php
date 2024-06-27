@@ -30,10 +30,9 @@ class Data_Absensi extends CI_Controller {
 			$bulantahun = $bulan.$tahun;
 		}
 
-		$data['absensi'] = $this->db->query("SELECT data_kehadiran.*, data_pegawai.nama_pegawai, data_pegawai.jenis_kelamin, data_jabatan.nama_jabatan
+		$data['absensi'] = $this->db->query("SELECT data_kehadiran.*, data_pegawai.nama_pegawai
 			FROM data_kehadiran
 			INNER JOIN data_pegawai ON data_kehadiran.nip = data_pegawai.nip
-			INNER JOIN data_jabatan ON data_pegawai.jabatan = data_jabatan.nama_jabatan
 			WHERE data_kehadiran.bulan = '$bulantahun' ORDER BY data_pegawai.nama_pegawai ASC")->result();
 
 		$this->load->view('template_admin/header', $data);
@@ -53,10 +52,9 @@ class Data_Absensi extends CI_Controller {
 						'bulan'          => $post['bulan'][$key],
 						'nip'            => $post['nip'][$key],
 						'nama_pegawai'   => $post['nama_pegawai'][$key],
-						'jenis_kelamin'  => $post['jenis_kelamin'][$key],
-						'nama_jabatan'   => $post['nama_jabatan'][$key],
 						'hadir'          => $post['hadir'][$key],
 						'sakit'          => $post['sakit'][$key],
+						'ijin'          => $post['ijin'][$key],
 						'alpha'          => $post['alpha'][$key],
 					);
 				}
@@ -84,8 +82,8 @@ class Data_Absensi extends CI_Controller {
 			$bulantahun = $bulan.$tahun;
 		}
 
-		$data['input_absensi'] = $this->db->query("SELECT data_pegawai.*, data_jabatan.nama_jabatan FROM data_pegawai
-			INNER JOIN data_jabatan ON data_pegawai.jabatan = data_jabatan.nama_jabatan
+		$data['input_absensi'] = $this->db->query("SELECT data_pegawai.* FROM data_pegawai
+			
 			WHERE NOT EXISTS (SELECT * FROM data_kehadiran WHERE bulan = '$bulantahun' AND data_pegawai.nip = data_kehadiran.nip) ORDER BY data_pegawai.nama_pegawai ASC")->result();
 
 		$this->load->view('template_admin/header', $data);
