@@ -74,6 +74,13 @@
 
       <!-- Nav Item - Charts -->
       <li class="nav-item">
+        <a class="nav-link" href="<?php echo base_url('admin/jurnal_umum') ?>">
+          <i class="fas fa-fw fa-lock"></i>
+          <span>Jurnal Umum</span></a>
+      </li>
+
+      <!-- Nav Item - Charts -->
+      <li class="nav-item">
         <a class="nav-link" href="<?php echo base_url('ganti_password') ?>">
           <i class="fas fa-fw fa-lock"></i>
           <span>Ubah Password</span></a>

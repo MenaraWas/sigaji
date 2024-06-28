@@ -49,7 +49,7 @@ class Input_gaji extends CI_Controller {
 
 	$this->load->view('template_manager/header', $data);
 	$this->load->view('template_manager/sidebar');
-	$this->load->view('admin/penggajian/data_gaji', $data);
+	$this->load->view('manajer/penggajian/data_gaji', $data);
 	$this->load->view('template_manager/footer');
 }
 
@@ -69,7 +69,7 @@ class Input_gaji extends CI_Controller {
 
 		$this->load->view('template_manager/header', $data);
 		$this->load->view('template_manager/sidebar');
-		$this->load->view('admin/penggajian/tambah_gaji', $data);
+		$this->load->view('manajer/penggajian/tambah_gaji', $data);
 		$this->load->view('template_manager/footer');
 	}
 
@@ -127,7 +127,7 @@ class Input_gaji extends CI_Controller {
 					</button>
 					</div>');
 	
-				redirect('admin/input_gaji');
+				redirect('manajer/input_gaji');
 			} else {
 				$this->session->set_flashdata('pesan','<div class="alert alert-danger alert-dismissible fade show" role="alert">
 					<strong>Data pegawai tidak ditemukan!</strong>
@@ -136,7 +136,7 @@ class Input_gaji extends CI_Controller {
 					</button>
 					</div>');
 	
-				redirect('admin/input_gaji');
+				redirect('manajer/input_gaji');
 			}
 		}
 	}
@@ -150,23 +150,23 @@ class Input_gaji extends CI_Controller {
 
 		$this->load->view('template_manager/header', $data);
 		$this->load->view('template_manager/sidebar');
-		$this->load->view('admin/penggajian/update_gaji', $data);
+		$this->load->view('manajer/penggajian/update_gaji', $data);
 		$this->load->view('template_manager/footer');
 	}
 
 	public function update_data_aksi(){
 		$this->form_validation->set_rules('nip', 'NIP', 'required');
-		$this->form_validation->set_rules('tgl_gajian', 'Tanggal Gaji', 'required');
 
 		if ($this->form_validation->run() == FALSE) {
 			$this->update_data($this->input->post('nip'));
 		} else {
 			$nip = $this->input->post('nip');
-			$tgl_gaji = $this->input->post('tgl_gajian');
+			$status_pengajuan = $this->input->post('status_pengajuan');
+			$catatan = $this->input->post('catatan');
 
 			$data = array(
-				'nip' => $nip,
-				'tgl_gaji' => $tgl_gaji,
+				'status_pengajuan' => $status_pengajuan,
+				'catatan' => $catatan,
 			);
 
 			$where = array('nip' => $nip);
@@ -180,7 +180,7 @@ class Input_gaji extends CI_Controller {
 				</button>
 				</div>');
 
-			redirect('admin/input_gaji');
+			redirect('manajer/input_gaji');
 		}
 	}
 
@@ -195,7 +195,7 @@ class Input_gaji extends CI_Controller {
 			</button>
 			</div>');
 
-		redirect('admin/input_gaji');
+		redirect('manajer/input_gaji');
 	}
 }
 

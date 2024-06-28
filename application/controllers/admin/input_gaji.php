@@ -88,17 +88,7 @@ class Input_gaji extends CI_Controller {
 	
 			if ($pegawai) {
 				$gaji_pokok = $pegawai->gaji_pokok;
-	
-				// // Query untuk mengambil total tunjangan dari data_tunjangan
-				// $query_tunjangan = $this->db->query('SELECT COALESCE(SUM(jumlah_tunjangan), 0) AS total_tunjangan FROM data_tunjangan WHERE Kode_Tunjangan = "'.$kode_tunjangan.'"')->row();
-				// $total_tunjangan = $query_tunjangan->total_tunjangan;
-	
-				// // Query untuk mengambil total bonus dari data_bonus
-				// $query_bonus = $this->db->query('SELECT COALESCE(SUM(jumlah_bonus), 0) AS total_bonus FROM data_bonus WHERE Kode_Bonus = "'.$kode_bonus.'"')->row();
-				// $total_bonus = $query_bonus->total_bonus;
-	
-				// // Query untuk mengambil total potongan dari potongan_gaji
-				// $query_potongan = $this->db->query('SELECT COALESCE(SUM(jml_potongan), 0) AS total_potongan FROM potongan_gaji WHERE id = "'.$id.'"')->row();
+
 				$total_potongan = $query_potongan->total_potongan;
 	
 				// Hitung gaji kotor
@@ -111,11 +101,9 @@ class Input_gaji extends CI_Controller {
 					'nip' => $nip,
 					'tgl_gaji' => $tgl_gaji,
 					'tot_gapok' => $gaji_pokok,
-					// 'total_tunjangan' => $total_tunjangan,
-					// 'total_bonus' => $total_bonus,
-					// 'total_potongan' => $total_potongan,
 					'gaji_kotor' => $gaji_kotor,
 					'gaji_bersih' => $gaji_bersih,
+					'status_pengajuan' => 'Proses'
 				);
 	
 				$this->ModelPenggajian->insert_data($data, 'data_gaji');

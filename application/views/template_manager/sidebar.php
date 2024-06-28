@@ -16,7 +16,7 @@
 
       <!-- Nav Item - Dashboard -->
       <li class="nav-item">
-        <a class="nav-link" href="<?php echo base_url('pegawai/dashboard') ?>">
+        <a class="nav-link" href="<?php echo base_url('manajer/dashboard') ?>">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Dashboard</span></a>
       </li>
@@ -29,7 +29,7 @@
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" href="<?php echo base_url('pegawai/data_gaji') ?>">
+        <a class="nav-link" href="<?php echo base_url('manajer/input_gaji') ?>">
           <i class="fas fa-fw fa-money-check-alt"></i>
           <span>Data Gaji</span></a>
       </li>
@@ -47,6 +47,13 @@
             <a class="collapse-item" href="<?php echo base_url('manajer/slip_gaji') ?>">Slip Gaji</a>
           </div>
         </div>
+      </li>
+
+      <!-- Nav Item - Charts -->
+      <li class="nav-item">
+        <a class="nav-link" href="<?php echo base_url('manajer/jurnal_umum') ?>">
+          <i class="fas fa-fw fa-lock"></i>
+          <span>Jurnal Umum</span></a>
       </li>
 
       <!-- Nav Item - Charts -->

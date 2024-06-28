@@ -129,6 +129,21 @@ var myBarChart = new Chart(ctx, {
 });
 </script>
 
+<script>
+    $('#modalUpdate').on('show.bs.modal', function(event){
+        var button = $(event.relatedTarget);
+        var no_slip_gaji = button.data('no_slip_gaji');
+        var nip = button.data('nip');
+        var tgl_gajian = button.data('tgl_gajian');
+
+        var modal = $(this);
+        modal.find('.modal-body #no_slip_gaji').val(no_slip_gaji);
+        modal.find('.modal-body #nip').val(nip);
+        modal.find('.modal-body #tgl_gajian').val(tgl_gajian);
+    });
+</script>
+
+
 </body>
 
 </html>

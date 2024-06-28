@@ -66,17 +66,14 @@
 	<button class="btn btn-success mb-3" type="submit" name="submit" value="submit">Simpan</button>
 	<table class="table table-bordered table-striped">
 		<tr>
-        <td class="text-center">No Slip Gaji</td>
-						<td class="text-center">NIP</td>
-						<td class="text-center">Nama Pegawai</td>
-						<td class="text-center">Tanggal Gaji</td>
-						<td class="text-center">Total Gapok</td>
-						<td class="text-center">Total Tunjangan</td>
-						<td class="text-center">Total Bonus</td>
-						<td class="text-center">Gaji Bersih</td>
-						<td class="text-center">Gaji Kotor</td>
-						<td class="text-center">Status Pengajuan</td>
-						<td class="text-center">Catatan</td>
+			<td class="text-center">No</td>
+			<td class="text-center">NIP</td>
+			<td class="text-center">Nama Pegawai</td>
+			<td class="text-center">Jenias Kalamin</td>
+			<td class="text-center">Jabatan</td>
+			<td class="text-center" width="8%">Hadir</td>
+			<td class="text-center" width="8%">Sakit</td>
+			<td class="text-center" width="8%">Alpha</td>
 		</tr>
 		<?php $no=1; foreach($input_absensi as $a) :?>
 			<tr>

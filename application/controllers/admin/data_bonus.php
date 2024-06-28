@@ -5,7 +5,7 @@ class data_bonus extends CI_Controller{
 public function index()
 {
         $data['title'] = "Data Bonus";    
-		$data['bonus'] = $this->ModelPenggajian->get_data('data_bonus')  
+		$data['bonus'] = $this->ModelPenggajian->get_data('data_bonus')   
 			->result();	
 		$this->load->view('template_admin/header',$data);
 		$this->load->view('template_admin/sidebar');
