@@ -36,7 +36,7 @@
         }
         .details table {
             width: 100%;
-        }
+        } 
         .details table td {
             padding: 5px;
         }
@@ -58,82 +58,45 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>PT. Multimedia Adiautama Asia</h1>
-            <h2>Daftar Gaji Pegawai</h2>
+            <h1>PT. Pandam Adiwastra Janaloka</h1>
+            <a href="www.pandamjanaloka.com">www.pandamjanaloka.com</a>
+            <hr>
+            <h3>SLIP GAJI</h3>
             <hr>
         </div>
 
         <?php foreach($print_slip as $ps) : ?>
         <div class="details">
-            <table>
-                <tr>
-                    <td width="30%">Nama Pegawai</td>
-                    <td width="5%">:</td>
-                    <td><?php echo $ps->nama_pegawai?></td>
-                </tr>
-                <tr>
-                    <td>NIP</td>
-                    <td>:</td>
-                    <td><?php echo $ps->nip?></td>
-                </tr>
-                <tr>
-                    <td>Jabatan</td>
-                    <td>:</td>
-                    <td><?php echo $ps->jabatan?></td>
-                </tr>
-                <tr>
-                    <td>Bulan</td>
-                    <td>:</td>
-                    <td><?php echo substr($ps->bulan, 0,2) ?></td>
-                </tr>
-                <tr>
-                    <td>Tahun</td>
-                    <td>:</td>
-                    <td><?php echo substr($ps->bulan, 2,4) ?></td>
-                </tr>
-            </table>
+            <p>Nama Pegawai : <?php echo $ps->nama_pegawai?> <br>
+        NIP          : <?php echo $ps->nip?> <br>
+        Jabatan      : <?php echo $ps->jabatan?> <br>
+        Bulan        : <?php echo substr($ps->bulan, 0,2) ?><br>
         </div>
  
         <div class="address">
-            <p>Alamat:</p>
-            <p>Jl. Contoh No. 123</p>
-            <p>Kota Contoh</p>
-            <p>12345</p>
+            <p>JL. Langenarjan Kidul no.7A,<br> Panembahan, <br>Kecamatan Kraton,<br> D.I. Yogyakarta, 55131</p>
         </div>
+        
 
-        <div class="summary">
-            <table>
-                <tr>
-                    <th>No</th>
-                    <th>Keterangan</th>
-                    <th>Jumlah</th>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Gaji Pokok</td>
-                    <td>Rp. <?php echo number_format($ps->tot_gapok,0,',','.') ?></td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Tunjangan</td>
-                    <td>Rp. <?php echo number_format($ps->id_tunjangan,0,',','.') ?></td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>Bonus</td>
-                    <td>Rp. <?php echo number_format($ps->id_bonus,0,',','.') ?></td>
-                </tr>
-                <tr>
-                    <td>4</td>
-                    <td>Potongan</td>
-                    <td>Rp. <?php echo number_format($ps->id_potongan,0,',','.') ?></td>
-                </tr>
-                <tr>
-                    <th colspan="2" style="text-align: right;">Total Gaji : </th>
-                    <th>Rp. <?php echo number_format($ps->gaji_bersih,0,',','.') ?></th>
-                </tr>
-            </table>
-        </div>
+        <?php endforeach ;?>
+        
+        <?php foreach($print_slip as $ps) : ?>
+
+        
+
+        <h3><b>Penerimaan</b></h3>
+        <p>Gaji Pokok : Rp. <?php echo number_format($ps->tot_gapok, 0, ',', '.'); ?><br>
+        Tunjangan : Rp. <?php echo number_format($ps->id_tunjangan, 0, ',', '.'); ?> <br>
+        Bonus : Rp. <?php echo number_format($ps->id_bonus, 0, ',', '.'); ?> </p>
+        <h6><b>Penghasilan Kotor : Rp. <?php echo number_format($ps->gaji_kotor, 0, ',', '.'); ?> </b></h6>
+        <h3><b>Pengurangan</b></h3>
+        <p>Alpha : Rp. <?php echo number_format($ps->id_potongan, 0, ',', '.'); ?><br>
+        <h6><b>Total Potongan: Rp. <?php echo number_format($ps->id_potongan, 0, ',', '.'); ?> </b></h6>
+        <br>
+        <h3><b>Gaji Bersih : Rp. <?php echo number_format($ps->gaji_bersih, 0, ',', '.'); ?></b></h3>
+
+
+
 
         <div style="clear: both;"></div>
 
@@ -161,5 +124,5 @@
 </html>
 
 <script type="text/javascript">
-    window.print();
+    // window.print();
 </script>

@@ -94,15 +94,12 @@ public function tambah_data_aksi()
             'nama_pegawai'  => $nama_pegawai,
             // 'email'      => $email,
             // 'password'      => $password,
-            'jenis_kelamin' => $jenis_kelamin,
             'jabatan'       => $jabatan,
             'tgl_lahir' => $tgl_lahir,
-            'status'        => $status,
             // 'hak_akses'     => $hak_akses,
             'no_telp'     => $no_telp,
             'alamat'     => $alamat,
             'gaji_pokok'     => $gaji_pokok,
-            'photo'         => $photo,
         );
 
         // Simpan data ke database
@@ -166,7 +163,7 @@ public function tambah_data_aksi()
 		$where = array('nip' => $id);
 		$data['title'] = "update Data Pegawai";
 		$data['jabatan'] = $this->ModelPenggajian->get_data('data_jabatan')->result();
-		$data['pegawai'] = $this->db->query("SELECT * FROM data_pegawai WHERE nip='$id'")->result();
+		$data['pegawai'] = $this->db->query("SELECT * FROM data_pegawai WHERE nip='$id'")->result(); 
 		
 		$this->load->view('template_admin/header', $data);
 		$this->load->view('template_admin/sidebar');
@@ -188,38 +185,20 @@ public function tambah_data_aksi()
 			$jenis_kelamin	= $this->input->post('jenis_kelamin');
 			$jabatan		= $this->input->post('jabatan');
 			$tgl_lahir	= $this->input->post('tgl_lahir');
-			$status			= $this->input->post('status');
 			// $hak_akses		= $this->input->post('hak_akses');
 			$alamat      = $this->input->post('alamat');
 			$gaji_pokok      = $this->input->post('gaji_pokok');
 			$no_telp     = $this->input->post('no_telp');
-			$photo			= $_FILES['photo']['name'];
-			if($photo){
-				$config['upload_path'] 		= './photo';
-				$config['allowed_types'] 	= 'jpg|jpeg|png|tiff';
-				$config['max_size']			= 	2048;
-				$config['file_name']		= 	'pegawai-'.date('ymd').'-'.substr(md5(rand()),0,10);
-				$this->load->library('upload',$config);
-				if($this->upload->do_upload('photo')){
-					$photo=$this->upload->data('file_name');
-					$this->db->set('photo',$photo);
-				}else{
-					echo $this->upload->display_errors();
-				}
-			}
 
 			$data = array(
 				'nip' 			=> $nip,
 				'nama_pegawai' 	=> $nama_pegawai,
-				'jenis_kelamin' => $jenis_kelamin,
 				'jabatan' 		=> $jabatan,
 				'tgl_lahir' => $tgl_lahir,
-				'status' 		=> $status,
 				// 'hak_akses' 	=> $hak_akses,
 				'no_telp'     => $no_telp,
 				'alamat'     => $alamat,
 				'gaji_pokok'     => $gaji_pokok,
-				'photo'         => $photo,
 			);
 
 			$where = array(
@@ -253,10 +232,8 @@ public function tambah_data_aksi()
 	public function _rules() {
 		$this->form_validation->set_rules('nip','nip','required');
 		$this->form_validation->set_rules('nama_pegawai','Nama Pegawai','required');
-		$this->form_validation->set_rules('jenis_kelamin','Jenis Kelamin','required');
 		$this->form_validation->set_rules('tgl_lahir','Tanggal Masuk','required');
 		$this->form_validation->set_rules('jabatan','Jabatan','required');
-		$this->form_validation->set_rules('status','Status','required');
 	}
 
 	public function delete_data($id) {

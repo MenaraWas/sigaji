@@ -1,104 +1,91 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title><?php echo $title?></title>
+	<title><?php echo $title;?></title>
 	<style type="text/css">
-		body{
-			font-family: Arial;
-			color: black;
+		body {
+			font-family: Arial, sans-serif;
+			font-size: 14px;
 		}
 		.table {
 			width: 100%;
 			border-collapse: collapse;
+			margin-top: 20px;
 		}
 		.table, .table th, .table td {
-			border: 1px solid black;
+			border: 1px solid #ddd;
+			padding: 8px;
 		}
 		.table th, .table td {
-			padding: 8px;
+			text-align: left;
+		}
+		.text-center {
 			text-align: center;
+		}
+		.text-right {
+			text-align: right;
+		}
+		.title {
+			text-align: center;
+			font-size: 18px;
+			font-weight: bold;
+			margin-bottom: 20px;
 		}
 	</style>
 </head>
 <body>
-	<center>
-		<h1>PT. Multimedia Adiautama Asia</h1>
-		<h2>Daftar Gaji Pegawai</h2>
-	</center>
 
-	<?php
-	if((isset($_GET['bulan']) && $_GET['bulan']!='') && (isset($_GET['tahun']) && $_GET['tahun']!='')){
-			$bulan = $_GET['bulan'];
-			$tahun = $_GET['tahun'];
-			$bulantahun = $bulan.$tahun;
-		}else{
-			$bulan = date('m');
-			$tahun = date('Y');
-			$bulantahun = $bulan.$tahun;
-		}
-	?>
-	<table>
-		<tr>
-			<td>Bulan</td>
-			<td>:</td>
-			<td><?php echo $bulan?></td>
-		</tr>
-		<tr>
-			<td>Tahun</td>
-			<td>:</td>
-			<td><?php echo $tahun?></td>
-		</tr>
-	</table>
-	<table class="table">
+<div class="title"><?php echo $title;?></div>
+
+<?php foreach ($gaji as $row) : ?>
+    <p>Bulan : <?php echo date('F', strtotime($row->tgl_gaji)); ?></p>
+<?php endforeach; ?>
+
+
+
+<table class="table">
+	<thead>
 		<tr>
 			<th class="text-center">No</th>
+			<th class="text-center">No Slip Gaji</th>
 			<th class="text-center">NIP</th>
 			<th class="text-center">Nama Pegawai</th>
-			<th class="text-center">Jenis Kelamin</th>
-			<th class="text-center">Jabatan</th>
+			<th class="text-center">Tanggal Gaji</th>
 			<th class="text-center">Gaji Pokok</th>
 			<th class="text-center">Bonus</th>
 			<th class="text-center">Tunjangan</th>
 			<th class="text-center">Potongan</th>
 			<th class="text-center">Total Gaji</th>
 		</tr>
-		<?php 
-		$no = 1; 
-		foreach($cetak_gaji as $g) : 
-			foreach($potongan as $p) {
-				$alpha = $p->jml_potongan;
-			}
-			$potongan = $g->alpha * $alpha;
-		?>
-		<tr>
-			<td class="text-center"><?php echo $no++ ?></td>
-			<td class="text-center"><?php echo $g->nip ?></td>
-			<td class="text-center"><?php echo $g->nama_pegawai ?></td>
-			<td class="text-center"><?php echo $g->jenis_kelamin ?></td>
-			<td class="text-center"><?php echo $g->jabatan ?></td>
-			<td class="text-center">Rp. <?php echo number_format($g->gaji_pokok,0,',','.') ?></td>
-			<td class="text-center">Rp. <?php echo number_format($g->id_bonus,0,',','.') ?></td>
-			<td class="text-center">Rp. <?php echo number_format($g->id_tunjangan,0,',','.') ?></td>
-			<td class="text-center">Rp. <?php echo number_format($potongan,0, ',','.') ?></td>
-			<td class="text-center">Rp. <?php echo number_format($g->gaji_pokok + $g->id_bonus + $g->id_tunjangan - $potongan,0,',','.') ?></td>
-		</tr>
-		<?php endforeach; ?>
-	</table>
+	</thead>
+	<tbody>
+		<?php if (!empty($gaji)) : ?>
+			<?php $no = 1; ?>
+			<?php foreach ($gaji as $row) : ?>
+				<tr>
+					<td class="text-center"><?php echo $no++; ?></td>
+					<td><?php echo $row->no_slip_gaji; ?></td>
+					<td><?php echo $row->nip; ?></td>
+					<td><?php echo $row->nama_pegawai; ?></td>
+					<td class="text-center"><?php echo date('d M Y', strtotime($row->tgl_gaji)); ?></td>
+					<td class="text-right">Rp. <?php echo number_format($row->tot_gapok, 0, ',', '.'); ?></td>
+					<td class="text-right">Rp. <?php echo number_format($row->id_bonus, 0, ',', '.'); ?></td>
+					<td class="text-right">Rp. <?php echo number_format($row->id_tunjangan, 0, ',', '.'); ?></td>
+					<td class="text-right">Rp. <?php echo number_format($row->alpha * $row->jml_potongan, 0, ',', '.'); ?></td>
+					<td class="text-right">Rp. <?php echo number_format($row->gaji_bersih, 0, ',', '.'); ?></td>
+				</tr>
+			<?php endforeach; ?>
+		<?php else : ?>
+			<tr>
+				<td colspan="10" class="text-center">Data tidak tersedia.</td>
+			</tr>
+		<?php endif; ?>
+	</tbody>
+</table>
 
-	<table width="100%">
-		<tr>
-			<td></td>
-			<td width="200px">
-				<p>Yogyakarta, <?php echo date("d M Y") ?> <br> Finance</p>
-				<br>
-				<br>
-				<p>_____________________</p>
-			</td>
-		</tr>
-	</table>
 </body>
 </html>
 
-<script type="text/javascript">
-	window.print();
+<script>
+	window.print()
 </script>

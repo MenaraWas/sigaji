@@ -17,41 +17,88 @@ class Laporan_Gaji extends CI_Controller {
 	}
 
 	public function index() 
-	{	
-		$data['title'] = "Laporan Gaji Pegawai";
+{
+	$data['title'] = "Laporan Gaji";
+	$data['pegawai'] = $this->ModelPenggajian->get_data('data_pegawai')->result();
 
-		$this->load->view('template_admin/header',$data);
-		$this->load->view('template_admin/sidebar');
-		$this->load->view('admin/gaji/laporan_gaji');
-		$this->load->view('template_admin/footer');
+	$nip = $this->input->get('nip');
+	$bulan = $this->input->get('bulan');
+	$status_pengajuan = $this->input->get('status_pengajuan');
+
+	$this->db->select('data_gaji.*, data_pegawai.nama_pegawai, data_kehadiran.*');
+	$this->db->from('data_gaji');
+	$this->db->join('data_pegawai', 'data_gaji.nip = data_pegawai.nip');
+	$this->db->join('data_kehadiran', 'data_gaji.nip = data_kehadiran.nip');
+
+
+	if (!empty($nip)) {
+		$this->db->where('data_gaji.nip', $nip);
+	}
+	if (!empty($bulan)) {
+		$this->db->like('data_gaji.tgl_gaji', $bulan);
+	}
+	if (!empty($status_pengajuan)) {
+		$this->db->where('data_gaji.status_pengajuan', $status_pengajuan);
 	}
 
-	public function cetak_laporan_gaji(){
+	$data['gaji'] = $this->db->get()->result();
 
-	$data['title'] = "Cetak Laporan Gaji Pegawai";
-		if((isset($_GET['bulan']) && $_GET['bulan']!='') && (isset($_GET['tahun']) && $_GET['tahun']!='')){
-			$bulan = $_GET['bulan'];
-			$tahun = $_GET['tahun'];
-			$bulantahun = $bulan.$tahun;
-		}else{
-			$bulan = date('m');
-			$tahun = date('Y');
-			$bulantahun = $bulan.$tahun;
+		// Mendapatkan nomor slip gaji berikutnya
+		$last_no_slip_query = $this->db->select('no_slip_gaji')->order_by('no_slip_gaji', 'DESC')->limit(1)->get('data_gaji');
+		if ($last_no_slip_query->num_rows() > 0) {
+			$last_no_slip = $last_no_slip_query->row()->no_slip_gaji;
+			$data['next_no_slip'] = $last_no_slip + 1;
+		} else {
+			$data['next_no_slip'] = 1;
 		}
 
-		$data['potongan'] = $this->ModelPenggajian->get_data('potongan_gaji')->result();
+	// Debug data
+	// print_r($data['gaji']);
+	// exit;
 
-		$data['cetak_gaji'] = $this->db->query("SELECT data_pegawai.nip,data_pegawai.nama_pegawai,
-			data_pegawai.jenis_kelamin,data_pegawai.jabatan, data_pegawai.gaji_pokok,
-			data_kehadiran.alpha, data_gaji.id_tunjangan, data_gaji.id_potongan, data_gaji.id_bonus, data_gaji.gaji_bersih
-			FROM data_pegawai
-			INNER JOIN data_kehadiran ON data_kehadiran.nip=data_pegawai.nip
-			INNER JOIN data_gaji ON data_gaji.nip=data_kehadiran.nip
-			WHERE data_kehadiran.bulan='$bulantahun'
-			ORDER BY data_pegawai.nama_pegawai ASC")->result();
-		$this->load->view('template_admin/header', $data);
-		$this->load->view('admin/gaji/cetak_gaji', $data);
+	$this->load->view('template_admin/header', $data);
+	$this->load->view('template_admin/sidebar');
+	$this->load->view('admin/gaji/laporan_gaji', $data);
+	$this->load->view('template_admin/footer');
+}
+
+public function cetak_laporan_gaji() 
+{
+	$data['title'] = "Laporan Gaji";
+
+	$nip = $this->input->get('nip');
+	$bulan = $this->input->get('bulan');
+	$status_pengajuan = $this->input->get('status_pengajuan');
+
+	$this->db->select('data_gaji.*, data_pegawai.nama_pegawai, data_kehadiran.*');
+	$this->db->from('data_gaji');
+	$this->db->join('data_pegawai', 'data_gaji.nip = data_pegawai.nip');
+	$this->db->join('data_kehadiran', 'data_gaji.nip = data_kehadiran.nip');
+
+
+	if (!empty($nip)) {
+		$this->db->where('data_gaji.nip', $nip);
 	}
+	if (!empty($bulan)) {
+		$this->db->like('data_gaji.tgl_gaji', $bulan);
+	}
+	if (!empty($status_pengajuan)) {
+		$this->db->where('data_gaji.status_pengajuan', $status_pengajuan);
+	}
+
+	$data['gaji'] = $this->db->get()->result();
+	// Mendapatkan nomor slip gaji berikutnya
+		$last_no_slip_query = $this->db->select('no_slip_gaji')->order_by('no_slip_gaji', 'DESC')->limit(1)->get('data_gaji');
+		if ($last_no_slip_query->num_rows() > 0) {
+			$last_no_slip = $last_no_slip_query->row()->no_slip_gaji;
+			$data['next_no_slip'] = $last_no_slip + 1;
+		} else {
+			$data['next_no_slip'] = 1;
+		}
+
+	// Load view untuk mencetak laporan dengan data yang sudah disiapkan
+	$this->load->view('admin/gaji/cetak_gaji', $data);
+}
 }
 
 ?>

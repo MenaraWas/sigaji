@@ -10,7 +10,7 @@
   <div class="card-body">
     <form class="form-inline">
 	  <div class="form-group mb-2">
-	  <label for="staticEmail2">Nama Pegawai</label>
+	  <label for="staticEmail2">Nama Pegawai</label> 
 		<select class="form-control ml-3" name="nama_pegawai">
 			<option value=""> Pilih Pegawai </option>
 			<?php foreach($pegawai as $p): ?>

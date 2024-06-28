@@ -72,51 +72,19 @@
                 <!-- Isi modal -->
                 <form method="POST" action="<?php echo base_url('admin/data_pegawai/tambah_data_aksi')?>"
                     enctype="multipart/form-data"> 
-                    <!-- Form input -->
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
+                    <!-- Form input --> 
+                    <div class="form-group">
                             <label>NIP</label>
                             <input type="number" name="nip" class="form-control" value="<?php echo $next_nip; ?>"
                                 readonly>
                             <?php echo form_error('nip', '<div class="text-small text-danger"> </div>')?>
                         </div>
-                        <div class="form-group col-md-6">
+                        <div class="form-group">
                             <label>Nama Pegawai</label>
                             <input type="text" name="nama_pegawai" class="form-control">
                             <?php echo form_error('nama_pegawai', '<div class="text-small text-danger"> </div>')?>
                         </div>
-                    </div>
-
-                    
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label>No. Telpon</label>
-                            <input type="text" name="no_telp" class="form-control">
-                            <?php echo form_error('no_telp', '<div class="text-small text-danger"> </div>')?>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label>Gaji</label>
-                            <input type="text" name="gaji_pokok" class="form-control">
-                            <?php echo form_error('gaji_pokok', '<div class="text-small text-danger"> </div>')?>
-                        </div>
-                        <div class="form-group col-md-12">
-                            <label>Alamat</label>
-                            <input type="text" name="alamat" class="form-control">
-                            <?php echo form_error('alamat', '<div class="text-small text-danger"> </div>')?>
-                        </div>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label>Jenis Kelamin</label>
-                            <select name="jenis_kelamin" class="form-control">
-                                <option value="">--Pilih Jenis Kelamin--</option>
-                                <option value="Laki-Laki">Laki-Laki</option>
-                                <option value="Perempuan">Perempuan</option>
-                            </select>
-                            <?php echo form_error('jenis_kelamin', '<div class="text-small text-danger"> </div>')?>
-                        </div>
-                        <div class="form-group col-md-6">
+                        <div class="form-group">
                             <label>Jabatan</label>
                             <select name="jabatan" class="form-control">
                                 <option value="">--Pilih Jabatan--</option>
@@ -125,32 +93,26 @@
                                 <?php endforeach; ?>
                             </select>
                         </div>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
+                        <div class="form-group">
+                            <label>Gaji</label>
+                            <input type="text" name="gaji_pokok" class="form-control">
+                            <?php echo form_error('gaji_pokok', '<div class="text-small text-danger"> </div>')?>
+                        </div>
+                        <div class="form-group ">
+                            <label>Alamat</label>
+                            <input type="text" name="alamat" class="form-control">
+                            <?php echo form_error('alamat', '<div class="text-small text-danger"> </div>')?>
+                        </div>
+                        <div class="form-group">
+                            <label>No. Telpon</label>
+                            <input type="text" name="no_telp" class="form-control">
+                            <?php echo form_error('no_telp', '<div class="text-small text-danger"> </div>')?>
+                        </div>
+                        <div class="form-group">
                             <label>Tanggal Lahir</label>
                             <input type="date" name="tgl_lahir" class="form-control">
                             <?php echo form_error('tgl_lahir', '<div class="text-small text-danger"> </div>')?>
                         </div>
-                        <div class="form-group col-md-6">
-                            <label>Status</label>
-                            <select name="status" class="form-control">
-                                <option value="">--Pilih Status--</option>
-                                <option value="Karyawan Tetap">Karyawan Tetap</option>
-                                <option value="Karyawan Tidak Tetap">Karyawan Tidak Tetap</option>
-                            </select>
-                            <?php echo form_error('status', '<div class="text-small text-danger"> </div>')?>
-                        </div>
-                    </div>
-
-                    <div class="form-row">
-                        
-                        <div class="form-group col-md-6">
-                            <label>Photo</label>
-                            <input type="file" name="photo" class="form-control">
-                        </div>
-                    </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-success">Simpan</button>
                         <button type="reset" class="btn btn-danger">Reset</button>

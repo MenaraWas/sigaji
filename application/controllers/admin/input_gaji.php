@@ -26,13 +26,36 @@ class Input_gaji extends CI_Controller {
 	$data['title'] = "Data Gaji Karyawan";
 	$data['pegawai'] = $this->ModelPenggajian->get_data('data_pegawai')->result();
 
-	// Query untuk mengambil data gaji dan kehadiran
-	$data['gaji'] = $this->db->query('SELECT data_gaji.*, data_pegawai.gaji_pokok, data_kehadiran.nip, data_kehadiran.nama_pegawai, data_kehadiran.sakit, 
-		data_kehadiran.ijin, data_kehadiran.hadir, data_kehadiran.alpha
-		FROM data_gaji
-		INNER JOIN data_kehadiran ON data_gaji.nip = data_kehadiran.nip 
-		INNER JOIN data_pegawai  ON data_kehadiran.nip = data_pegawai.nip 
-		ORDER BY data_kehadiran.nama_pegawai ASC')->result();
+	$nip = $this->input->get('nip');
+	$bulan = $this->input->get('bulan');
+	$status_pengajuan = $this->input->get('status_pengajuan');
+
+	$this->db->select('data_gaji.*, data_pegawai.nama_pegawai, data_kehadiran.*');
+	$this->db->from('data_gaji');
+	$this->db->join('data_pegawai', 'data_gaji.nip = data_pegawai.nip');
+	$this->db->join('data_kehadiran', 'data_gaji.nip = data_kehadiran.nip');
+
+
+	if (!empty($nip)) {
+		$this->db->where('data_gaji.nip', $nip);
+	}
+	if (!empty($bulan)) {
+		$this->db->like('data_gaji.tgl_gaji', $bulan);
+	}
+	if (!empty($status_pengajuan)) {
+		$this->db->where('data_gaji.status_pengajuan', $status_pengajuan);
+	}
+
+	$data['gaji'] = $this->db->get()->result();
+
+
+	// // Query untuk mengambil data gaji dan kehadiran
+	// $data['gaji'] = $this->db->query('SELECT data_gaji.*, data_pegawai.gaji_pokok, data_kehadiran.nip, data_kehadiran.nama_pegawai, data_kehadiran.sakit, 
+	// 	data_kehadiran.ijin, data_kehadiran.hadir, data_kehadiran.alpha
+	// 	FROM data_gaji
+	// 	INNER JOIN data_kehadiran ON data_gaji.nip = data_kehadiran.nip 
+	// 	INNER JOIN data_pegawai  ON data_kehadiran.nip = data_pegawai.nip 
+	// 	ORDER BY data_kehadiran.nama_pegawai ASC')->result();
 
 		// Mendapatkan nomor slip gaji berikutnya
 		$last_no_slip_query = $this->db->select('no_slip_gaji')->order_by('no_slip_gaji', 'DESC')->limit(1)->get('data_gaji');
@@ -111,7 +134,7 @@ class Input_gaji extends CI_Controller {
 				$this->session->set_flashdata('pesan','<div class="alert alert-success alert-dismissible fade show" role="alert">
 					<strong>Data berhasil ditambahkan!</strong>
 					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
+					<span aria-hidden="true">&times;</span> 
 					</button>
 					</div>');
 	
