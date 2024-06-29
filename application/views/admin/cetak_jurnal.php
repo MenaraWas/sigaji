@@ -39,3 +39,7 @@
     </script>
 </body>
 </html>
+
+<script>
+    window.print();
+</script>
