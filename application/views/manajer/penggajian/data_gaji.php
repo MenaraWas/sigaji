@@ -8,8 +8,54 @@
 </div>
 
 <div class="container-fluid">
-    <div class="card shadow mb-4">
+    <div class="card shadow mb-4"> 
         <div class="card-body">
+            <form method="GET" class="mb-3" action="<?php echo base_url('manajer/input_gaji'); ?>">
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label>Nama Pegawai</label>
+                        <select name="nip" class="form-control">
+                            <option value="">-- Pilih Nama Pegawai --</option>
+                            <?php foreach($pegawai as $p): ?>
+                                <option value="<?php echo $p->nip; ?>" <?php echo ($this->input->get('nip') == $p->nip) ? 'selected' : ''; ?>>
+                                    <?php echo $p->nama_pegawai; ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label>Bulan</label>
+                        <div class="col-sm-9">
+                        <select class="form-control" name="bulan">
+                            <option value=""> Pilih Bulan </option>
+                            <option value="01" <?php echo ($this->input->get('bulan') == '01') ? 'selected' : ''; ?>>Januari</option>
+                            <option value="02" <?php echo ($this->input->get('bulan') == '02') ? 'selected' : ''; ?>>Februari</option>
+                            <option value="03" <?php echo ($this->input->get('bulan') == '03') ? 'selected' : ''; ?>>Maret</option>
+                            <option value="04" <?php echo ($this->input->get('bulan') == '04') ? 'selected' : ''; ?>>April</option>
+                            <option value="05" <?php echo ($this->input->get('bulan') == '05') ? 'selected' : ''; ?>>Mei</option>
+                            <option value="06" <?php echo ($this->input->get('bulan') == '06') ? 'selected' : ''; ?>>Juni</option>
+                            <option value="07" <?php echo ($this->input->get('bulan') == '07') ? 'selected' : ''; ?>>Juli</option>
+                            <option value="08" <?php echo ($this->input->get('bulan') == '08') ? 'selected' : ''; ?>>Agustus</option>
+                            <option value="09" <?php echo ($this->input->get('bulan') == '09') ? 'selected' : ''; ?>>September</option>
+                            <option value="10" <?php echo ($this->input->get('bulan') == '10') ? 'selected' : ''; ?>>Oktober</option>
+                            <option value="11" <?php echo ($this->input->get('bulan') == '11') ? 'selected' : ''; ?>>November</option>
+                            <option value="12" <?php echo ($this->input->get('bulan') == '12') ? 'selected' : ''; ?>>Desember</option>
+                        </select>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label>Status Pengajuan</label>
+                        <select name="status_pengajuan" class="form-control">
+                            <option value="">-- Pilih Status --</option>
+                            <option value="Proses" <?php echo ($this->input->get('status_pengajuan') == 'Proses') ? 'selected' : ''; ?>>Proses</option>
+                            <option value="Diterima" <?php echo ($this->input->get('status_pengajuan') == 'Diterima') ? 'selected' : ''; ?>>Disetujui</option>
+                            <option value="Ditolak" <?php echo ($this->input->get('status_pengajuan') == 'Ditolak') ? 'selected' : ''; ?>>Ditolak</option>
+                        </select>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Filter</button>
+                <a href="<?php echo base_url('manajer/input_gaji'); ?>" class="btn btn-secondary">Reset</a>
+            </form>
             <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead class="thead-dark">
@@ -45,7 +91,7 @@
                             <td class="text-center"><?php echo $p->id_potongan ?></td>
                             <td class="text-center"><?php echo $p->gaji_kotor ?></td>
                             <td class="text-center"><?php echo $p->gaji_bersih ?></td>
-
+                            
                             <td class="text-center">
                                 <?php echo "Hadir: " . $p->hadir . ", Sakit: " . $p->sakit . ", Alpha: " . $p->alpha; ?>
                             </td>
@@ -53,13 +99,11 @@
                             <td class="text-center"><?php echo $p->catatan ?></td>
                             <td>
                                 <center>
-                                    <a class="btn btn-sm btn-success" href="#" data-toggle="modal"
-                                        data-target="#modalUpdate" data-no_slip_gaji="<?php echo $p->no_slip_gaji ?>"
-                                        data-nip="<?php echo $p->nip ?>" data-tgl_gajian="<?php echo $p->tgl_gaji ?>">
-                                        <i class="fas fa-edit"></i>
-                                    </a>
+                                    <a class="btn btn-sm btn-info"
+                                        href="<?php echo base_url('manajer/data_pegawai/update_data/'.$p->nip) ?>"><i
+                                            class="fas fa-edit"></i></a>
                                     <a onclick="return confirm('Yakin Hapus?')" class="btn btn-sm btn-danger"
-                                        href="<?php echo base_url('manajer/input_gaji/delete_data/'.$p->no_slip_gaji) ?>"><i
+                                        href="<?php echo base_url('manajer/data_pegawai/delete_data/'.$p->nip) ?>"><i
                                             class="fas fa-trash"></i></a>
                                 </center>
                             </td>
@@ -118,60 +162,6 @@
                         <button type="reset" class="btn btn-danger">Reset</button>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         <!-- Tombol simpan -->
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Modal Tambah Data Gaji -->
-<div class="modal fade" id="modalUpdate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Edit Data Gaji</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <!-- Form Edit Data Gaji -->
-                <form method="POST" action="<?php echo base_url('manajer/input_gaji/update_data_aksi') ?>"
-                    enctype="multipart/form-data">
-                    <div class="form-group">
-                        <label for="no_slip_gaji">No Slip Gaji</label>
-                        <input type="text" class="form-control" id="no_slip_gaji" name="no_slip_gaji" readonly>
-                    </div>
-                    <div class="form-group">
-                        <label for="tgl_gajian">Tanggal Gajian</label>
-                        <input type="date" class="form-control" id="tgl_gajian" name="tgl_gajian">
-                    </div>
-                    <div class="form-group">
-                        <label for="nip">Nama Pegawai</label>
-                        <select class="form-control" id="nip" name="nip">
-                            <?php foreach($pegawai as $p): ?>
-                            <option value="<?php echo $p->nip; ?>"><?php echo $p->nama_pegawai; ?></option>
-                            <?php endforeach; ?>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="status_pengajuan">Status Pengajuan</label>
-                        <select class="form-control" id="status_pengajuan" name="status_pengajuan">
-                            <option value="Proses">Diajukan</option>
-                            <option value="Ditolak">Ditolak</option>
-                            <option value="Diterima">Disetujui</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="catatan">Catatan</label>
-                        <textarea class="form-control" id="catatan" name="catatan" rows="3"></textarea>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-success">Simpan</button>
-                        <button type="reset" class="btn btn-danger">Reset</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     </div>
                 </form>
             </div>

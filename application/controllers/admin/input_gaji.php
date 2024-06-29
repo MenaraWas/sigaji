@@ -165,7 +165,7 @@ class Input_gaji extends CI_Controller {
 		$this->load->view('admin/penggajian/update_gaji', $data);
 		$this->load->view('template_admin/footer');
 	}
-
+ 
 	public function update_data_aksi(){
 		$this->form_validation->set_rules('nip', 'NIP', 'required');
 		$this->form_validation->set_rules('tgl_gajian', 'Tanggal Gaji', 'required');

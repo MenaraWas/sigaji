@@ -8,7 +8,7 @@
 </div>
 
 <div class="container-fluid">
-    <div class="card shadow mb-4">
+    <div class="card shadow mb-4"> 
         <div class="card-body">
             <form method="GET" class="mb-3" action="<?php echo base_url('admin/input_gaji'); ?>">
                 <div class="form-row">
@@ -48,7 +48,7 @@
                         <select name="status_pengajuan" class="form-control">
                             <option value="">-- Pilih Status --</option>
                             <option value="Proses" <?php echo ($this->input->get('status_pengajuan') == 'Proses') ? 'selected' : ''; ?>>Proses</option>
-                            <option value="Disetujui" <?php echo ($this->input->get('status_pengajuan') == 'Disetujui') ? 'selected' : ''; ?>>Disetujui</option>
+                            <option value="Diterima" <?php echo ($this->input->get('status_pengajuan') == 'Diterima') ? 'selected' : ''; ?>>Disetujui</option>
                             <option value="Ditolak" <?php echo ($this->input->get('status_pengajuan') == 'Ditolak') ? 'selected' : ''; ?>>Ditolak</option>
                         </select>
                     </div>

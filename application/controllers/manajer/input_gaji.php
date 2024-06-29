@@ -25,23 +25,37 @@ class Input_gaji extends CI_Controller {
 {
 	$data['title'] = "Data Gaji Karyawan";
 	$data['pegawai'] = $this->ModelPenggajian->get_data('data_pegawai')->result();
+ 
+	$nip = $this->input->get('nip');
+	$bulan = $this->input->get('bulan');
+	$status_pengajuan = $this->input->get('status_pengajuan');
 
-	// Query untuk mengambil data gaji dan kehadiran
-	$data['gaji'] = $this->db->query('SELECT data_gaji.*, data_pegawai.gaji_pokok, data_kehadiran.nip, data_kehadiran.nama_pegawai, data_kehadiran.sakit, 
-		data_kehadiran.ijin, data_kehadiran.hadir, data_kehadiran.alpha
-		FROM data_gaji
-		INNER JOIN data_kehadiran ON data_gaji.nip = data_kehadiran.nip 
-		INNER JOIN data_pegawai  ON data_kehadiran.nip = data_pegawai.nip 
-		ORDER BY data_kehadiran.nama_pegawai ASC')->result();
+	$this->db->select('data_gaji.*, data_pegawai.nama_pegawai, data_kehadiran.*');
+	$this->db->from('data_gaji');
+	$this->db->join('data_pegawai', 'data_gaji.nip = data_pegawai.nip');
+	$this->db->join('data_kehadiran', 'data_gaji.nip = data_kehadiran.nip');
 
-		// Mendapatkan nomor slip gaji berikutnya
-		$last_no_slip_query = $this->db->select('no_slip_gaji')->order_by('no_slip_gaji', 'DESC')->limit(1)->get('data_gaji');
-		if ($last_no_slip_query->num_rows() > 0) {
-			$last_no_slip = $last_no_slip_query->row()->no_slip_gaji;
-			$data['next_no_slip'] = $last_no_slip + 1;
-		} else {
-			$data['next_no_slip'] = 1;
-		}
+
+	if (!empty($nip)) {
+		$this->db->where('data_gaji.nip', $nip);
+	}
+	if (!empty($bulan)) {
+		$this->db->like('data_gaji.tgl_gaji', $bulan);
+	}
+	if (!empty($status_pengajuan)) {
+		$this->db->where('data_gaji.status_pengajuan', $status_pengajuan);
+	}
+
+	$data['gaji'] = $this->db->get()->result();
+
+	// Mendapatkan nomor slip gaji berikutnya
+	$last_no_slip_query = $this->db->select('no_slip_gaji')->order_by('no_slip_gaji', 'DESC')->limit(1)->get('data_gaji');
+	if ($last_no_slip_query->num_rows() > 0) {
+		$last_no_slip = $last_no_slip_query->row()->no_slip_gaji;
+		$data['next_no_slip'] = $last_no_slip + 1;
+	} else {
+		$data['next_no_slip'] = 1;
+	}
 
 	// Debug data
 	// print_r($data['gaji']);

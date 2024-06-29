@@ -19,31 +19,71 @@ class Slip_Gaji extends CI_Controller {
 	public function index() 
 	{
 		$data['title'] = "Slip Gaji Pegawai";
-		$data['pegawai'] = $this->ModelPenggajian->get_data('data_pegawai')-> result();
+		$data['pegawai'] = $this->ModelPenggajian->get_data('data_pegawai')->result();
+
+	$nip = $this->input->get('nip');
+	$bulan = $this->input->get('bulan');
+	$status_pengajuan = $this->input->get('status_pengajuan');
+
+	$this->db->select('data_gaji.*, data_pegawai.nama_pegawai, data_kehadiran.*');
+	$this->db->from('data_gaji');
+	$this->db->join('data_pegawai', 'data_gaji.nip = data_pegawai.nip');
+	$this->db->join('data_kehadiran', 'data_gaji.nip = data_kehadiran.nip');
+
+
+	if (!empty($nip)) {
+		$this->db->where('data_gaji.nip', $nip);
+	}
+	if (!empty($bulan)) {
+		$this->db->like('data_gaji.tgl_gaji', $bulan);
+	}
+	if (!empty($status_pengajuan)) {
+		$this->db->where('data_gaji.status_pengajuan', $status_pengajuan);
+	}
+
+	$data['gaji'] = $this->db->get()->result();
+
+		// Mendapatkan nomor slip gaji berikutnya
+		$last_no_slip_query = $this->db->select('no_slip_gaji')->order_by('no_slip_gaji', 'DESC')->limit(1)->get('data_gaji');
+		if ($last_no_slip_query->num_rows() > 0) {
+			$last_no_slip = $last_no_slip_query->row()->no_slip_gaji;
+			$data['next_no_slip'] = $last_no_slip + 1;
+		} else {
+			$data['next_no_slip'] = 1;
+		}
+
 
 		$this->load->view('template_manager/header', $data);
 		$this->load->view('template_manager/sidebar');
-		$this->load->view('admin/gaji/slip_gaji', $data);
+		$this->load->view('manajer/gaji/slip_gaji', $data);
 		$this->load->view('template_manager/footer');
 	}
 
 	public function cetak_slip_gaji(){
 
-	$data['title'] = "Cetak Laporan Absensi Pegawai";
-	$data['potongan'] = $this->ModelPenggajian->get_data('potongan_gaji')-> result();
-	$nama = $this->input->post('nama_pegawai');
-	$bulan = $this->input->post('bulan');
-	$tahun = $this->input->post('tahun');
-	$bulantahun =$bulan.$tahun;
-
-	$data['print_slip'] = $this->db->query("SELECT data_pegawai.nip,data_pegawai.nama_pegawai,data_pegawai.jabatan,data_gaji.tot_gapok,
-	data_kehadiran.alpha,data_kehadiran.bulan, data_gaji.id_potongan, data_gaji.id_bonus, data_gaji.id_tunjangan, data_gaji.gaji_bersih 
-	FROM data_pegawai 
-	INNER JOIN data_kehadiran ON data_kehadiran.nip=data_pegawai.nip
-	INNER JOIN data_gaji ON data_gaji.nip=data_kehadiran.nip		
-		WHERE data_kehadiran.bulan='$bulantahun' AND data_kehadiran.nama_pegawai='$nama'")->result();
+		$nip = $this->input->get('nip');
+		$bulan = $this->input->get('bulan');
+		$status_pengajuan = $this->input->get('status_pengajuan');
+	
+		$this->db->select('data_gaji.*, data_pegawai.nama_pegawai, data_kehadiran.*');
+		$this->db->from('data_gaji');
+		$this->db->join('data_pegawai', 'data_gaji.nip = data_pegawai.nip');
+		$this->db->join('data_kehadiran', 'data_gaji.nip = data_kehadiran.nip');
+	
+	
+		if (!empty($nip)) {
+			$this->db->where('data_gaji.nip', $nip);
+		}
+		if (!empty($bulan)) {
+			$this->db->like('data_gaji.tgl_gaji', $bulan);
+		}
+		if (!empty($status_pengajuan)) {
+			$this->db->where('data_gaji.status_pengajuan', $status_pengajuan);
+		}
+	
+		$data['print_slip'] = $this->db->get()->result();
 	$this->load->view('template_manager/header',$data);
-	$this->load->view('admin/gaji/cetak_slip_gaji', $data);
+	$this->load->view('manajer/gaji/cetak_slip_gaji', $data);
 	}
 }
 ?>
