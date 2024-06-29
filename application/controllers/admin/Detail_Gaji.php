@@ -111,7 +111,45 @@ class Detail_Gaji extends CI_Controller {
                 $where_gaji = array(
                     'no_slip_gaji' => $no_slip_gaji,
                 );
-    
+
+                // Ambil tanggal dari data_gaji
+                $tanggal_gaji = $query_gaji->tgl_gaji;
+
+
+                
+                $data_jurnal = array();
+
+                $data_jurnal[] = array(
+                    'tanggal' => $tanggal_gaji,
+                    'kredit' => $id_potongan,
+                    'keterangan' => 'Potongan gaji dari detail gaji',
+                );
+                
+                // Tunjangan
+                $data_jurnal[] = array(
+                    'tanggal' => $tanggal_gaji,
+                    'debit' => $id_tunjangan,
+                    'keterangan' => 'Tunjangan dari detail gaji',
+                );
+                
+                // Bonus
+                $data_jurnal[] = array(
+                    'tanggal' => $tanggal_gaji,
+                    'debit' => $id_bonus,
+                    'keterangan' => 'Bonus dari detail gaji',
+                );
+                
+                // Gaji Bersih
+                $data_jurnal[] = array(
+                    'tanggal' => $tanggal_gaji,
+                    'debit' => $gaji_bersih,
+                    'keterangan' => 'Penerimaan gaji bersih dari detail gaji',
+                );
+                // Simpan semua entri ke dalam tabel jurnal_umum
+                foreach ($data_jurnal as $jurnal) {
+                    $this->ModelPenggajian->insert_data($jurnal, 'jurnal_umum');
+                }
+
                 // Update data ke dalam tabel data_gaji
                 $this->ModelPenggajian->update_data_to_gaji($data_to_gaji, 'data_gaji', $where_gaji);
     

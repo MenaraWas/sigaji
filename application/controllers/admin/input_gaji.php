@@ -25,7 +25,7 @@ class Input_gaji extends CI_Controller {
 {
 	$data['title'] = "Data Gaji Karyawan";
 	$data['pegawai'] = $this->ModelPenggajian->get_data('data_pegawai')->result();
-
+ 
 	$nip = $this->input->get('nip');
 	$bulan = $this->input->get('bulan');
 	$status_pengajuan = $this->input->get('status_pengajuan');
@@ -128,6 +128,7 @@ class Input_gaji extends CI_Controller {
 					'gaji_bersih' => $gaji_bersih,
 					'status_pengajuan' => 'Proses'
 				);
+				
 	
 				$this->ModelPenggajian->insert_data($data, 'data_gaji');
 	
