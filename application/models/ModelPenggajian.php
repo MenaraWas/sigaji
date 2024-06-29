@@ -53,6 +53,7 @@ class ModelPenggajian extends CI_model{
     }
 }
 
+
 public function get_kehadiran_gaji_pegawai($nip) {
     $this->db->select('data_pegawai.nip, data_pegawai.nama_pegawai, data_kehadiran.hadir, data_kehadiran.alpha, data_kehadiran.sakit, data_gaji.*');
     $this->db->from('data_pegawai');

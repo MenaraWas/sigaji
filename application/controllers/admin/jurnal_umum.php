@@ -72,7 +72,6 @@ class Jurnal_Umum extends CI_Controller {
         $data = array(
             'tanggal' => $tanggal,
             'keterangan' => $keterangan,
-            'ref' => $ref,
             'debit' => $debit,
             'kredit' => $kredit
         );
@@ -110,6 +109,18 @@ class Jurnal_Umum extends CI_Controller {
         $this->form_validation->set_rules('ref', 'Ref', 'required');
         $this->form_validation->set_rules('debit', 'Debit', 'required|numeric');
         $this->form_validation->set_rules('kredit', 'Kredit', 'required|numeric');
+    }
+
+    public function cetak()
+    {
+        // Anda bisa menambahkan logika untuk mencetak jurnal umum di sini
+        // Misalnya, memanggil fungsi cetak dari library atau mengatur format cetak
+
+        $data['title'] = "Cetak Jurnal Umum";
+        $data['transaksi'] = $this->ModelPenggajian->get_data('jurnal_umum')->result();    
+        // Ambil semua transaksi dari model
+
+        $this->load->view('admin/cetak_jurnal', $data);
     }
 }
 ?>

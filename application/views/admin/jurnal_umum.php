@@ -1,5 +1,6 @@
 <div class="container-fluid">
     <h1 class="h3 mb-4 text-gray-800"><?php echo $title; ?></h1>
+    <a href="<?php echo base_url('admin/jurnal_umum/cetak'); ?>" class="btn btn-primary">Cetak Jurnal Umum</a>
     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
         <thead class="thead-dark"> 
             <tr>
