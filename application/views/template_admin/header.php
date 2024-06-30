@@ -18,4 +18,27 @@
   <!-- Custom styles for this template-->
   <link href="<?php echo base_url(); ?>assets/css/sb-admin-2.min.css" rel="stylesheet">
 
+  <style>
+    .label-approve {
+    color: white;
+    background-color: green;
+    padding: 5px;
+    border-radius: 3px;
+}
+
+.label-process {
+    color: white;
+    background-color: orange;
+    padding: 5px;
+    border-radius: 3px;
+}
+
+.label-reject {
+    color: white;
+    background-color: red;
+    padding: 5px;
+    border-radius: 3px;
+}
+
+  </style>
 </head>

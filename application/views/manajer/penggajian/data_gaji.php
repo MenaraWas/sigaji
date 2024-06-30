@@ -121,7 +121,19 @@
                             <td class="text-center">
                                 <?php echo "Hadir: " . $p->hadir . ", Sakit: " . $p->sakit . ", Alpha: " . $p->alpha; ?>
                             </td>
-                            <td class="text-center"><?php echo $p->status_pengajuan ?></td>
+                            <td class="text-center">
+                                <?php 
+                                    if ($p->status_pengajuan == 'Diterima') {
+                                        echo '<span class="label-approve">Disetujui</span>';
+                                    } elseif ($p->status_pengajuan == 'Proses') {
+                                        echo '<span class="label-process">Proses</span>';
+                                    } elseif ($p->status_pengajuan == 'Ditolak') {
+                                        echo '<span class="label-reject">Ditolak</span>';
+                                    } else {
+                                        echo '<span class="label-default">'.$p->status_pengajuan.'</span>';
+                                    }
+                                ?>
+                            </td>
                             <td class="text-center"><?php echo $p->catatan ?></td>
                             <td>
                                 <center>
@@ -130,7 +142,7 @@
                                             class="fas fa-edit"></i></button>
 
                                     <a onclick="return confirm('Yakin Hapus?')" class="btn btn-sm btn-danger"
-                                        href="<?php echo base_url('manajer/data_pegawai/delete_data/'.$p->nip) ?>"><i
+                                        href="<?php echo base_url('manajer/input_gaji/delete_data/'.$p->nip) ?>"><i
                                             class="fas fa-trash"></i></a>
                                 </center>
                             </td>

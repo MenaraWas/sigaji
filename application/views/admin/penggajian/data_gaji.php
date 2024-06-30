@@ -95,7 +95,19 @@
                             <td class="text-center">
                                 <?php echo "Hadir: " . $p->hadir . ", Sakit: " . $p->sakit . ", Alpha: " . $p->alpha; ?>
                             </td>
-                            <td class="text-center"><?php echo $p->status_pengajuan ?></td>
+                            <td class="text-center">
+                                <?php 
+                                    if ($p->status_pengajuan == 'Diterima') {
+                                        echo '<span class="label-approve">Disetujui</span>';
+                                    } elseif ($p->status_pengajuan == 'Proses') {
+                                        echo '<span class="label-process">Proses</span>';
+                                    } elseif ($p->status_pengajuan == 'Ditolak') {
+                                        echo '<span class="label-reject">Ditolak</span>';
+                                    } else {
+                                        echo '<span class="label-default">'.$p->status_pengajuan.'</span>';
+                                    }
+                                ?>
+                            </td>
                             <td class="text-center"><?php echo $p->catatan ?></td>
                             <td>
                                 <center>

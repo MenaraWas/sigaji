@@ -47,7 +47,6 @@
                 <th class="text-center">Keterangan</th>
                 <th class="text-center">Debit</th>
                 <th class="text-center">Kredit</th>
-                <th class="text-center">Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -58,10 +57,7 @@
                     <td class="text-center"><?php echo $ju->keterangan; ?></td>
                     <td class="text-center"><?php echo $ju->debit; ?></td>
                     <td class="text-center"><?php echo $ju->kredit; ?></td>
-                    <td class="text-center">
-                        <button class="btn btn-sm btn-info" data-toggle="modal" data-target="#modal_edit_jurnal_<?php echo $ju->id_jurnal; ?>"><i class="fas fa-edit"></i></button>
-                        <a onclick="return confirm('Yakin Hapus?')" class="btn btn-sm btn-danger" href="<?php echo base_url('manajer/jurnal_umum/delete_data/'.$ju->id_jurnal) ?>"><i class="fas fa-trash"></i></a>
-                    </td>
+                        
                 </tr>
 
                 <!-- Modal Edit Jurnal Umum -->
