@@ -8,7 +8,7 @@
 </div>
 
 <div class="container-fluid">
-    <div class="card shadow mb-4"> 
+    <div class="card shadow mb-4">
         <div class="card-body">
             <form method="GET" class="mb-3" action="<?php echo base_url('manajer/input_gaji'); ?>">
                 <div class="form-row">
@@ -17,39 +17,65 @@
                         <select name="nip" class="form-control">
                             <option value="">-- Pilih Nama Pegawai --</option>
                             <?php foreach($pegawai as $p): ?>
-                                <option value="<?php echo $p->nip; ?>" <?php echo ($this->input->get('nip') == $p->nip) ? 'selected' : ''; ?>>
-                                    <?php echo $p->nama_pegawai; ?>
-                                </option>
+                            <option value="<?php echo $p->nip; ?>"
+                                <?php echo ($this->input->get('nip') == $p->nip) ? 'selected' : ''; ?>>
+                                <?php echo $p->nama_pegawai; ?>
+                            </option>
                             <?php endforeach; ?>
                         </select>
                     </div>
                     <div class="form-group col-md-4">
                         <label>Bulan</label>
                         <div class="col-sm-9">
-                        <select class="form-control" name="bulan">
-                            <option value=""> Pilih Bulan </option>
-                            <option value="01" <?php echo ($this->input->get('bulan') == '01') ? 'selected' : ''; ?>>Januari</option>
-                            <option value="02" <?php echo ($this->input->get('bulan') == '02') ? 'selected' : ''; ?>>Februari</option>
-                            <option value="03" <?php echo ($this->input->get('bulan') == '03') ? 'selected' : ''; ?>>Maret</option>
-                            <option value="04" <?php echo ($this->input->get('bulan') == '04') ? 'selected' : ''; ?>>April</option>
-                            <option value="05" <?php echo ($this->input->get('bulan') == '05') ? 'selected' : ''; ?>>Mei</option>
-                            <option value="06" <?php echo ($this->input->get('bulan') == '06') ? 'selected' : ''; ?>>Juni</option>
-                            <option value="07" <?php echo ($this->input->get('bulan') == '07') ? 'selected' : ''; ?>>Juli</option>
-                            <option value="08" <?php echo ($this->input->get('bulan') == '08') ? 'selected' : ''; ?>>Agustus</option>
-                            <option value="09" <?php echo ($this->input->get('bulan') == '09') ? 'selected' : ''; ?>>September</option>
-                            <option value="10" <?php echo ($this->input->get('bulan') == '10') ? 'selected' : ''; ?>>Oktober</option>
-                            <option value="11" <?php echo ($this->input->get('bulan') == '11') ? 'selected' : ''; ?>>November</option>
-                            <option value="12" <?php echo ($this->input->get('bulan') == '12') ? 'selected' : ''; ?>>Desember</option>
-                        </select>
+                            <select class="form-control" name="bulan">
+                                <option value=""> Pilih Bulan </option>
+                                <option value="01"
+                                    <?php echo ($this->input->get('bulan') == '01') ? 'selected' : ''; ?>>Januari
+                                </option>
+                                <option value="02"
+                                    <?php echo ($this->input->get('bulan') == '02') ? 'selected' : ''; ?>>Februari
+                                </option>
+                                <option value="03"
+                                    <?php echo ($this->input->get('bulan') == '03') ? 'selected' : ''; ?>>Maret</option>
+                                <option value="04"
+                                    <?php echo ($this->input->get('bulan') == '04') ? 'selected' : ''; ?>>April</option>
+                                <option value="05"
+                                    <?php echo ($this->input->get('bulan') == '05') ? 'selected' : ''; ?>>Mei</option>
+                                <option value="06"
+                                    <?php echo ($this->input->get('bulan') == '06') ? 'selected' : ''; ?>>Juni</option>
+                                <option value="07"
+                                    <?php echo ($this->input->get('bulan') == '07') ? 'selected' : ''; ?>>Juli</option>
+                                <option value="08"
+                                    <?php echo ($this->input->get('bulan') == '08') ? 'selected' : ''; ?>>Agustus
+                                </option>
+                                <option value="09"
+                                    <?php echo ($this->input->get('bulan') == '09') ? 'selected' : ''; ?>>September
+                                </option>
+                                <option value="10"
+                                    <?php echo ($this->input->get('bulan') == '10') ? 'selected' : ''; ?>>Oktober
+                                </option>
+                                <option value="11"
+                                    <?php echo ($this->input->get('bulan') == '11') ? 'selected' : ''; ?>>November
+                                </option>
+                                <option value="12"
+                                    <?php echo ($this->input->get('bulan') == '12') ? 'selected' : ''; ?>>Desember
+                                </option>
+                            </select>
                         </div>
                     </div>
                     <div class="form-group col-md-4">
                         <label>Status Pengajuan</label>
                         <select name="status_pengajuan" class="form-control">
                             <option value="">-- Pilih Status --</option>
-                            <option value="Proses" <?php echo ($this->input->get('status_pengajuan') == 'Proses') ? 'selected' : ''; ?>>Proses</option>
-                            <option value="Diterima" <?php echo ($this->input->get('status_pengajuan') == 'Diterima') ? 'selected' : ''; ?>>Disetujui</option>
-                            <option value="Ditolak" <?php echo ($this->input->get('status_pengajuan') == 'Ditolak') ? 'selected' : ''; ?>>Ditolak</option>
+                            <option value="Proses"
+                                <?php echo ($this->input->get('status_pengajuan') == 'Proses') ? 'selected' : ''; ?>>
+                                Proses</option>
+                            <option value="Diterima"
+                                <?php echo ($this->input->get('status_pengajuan') == 'Diterima') ? 'selected' : ''; ?>>
+                                Disetujui</option>
+                            <option value="Ditolak"
+                                <?php echo ($this->input->get('status_pengajuan') == 'Ditolak') ? 'selected' : ''; ?>>
+                                Ditolak</option>
                         </select>
                     </div>
                 </div>
@@ -91,7 +117,7 @@
                             <td class="text-center"><?php echo $p->id_potongan ?></td>
                             <td class="text-center"><?php echo $p->gaji_kotor ?></td>
                             <td class="text-center"><?php echo $p->gaji_bersih ?></td>
-                            
+
                             <td class="text-center">
                                 <?php echo "Hadir: " . $p->hadir . ", Sakit: " . $p->sakit . ", Alpha: " . $p->alpha; ?>
                             </td>
@@ -99,15 +125,74 @@
                             <td class="text-center"><?php echo $p->catatan ?></td>
                             <td>
                                 <center>
-                                    <a class="btn btn-sm btn-info"
-                                        href="<?php echo base_url('manajer/data_pegawai/update_data/'.$p->nip) ?>"><i
-                                            class="fas fa-edit"></i></a>
+                                    <button class="btn btn-sm btn-info" data-toggle="modal"
+                                        data-target="#modal_no_slip_<?php echo $p->nip; ?>"><i
+                                            class="fas fa-edit"></i></button>
+
                                     <a onclick="return confirm('Yakin Hapus?')" class="btn btn-sm btn-danger"
                                         href="<?php echo base_url('manajer/data_pegawai/delete_data/'.$p->nip) ?>"><i
                                             class="fas fa-trash"></i></a>
                                 </center>
                             </td>
                         </tr>
+
+                        <div class="modal fade" id="modal_no_slip_<?php echo $p->nip; ?>" tabindex="-1"
+                            role="dialog" aria-labelledby="modal_no_slip_<?php echo $p->nip; ?>"
+                            aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title"
+                                            id="modal_edit_jurnalLabel_<?php echo $p->nip; ?>">
+                                            Edit Gaji <?php echo $p->nama_pegawai?>
+                                        </h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form method="post"
+                                            action="<?php echo base_url('manajer/input_gaji/update_data_aksi'); ?>">
+                                            <div class="form-row">
+                                                <div class="form-group col-md-6">
+                                                    <label>No Slip Gaji</label>
+                                                    <input type="text" name="no_slip_gaji" class="form-control"
+                                                        value="<?php echo $p->no_slip_gaji; ?>" readonly>
+                                                    <?php echo form_error('no_slip_gaji', '<div class="text-small text-danger"> </div>')?>
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label>NIP</label>
+                                                    <input type="text" name="nip" class="form-control"
+                                                        value="<?php echo $p->nip; ?>" readonly>
+                                                    <?php echo form_error('nip', '<div class="text-small text-danger"> </div>')?>
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label>Tanggal Gajian</label>
+                                                    <input type="date" name="tgl_gajian" class="form-control">
+                                                    <?php echo form_error('tgl_gajian', '<div class="text-small text-danger"> </div>')?>
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-md-4">
+                                                <label>Status Pengajuan</label>
+                                                <select name="status_pengajuan" class="form-control">
+                                                    <option value="">-- Pilih Status --</option>
+                                                    <option value="Proses"
+                                                        <?php echo ($this->input->get('status_pengajuan') == 'Proses') ? 'selected' : ''; ?>>
+                                                        Proses</option>
+                                                    <option value="Diterima"
+                                                        <?php echo ($this->input->get('status_pengajuan') == 'Diterima') ? 'selected' : ''; ?>>
+                                                        Disetujui</option>
+                                                    <option value="Ditolak"
+                                                        <?php echo ($this->input->get('status_pengajuan') == 'Ditolak') ? 'selected' : ''; ?>>
+                                                        Ditolak</option>
+                                                </select>
+                                            </div>
+                                            <button type="submit" class="btn btn-primary">Simpan</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <?php endforeach; ?>
                     </tbody>
 

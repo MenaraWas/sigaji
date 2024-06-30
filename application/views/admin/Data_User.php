@@ -20,7 +20,7 @@
                             <th class="text-center">Level</th>
                             <th class="text-center">Actions</th>
                         </tr>
-                    </thead>
+                    </thead> 
                     <tbody>
                         <?php $no = 1; foreach ($user as $p) : ?>
                         <tr>
