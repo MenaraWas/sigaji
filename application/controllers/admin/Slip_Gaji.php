@@ -52,10 +52,10 @@ class Slip_Gaji extends CI_Controller {
 			$data['next_no_slip'] = 1;
 		}
 
-		$this->load->view('template_manager/header', $data);
-		$this->load->view('template_manager/sidebar');
+		$this->load->view('template_admin/header', $data);
+		$this->load->view('template_admin/sidebar');
 		$this->load->view('admin/gaji/slip_gaji', $data);
-		$this->load->view('template_manager/footer');
+		$this->load->view('template_admin/footer');
 	}
 
 	public function cetak_slip_gaji(){
@@ -64,7 +64,7 @@ class Slip_Gaji extends CI_Controller {
 	$bulan = $this->input->get('bulan');
 	$status_pengajuan = $this->input->get('status_pengajuan');
 
-	$this->db->select('data_gaji.*, data_pegawai.nama_pegawai, data_kehadiran.*');
+	$this->db->select('data_gaji.*, data_pegawai.nama_pegawai, data_pegawai.jabatan, data_kehadiran.*');
 	$this->db->from('data_gaji');
 	$this->db->join('data_pegawai', 'data_gaji.nip = data_pegawai.nip');
 	$this->db->join('data_kehadiran', 'data_gaji.nip = data_kehadiran.nip');
@@ -82,7 +82,7 @@ class Slip_Gaji extends CI_Controller {
 
 	$data['print_slip'] = $this->db->get()->result();
 
-	$this->load->view('template_manager/header',$data);
+	$this->load->view('template_admin/header',$data);
 	$this->load->view('admin/gaji/cetak_slip_gaji', $data);
 	}
 }

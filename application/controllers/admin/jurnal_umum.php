@@ -3,8 +3,25 @@
 class Jurnal_Umum extends CI_Controller {
 
     public function index() {
-        $data['title'] = "Jurnal Umum";    
-        $data['jurnal_umum'] = $this->ModelPenggajian->get_data('jurnal_umum')->result();    
+        $data['title'] = "Jurnal Umum";
+        $bulan = $this->input->get('bulan');
+        $tahun = $this->input->get('tahun');
+
+        // Set default bulan dan tahun jika tidak ada input dari user
+        if (!$bulan) {
+            $bulan = date('m');
+        }
+        if (!$tahun) {
+            $tahun = date('Y');
+        }
+
+        $data['bulan'] = $bulan;
+        $data['tahun'] = $tahun;
+
+        // Query untuk mengambil data jurnal umum berdasarkan bulan dan tahun
+        $query = "SELECT * FROM jurnal_umum WHERE MONTH(tanggal) = '$bulan' AND YEAR(tanggal) = '$tahun'";
+        $data['jurnal_umum'] = $this->db->query($query)->result();
+
         $this->load->view('template_admin/header', $data);
         $this->load->view('template_admin/sidebar');
         $this->load->view('admin/jurnal_umum', $data);
@@ -102,7 +119,7 @@ class Jurnal_Umum extends CI_Controller {
             </div>');
         redirect('admin/jurnal_umum');
     }
-
+ 
     private function _rules() {
         $this->form_validation->set_rules('tanggal', 'Tanggal', 'required');
         $this->form_validation->set_rules('keterangan', 'Keterangan', 'required');
@@ -113,10 +130,12 @@ class Jurnal_Umum extends CI_Controller {
 
     public function cetak()
     {
+        $data['title'] = "Cetak Jurnal Umum";
+        $bulan = $this->input->get('bulan');
+        $tahun = $this->input->get('tahun');
         // Anda bisa menambahkan logika untuk mencetak jurnal umum di sini
         // Misalnya, memanggil fungsi cetak dari library atau mengatur format cetak
 
-        $data['title'] = "Cetak Jurnal Umum";
         $data['transaksi'] = $this->ModelPenggajian->get_data('jurnal_umum')->result();    
         // Ambil semua transaksi dari model
 

@@ -15,7 +15,7 @@
                     <thead class="thead-dark">
                         <tr>
                             <th class="text-center">No</th>
-                            <th class="text-center">NIP</th>
+                            <th class="text-center">ID User</th>
                             <th class="text-center">Email</th>
                             <th class="text-center">Level</th>
                             <th class="text-center">Actions</th>
@@ -33,6 +33,9 @@
                                     <button class="btn btn-sm btn-info" data-toggle="modal"
                                         data-target="#modal_edit_user_<?php echo $p->id_user; ?>"><i
                                             class="fas fa-edit"></i></button>
+                                            <a onclick="return confirm('Yakin Hapus?')" class="btn btn-sm btn-danger"
+    href="<?php echo base_url('admin/data_user/delete_data/'.$p->nip) ?>"><i class="fas fa-trash"></i></a>
+
                                 </center>
                             </td>
                         </tr>
@@ -87,7 +90,7 @@
                     </tbody>
                 </table>
             </div>
-        </div>
+        </div> 
     </div>
 </div>
 
@@ -106,10 +109,10 @@
                 <?php echo form_open('admin/data_user/tambah_data_aksi'); ?>
 
                 <div class="form-group">
-                    <label for="nip">NIP</label>
+                    <label for="nip">ID User</label>
                     <select name="nip" class="form-control">
-                        <?php foreach ($pegawai as $p): ?>
-                        <option value="<?php echo $p->nip; ?>"><?php echo $p->nama_pegawai; ?></option>
+                        <?php foreach ($filter as $p): ?>
+                        <option value="<?php echo $p->nip; ?>"><?php echo $p->nip; ?> - <?php echo $p->nama_pegawai; ?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>

@@ -46,7 +46,7 @@
         </a> 
         <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="<?php echo base_url('admin/data_absensi') ?>">Data Absensi</a>
+            <a class="collapse-item" href="<?php echo base_url('admin/input_presensi') ?>">Data Absensi</a>
             <a class="collapse-item" href="<?php echo base_url('admin/potongan_gaji') ?>">Setting Potongan Gaji</a>
             <a class="collapse-item" href="<?php echo base_url('admin/data_tunjangan') ?>">Data Tunjangan</a>
             <hr>

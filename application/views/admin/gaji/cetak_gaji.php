@@ -64,14 +64,14 @@
 			<?php foreach ($gaji as $row) : ?>
 				<tr>
 					<td class="text-center"><?php echo $no++; ?></td>
-					<td><?php echo $row->no_slip_gaji; ?></td>
+					<td><?php echo $row->no_slip_gaji; ?></td> 
 					<td><?php echo $row->nip; ?></td>
 					<td><?php echo $row->nama_pegawai; ?></td>
 					<td class="text-center"><?php echo date('d M Y', strtotime($row->tgl_gaji)); ?></td>
 					<td class="text-right">Rp. <?php echo number_format($row->tot_gapok, 0, ',', '.'); ?></td>
 					<td class="text-right">Rp. <?php echo number_format($row->id_bonus, 0, ',', '.'); ?></td>
 					<td class="text-right">Rp. <?php echo number_format($row->id_tunjangan, 0, ',', '.'); ?></td>
-					<td class="text-right">Rp. <?php echo number_format($row->alpha * $row->jml_potongan, 0, ',', '.'); ?></td>
+					<td class="text-right">Rp. <?php echo number_format($row->id_potongan, 0, ',', '.'); ?></td>
 					<td class="text-right">Rp. <?php echo number_format($row->gaji_bersih, 0, ',', '.'); ?></td>
 				</tr>
 			<?php endforeach; ?>

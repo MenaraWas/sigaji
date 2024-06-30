@@ -65,10 +65,10 @@
                             <th class="text-center">NIP</th>
                             <th class="text-center">Nama Pegawai</th>
                             <th class="text-center">Tanggal Gaji</th>
-                            <th class="text-center">Gaji Pokok</th>
+                            <th class="text-center">Gaji Pokok</th> 
                             <th class="text-center">Total Tunjangan</th>
-                            <th class="text-center">Total Bonus</th>
                             <th class="text-center">Total Potongan</th>
+                            <th class="text-center">Total Bonus</th>
                             <th class="text-center">Gaji Kotor</th>
                             <th class="text-center">Gaji Bersih</th>
                             <th class="text-center">Total Presensi</th>
@@ -76,8 +76,8 @@
                             <th class="text-center">Catatan</th>
                             <th class="text-center">Actions</th>
                         </tr>
-                    </thead>
-                    <tbody>
+                    </thead> 
+                    <tbody> 
                         <?php $no=1; foreach($gaji as $p) : ?>
                         <tr>
                             <td class="text-center"><?php echo $no++ ?></td>
@@ -86,11 +86,11 @@
                             <td class="text-center"><?php echo $p->nama_pegawai ?></td>
                             <td class="text-center"><?php echo $p->tgl_gaji ?></td>
                             <td class="text-center"><?php echo $p->tot_gapok ?></td>
-                            <td class="text-center"><?php echo $p->id_tunjangan ?></td>
-                            <td class="text-center"><?php echo $p->id_bonus ?></td>
-                            <td class="text-center"><?php echo $p->id_potongan ?></td>
-                            <td class="text-center"><?php echo $p->gaji_kotor ?></td>
-                            <td class="text-center"><?php echo $p->gaji_bersih ?></td>
+                            <td class="text-center">Rp. <?php echo number_format($p->id_tunjangan,0,',','.') ?></td>
+                            <td class="text-center">Rp. <?php echo number_format($p->id_potongan,0,',','.') ?></td>
+                            <td class="text-center">Rp. <?php echo number_format($p->id_bonus,0,',','.') ?></td>
+                            <td class="text-center">Rp. <?php echo number_format($p->gaji_kotor,0,',','.') ?></td>
+                            <td class="text-center">Rp. <?php echo number_format($p->gaji_bersih,0,',','.') ?></td>
                             
                             <td class="text-center">
                                 <?php echo "Hadir: " . $p->hadir . ", Sakit: " . $p->sakit . ", Alpha: " . $p->alpha; ?>
@@ -100,10 +100,10 @@
                             <td>
                                 <center>
                                     <a class="btn btn-sm btn-info"
-                                        href="<?php echo base_url('admin/data_pegawai/update_data/'.$p->nip) ?>"><i
+                                        href="<?php echo base_url('admin/input_gaji/update_data/'.$p->no_slip_gaji) ?>"><i
                                             class="fas fa-edit"></i></a>
                                     <a onclick="return confirm('Yakin Hapus?')" class="btn btn-sm btn-danger"
-                                        href="<?php echo base_url('admin/data_pegawai/delete_data/'.$p->nip) ?>"><i
+                                        href="<?php echo base_url('admin/input_gaji/delete_data/'.$p->nip) ?>"><i
                                             class="fas fa-trash"></i></a>
                                 </center>
                             </td>

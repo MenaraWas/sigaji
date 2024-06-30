@@ -7,6 +7,8 @@ class Data_User extends CI_Controller {
         $data['user'] = $this->ModelPenggajian->get_data('data_user')->result();
         $data['pegawai'] = $this->ModelPenggajian->get_data('data_pegawai')->result();
         $data['hak_akses'] = $this->ModelPenggajian->get_data('hak_akses')->result();
+        $data['filter'] = $this->db->query("SELECT * FROM data_pegawai WHERE email IS NULL OR email = '' OR password IS NULL OR password = ''")->result();
+
         $this->load->view('template_admin/header', $data);
         $this->load->view('template_admin/sidebar');
         $this->load->view('admin/Data_User', $data);
@@ -18,8 +20,9 @@ class Data_User extends CI_Controller {
         $data['pegawai'] = $this->ModelPenggajian->get_data('data_pegawai')->result();
         $data['hak_akses'] = $this->ModelPenggajian->get_data('hak_akses')->result();
 
+
         $this->load->view('template_admin/header', $data);
-        $this->load->view('template_admin/sidebar');
+        $this->load->view('template_admin/sidebar'); 
         $this->load->view('admin/Data_User', $data);
         $this->load->view('template_admin/footer');
     }
@@ -129,7 +132,12 @@ class Data_User extends CI_Controller {
 	public function delete_data($id) {
 		$where = array('nip' => $id);
 		$this->ModelPenggajian->delete_data($where, 'data_user');
-		$this->ModelPenggajian->delete_data($where, 'data_pegawai');
+        $data_to_pegawai = array(
+            'email'     => '',
+            'password'  => '',
+            'hak_akses' => '',
+        );
+        $this->ModelPenggajian->update_data_to_pegawai($data_to_pegawai, 'data_pegawai', $where);
 		$this->session->set_flashdata('pesan','<div class="alert alert-danger alert-dismissible fade show" role="alert">
 				<strong>Data berhasil dihapus!</strong>
 				<button type="button" class="close" data-dismiss="alert" aria-label="Close">

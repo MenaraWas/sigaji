@@ -67,21 +67,24 @@
 	<table class="table table-bordered table-striped">
 		<tr>
 			<td class="text-center">No</td>
+			<td class="text-center">Id Kehadiran</td>
 			<td class="text-center">NIP</td>
 			<td class="text-center">Nama Pegawai</td>
 			<td class="text-center" width="8%">Hadir</td>
 			<td class="text-center" width="8%">Sakit</td>
 			<td class="text-center" width="8%">Ijin</td>
-			<td class="text-center" width="8%">Alpha</td>
+			<td class="text-center" width="8%">Tanpa Keterangan</td>
 		</tr>
 		<?php $no=1; foreach($input_absensi as $a) :?>
 			<tr>
 				<input type="hidden" name="bulan[]" class="form-control" value="<?php echo $bulantahun?>">
+				<input type="hidden" name="id_kehadiran[]" class="form-control" value="<?php echo $id_kehadiran?>">
 				<input type="hidden" name="nip[]" class="form-control" value="<?php echo $a->nip?>">
 				<input type="hidden" name="nama_pegawai[]" class="form-control" value="<?php echo $a->nama_pegawai?>">
 
 
 				<td><?php echo $no++?></td>
+				<td><?php echo $a->id_kehadiran?></td>
 				<td><?php echo $a->nip?></td>
 				<td><?php echo $a->nama_pegawai?></td>
 				<td><input type="number" name="hadir[]" class="form-control" value="0"></td>

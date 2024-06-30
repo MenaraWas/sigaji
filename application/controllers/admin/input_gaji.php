@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Input_gaji extends CI_Controller {
 
 	public function __construct(){
-		parent::__construct();
+		parent::__construct(); 
 
 		if($this->session->userdata('hak_akses') != '1'){
 			$this->session->set_flashdata('pesan','<div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -115,7 +115,7 @@ class Input_gaji extends CI_Controller {
 				$total_potongan = $query_potongan->total_potongan;
 	
 				// Hitung gaji kotor
-				$gaji_kotor = $gaji_pokok + $total_tunjangan + $total_bonus;
+				$gaji_kotor = $gaji_pokok;
 	
 				// Hitung gaji bersih
 				$gaji_bersih = $gaji_kotor - $total_potongan;
@@ -155,10 +155,10 @@ class Input_gaji extends CI_Controller {
 	
 	
 
-	public function update_data($nip){
+	public function update_data($no_slip_gaji){
 		$data['title'] = "Update Data Gaji Pegawai";
 		$data['pegawai'] = $this->ModelPenggajian->get_data('data_pegawai')->result();
-		$data['gaji'] = $this->ModelPenggajian->get_data_by_id($nip, 'data_gaji')->row();
+		$data['gaji'] = $this->ModelPenggajian->get_data_by_id($no_slip_gaji, 'data_gaji')->row();
 
 		$this->load->view('template_admin/header', $data);
 		$this->load->view('template_admin/sidebar');
@@ -177,7 +177,6 @@ class Input_gaji extends CI_Controller {
 			$tgl_gaji = $this->input->post('tgl_gajian');
 
 			$data = array(
-				'nip' => $nip,
 				'tgl_gaji' => $tgl_gaji,
 			);
 
@@ -193,7 +192,7 @@ class Input_gaji extends CI_Controller {
 				</div>');
 
 			redirect('admin/input_gaji');
-		}
+		}  
 	}
 
 	public function delete_data($nip){

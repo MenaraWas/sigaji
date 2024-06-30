@@ -4,27 +4,43 @@ class Detail_Gaji extends CI_Controller {
 
     public function index() {
         $data['title'] = "Detail Gaji";
+
+        // Ambil data dari model untuk formulir
         $data['gaji'] = $this->ModelPenggajian->get_data('data_gaji')->result();
         $data['tunjangan'] = $this->ModelPenggajian->get_data('data_tunjangan')->result();
         $data['bonus'] = $this->ModelPenggajian->get_data('data_bonus')->result();
         $data['potongan'] = $this->ModelPenggajian->get_data('potongan_gaji')->result();
         $data['dg'] = $this->ModelPenggajian->get_data('detail_gaji')->result();
+        $data['filter'] = $this->db->query("SELECT * FROM data_gaji where id_tunjangan = 0")->result();
+    
+        // // Ambil nilai no_slip_gaji dari form
+        // $no_slip_gaji = $this->input->post('no_slip_gaji');
+    
+        // // Ambil nip dari tabel data_gaji berdasarkan no_slip_gaji
+        // $query_gaji = $this->db->get_where('data_gaji', array('no_slip_gaji' => $no_slip_gaji))->row();
+        // $nip = $query_gaji ? $query_gaji->nip : '';
+    
+        // // Ambil alpha dari tabel data_kehadiran berdasarkan nip
+        // $this->db->select('alpha');
+        // $this->db->where('nip', $nip);
+        // $data['filter_kehadiran'] = $this->db->get('data_kehadiran')->result();
         
-        $data['detail_gaji'] = $this->db->query('
-    SELECT 
-        detail_gaji.*, 
-        data_gaji.no_slip_gaji, 
-        data_tunjangan.Nama_Tunjangan, 
-        data_bonus.Nama_Bonus, 
-        potongan_gaji.potongan 
-    FROM 
-        detail_gaji 
-        INNER JOIN data_gaji ON detail_gaji.no_slip_gaji = data_gaji.no_slip_gaji 
-        INNER JOIN data_tunjangan ON detail_gaji.id_tunjangan = data_tunjangan.Kode_Tunjangan 
-        INNER JOIN data_bonus ON detail_gaji.id_bonus = data_bonus.Kode_Bonus
-        INNER JOIN potongan_gaji ON detail_gaji.id_potongan = potongan_gaji.id
-    ORDER BY detail_gaji.id_detail_gaji ASC
-')->result();
+//         $data['detail_gaji'] = $this->db->query('
+//     SELECT 
+//         detail_gaji.*, 
+//         data_gaji.no_slip_gaji, 
+//         data_tunjangan.Nama_Tunjangan, 
+//         data_bonus.Nama_Bonus, 
+//         potongan_gaji.potongan 
+//     FROM 
+//         detail_gaji 
+//         INNER JOIN data_gaji ON detail_gaji.no_slip_gaji = data_gaji.no_slip_gaji 
+//         INNER JOIN data_tunjangan ON detail_gaji.id_tunjangan = data_tunjangan.Kode_Tunjangan 
+//         INNER JOIN data_bonus ON detail_gaji.id_bonus = data_bonus.Kode_Bonus
+//         INNER JOIN potongan_gaji ON detail_gaji.id_potongan = potongan_gaji.id
+//          WHERE data_gaji.id_tunjangan = 0
+//     ORDER BY detail_gaji.id_detail_gaji ASC
+// ')->result();
 
 
         $last_detail_query = $this->db->select('id_detail_gaji')->order_by('id_detail_gaji', 'DESC')->limit(1)->get('detail_gaji');
@@ -73,25 +89,35 @@ class Detail_Gaji extends CI_Controller {
             $id_tunjangan = $this->input->post('id_tunjangan');
             $id_potongan = $this->input->post('id_potongan');
             $id_bonus = $this->input->post('id_bonus');
+            
     
             // Ambil tot_gapok dari tabel data_gaji berdasarkan no_slip_gaji
             $query_gaji = $this->db->get_where('data_gaji', array('no_slip_gaji' => $no_slip_gaji))->row();
     
             if ($query_gaji) {
                 $tot_gapok = $query_gaji->tot_gapok;
+                $nip = $query_gaji->nip;
+
+                $this->db->select('alpha');
+                $this->db->where('nip', $nip);
+                $query_kehadiran = $this->db->get('data_kehadiran')->row();
+
+                // Ambil nilai alpha
+                $alpha = $query_kehadiran ? $query_kehadiran->alpha : 0;
+                $total_potongan = $id_potongan*$alpha;
     
                 // Hitung gaji kotor
                 $gaji_kotor = $tot_gapok + $id_tunjangan + $id_bonus;
     
                 // Hitung gaji bersih
-                $gaji_bersih = $gaji_kotor - $id_potongan;
+                $gaji_bersih = $gaji_kotor - $total_potongan;
     
                 // Data untuk tabel detail_gaji
                 $data_detail_gaji = array(
                     'id_detail_gaji' => $id_detail,
                     'no_slip_gaji' => $no_slip_gaji,
                     'id_tunjangan' => $id_tunjangan,
-                    'id_potongan' => $id_potongan,
+                    'id_potongan' => $total_potongan,
                     'id_bonus' => $id_bonus,
                 );
     
@@ -101,7 +127,7 @@ class Detail_Gaji extends CI_Controller {
                 // Data untuk update ke data_gaji
                 $data_to_gaji = array(
                     'id_tunjangan' => $id_tunjangan,
-                    'id_potongan' => $id_potongan,
+                    'id_potongan' => $total_potongan,
                     'id_bonus' => $id_bonus,
                     'gaji_kotor' => $gaji_kotor,
                     'gaji_bersih' => $gaji_bersih,
@@ -116,13 +142,14 @@ class Detail_Gaji extends CI_Controller {
                 $tanggal_gaji = $query_gaji->tgl_gaji;
 
 
-                
+                 
                 $data_jurnal = array();
 
                 $data_jurnal[] = array(
                     'tanggal' => $tanggal_gaji,
                     'kredit' => $id_potongan,
                     'keterangan' => 'Potongan gaji dari detail gaji',
+                    'jenis' => 'Debit',
                 );
                 
                 // Tunjangan
@@ -130,6 +157,7 @@ class Detail_Gaji extends CI_Controller {
                     'tanggal' => $tanggal_gaji,
                     'debit' => $id_tunjangan,
                     'keterangan' => 'Tunjangan dari detail gaji',
+                    'jenis' => 'Kredit',
                 );
                 
                 // Bonus
@@ -137,6 +165,7 @@ class Detail_Gaji extends CI_Controller {
                     'tanggal' => $tanggal_gaji,
                     'debit' => $id_bonus,
                     'keterangan' => 'Bonus dari detail gaji',
+                    'jenis' => 'Kredit',
                 );
                 
                 // Gaji Bersih
@@ -144,6 +173,7 @@ class Detail_Gaji extends CI_Controller {
                     'tanggal' => $tanggal_gaji,
                     'debit' => $gaji_bersih,
                     'keterangan' => 'Penerimaan gaji bersih dari detail gaji',
+                    'jenis' => 'Debit',
                 );
                 // Simpan semua entri ke dalam tabel jurnal_umum
                 foreach ($data_jurnal as $jurnal) {
@@ -183,6 +213,104 @@ class Detail_Gaji extends CI_Controller {
         $this->form_validation->set_rules('id_tunjangan', 'Tunjangan', 'required');
         $this->form_validation->set_rules('id_potongan', 'Potongan', 'required');
         $this->form_validation->set_rules('id_bonus', 'Bonus', 'required');
+    }
+
+    public function update_data($id) {
+        $data['title'] = "Update Data Gaji Pegawai";
+        $data['pegawai'] = $this->ModelPenggajian->get_data('data_pegawai')->result();
+        $data['tunjangan'] = $this->ModelPenggajian->get_data('data_tunjangan')->result();
+        $data['bonus'] = $this->ModelPenggajian->get_data('data_bonus')->result();
+        $data['potongan'] = $this->ModelPenggajian->get_data('potongan_gaji')->result();
+        $data['detail_gaji'] = $this->ModelPenggajian->get_data_by_id('detail_gaji', 'id_detail_gaji', $id)->row();
+
+        $this->load->view('template_admin/header', $data);
+        $this->load->view('template_admin/sidebar');
+        $this->load->view('admin/penggajian', $data);
+        $this->load->view('template_admin/footer');
+    }
+
+    public function update_data_aksi() {
+        $this->_rules();
+
+        if ($this->form_validation->run() == FALSE) {
+            $this->update_data($this->input->post('id_detail'));
+        } else {
+            $id_detail = $this->input->post('id_detail');
+            $no_slip_gaji = $this->input->post('no_slip_gaji');
+            $id_tunjangan = $this->input->post('id_tunjangan');
+            $id_potongan = $this->input->post('id_potongan');
+            $id_bonus = $this->input->post('id_bonus');
+
+            $query_gaji = $this->db->get_where('data_gaji', array('no_slip_gaji' => $no_slip_gaji))->row();
+
+            if ($query_gaji) {
+                $tot_gapok = $query_gaji->tot_gapok;
+                $nip = $query_gaji->nip;
+
+                $this->db->select('alpha');
+                $this->db->where('nip', $nip);
+                $query_kehadiran = $this->db->get('data_kehadiran')->row();
+
+                $alpha = $query_kehadiran ? $query_kehadiran->alpha : 0;
+                $total_potongan = $id_potongan * $alpha;
+
+                $gaji_kotor = $tot_gapok + $id_tunjangan + $id_bonus;
+                $gaji_bersih = $gaji_kotor - $total_potongan;
+
+                $data_detail_gaji = array(
+                    'no_slip_gaji' => $no_slip_gaji,
+                    'id_tunjangan' => $id_tunjangan,
+                    'id_potongan' => $total_potongan,
+                    'id_bonus' => $id_bonus,
+                );
+
+                $where_detail = array('id_detail_gaji' => $id_detail);
+                $this->ModelPenggajian->update_data('detail_gaji', $data_detail_gaji, $where_detail);
+
+                $data_to_gaji = array(
+                    'id_tunjangan' => $id_tunjangan,
+                    'id_potongan' => $total_potongan,
+                    'id_bonus' => $id_bonus,
+                    'gaji_kotor' => $gaji_kotor,
+                    'gaji_bersih' => $gaji_bersih,
+                );
+
+                $where_gaji = array('no_slip_gaji' => $no_slip_gaji);
+                $this->ModelPenggajian->update_data('data_gaji', $data_to_gaji, $where_gaji);
+
+                $this->session->set_flashdata('pesan', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>Data berhasil diupdate!</strong>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                    </div>');
+
+                redirect('admin/Detail_Gaji');
+            } else {
+                $this->session->set_flashdata('pesan', '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>Data gaji tidak ditemukan!</strong>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                    </div>');
+
+                redirect('admin/Detail_Gaji');
+            }
+        }
+    }
+
+    public function delete_data($id) {
+        $where = array('id_detail_gaji' => $id);
+        $this->ModelPenggajian->delete_data($where, 'detail_gaji');
+
+        $this->session->set_flashdata('pesan', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>Data berhasil dihapus!</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+            </div>');
+
+        redirect('admin/Detail_Gaji');
     }
 }
 ?>

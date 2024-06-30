@@ -54,7 +54,7 @@ class Data_Absensi extends CI_Controller {
 						'nama_pegawai'   => $post['nama_pegawai'][$key],
 						'hadir'          => $post['hadir'][$key],
 						'sakit'          => $post['sakit'][$key],
-						'ijin'          => $post['ijin'][$key],
+						'ijin'          => $post['ijin'][$key], 
 						'alpha'          => $post['alpha'][$key],
 					);
 				}

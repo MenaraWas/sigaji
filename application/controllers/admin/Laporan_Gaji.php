@@ -68,7 +68,7 @@ public function cetak_laporan_gaji()
 	$data['title'] = "Laporan Gaji";
 
 	$nip = $this->input->get('nip');
-	$bulan = $this->input->get('bulan');
+	$bulan = $this->input->get('bulan'); 
 	$status_pengajuan = $this->input->get('status_pengajuan');
 
 	$this->db->select('data_gaji.*, data_pegawai.nama_pegawai, data_kehadiran.*');

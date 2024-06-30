@@ -21,7 +21,7 @@
 								<?php endforeach; ?>
 							</select>
 						</div>
-						<div class="form-group col-md-4">
+						<div class="form-group col-md-4"> 
 							<label>Bulan</label>
 							<div class="col-sm-9">
 							<select class="form-control" name="bulan">
@@ -60,7 +60,7 @@
 						<thead class="thead-dark">
 							<tr>
 								<th class="text-center">No</th>
-								<th class="text-center">No Slip Gaji</th>
+								<th class="text-center">No Slip Gaji</th> 
 								<th class="text-center">NIP</th>
 								<th class="text-center">Nama Pegawai</th>
 								<th class="text-center">Tanggal Gaji</th>

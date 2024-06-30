@@ -28,7 +28,7 @@
 	?>
 	<table>
 		<tr>
-			<td>Bulan</td>
+			<td>Bulan</td> 
 			<td>:</td>
 			<td><?php echo $bulan?></td>
 		</tr>
@@ -46,16 +46,18 @@
 				<th class="text-center">Nama Pegawai</th>
 				<th class="text-center">Jabatan</th>
 				<th class="text-center">Hadir</th>
+				<th class="text-center">Ijin</th>
 				<th class="text-center">Sakit</th>
 				<th class="text-center">Alpha</th>
 			</tr>
-			<?php $no=1; foreach($lap_kehadiran as $l) : ?>
+			<?php $no=1; foreach($kehadiran as $l) : ?>
 			<tr>
 				<td class="text-center"><?php echo $no++ ?></td>
 				<td class="text-center"><?php echo $l->nip ?></td>
 				<td class="text-center"><?php echo $l->nama_pegawai ?></td>
 				<td class="text-center"><?php echo $l->jabatan ?></td>
 				<td class="text-center"><?php echo $l->hadir ?></td>
+				<td class="text-center"><?php echo $l->ijin ?></td>
 				<td class="text-center"><?php echo $l->sakit ?></td>
 				<td class="text-center"><?php echo $l->alpha ?></td>
 			</tr>

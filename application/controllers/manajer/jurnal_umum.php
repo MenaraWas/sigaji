@@ -3,8 +3,26 @@
 class Jurnal_Umum extends CI_Controller {
 
     public function index() {
-        $data['title'] = "Jurnal Umum";    
-        $data['jurnal_umum'] = $this->ModelPenggajian->get_data('jurnal_umum')->result();    
+        $data['title'] = "Jurnal Umum";
+$bulan = $this->input->get('bulan');
+$tahun = $this->input->get('tahun');
+
+// Set default bulan dan tahun jika tidak ada input dari user
+if (!$bulan) {
+    $bulan = date('m');
+}
+if (!$tahun) {
+    $tahun = date('Y');
+}
+
+$data['bulan'] = $bulan;
+$data['tahun'] = $tahun;
+
+// Query untuk mengambil data jurnal umum berdasarkan bulan dan tahun
+$query = "SELECT * FROM jurnal_umum WHERE MONTH(tanggal) = '$bulan' AND YEAR(tanggal) = '$tahun'";
+$data['jurnal_umum'] = $this->db->query($query)->result();
+
+    
         $this->load->view('template_manager/header', $data);
         $this->load->view('template_manager/sidebar');
         $this->load->view('manajer/jurnal_umum', $data);
