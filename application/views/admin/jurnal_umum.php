@@ -41,7 +41,6 @@
                 <th class="text-center">Keterangan</th>
                 <th class="text-center">Debit (Rp)</th>
                 <th class="text-center">Kredit (Rp)</th>
-                <th class="text-center">Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -52,10 +51,7 @@
                     <td><?php echo $ju->keterangan; ?></td>
                     <td class="text-right"><?php echo ($ju->jenis == 'Debit') ? number_format($ju->debit, 0, ',', '.') : ''; ?></td>
                     <td class="text-right"><?php echo ($ju->jenis == 'Kredit') ? number_format($ju->kredit, 0, ',', '.') : ''; ?></td>
-                    <td class="text-center">
-                        <button class="btn btn-sm btn-info" data-toggle="modal" data-target="#modal_edit_jurnal_<?php echo $ju->id_jurnal; ?>"><i class="fas fa-edit"></i></button>
-                        <a onclick="return confirm('Yakin Hapus?')" class="btn btn-sm btn-danger" href="<?php echo base_url('admin/jurnal_umum/delete_data/'.$ju->id_jurnal) ?>"><i class="fas fa-trash"></i></a>
-                    </td>
+                    
                 </tr>
 
                 <!-- Modal Edit Jurnal Umum -->

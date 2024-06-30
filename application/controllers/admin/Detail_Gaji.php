@@ -145,35 +145,41 @@ class Detail_Gaji extends CI_Controller {
                  
                 $data_jurnal = array();
 
-                $data_jurnal[] = array(
-                    'tanggal' => $tanggal_gaji,
-                    'kredit' => $id_potongan,
-                    'keterangan' => 'Potongan gaji dari detail gaji',
-                    'jenis' => 'Debit',
-                );
+                // $data_jurnal[] = array(
+                //     'tanggal' => $tanggal_gaji,
+                //     'kredit' => $id_potongan,
+                //     'keterangan' => 'Potongan gaji dari detail gaji',
+                //     'jenis' => 'Debit',
+                // );
                 
-                // Tunjangan
-                $data_jurnal[] = array(
-                    'tanggal' => $tanggal_gaji,
-                    'debit' => $id_tunjangan,
-                    'keterangan' => 'Tunjangan dari detail gaji',
-                    'jenis' => 'Kredit',
-                );
+                // // Tunjangan
+                // $data_jurnal[] = array(
+                //     'tanggal' => $tanggal_gaji,
+                //     'debit' => $id_tunjangan,
+                //     'keterangan' => 'Tunjangan dari detail gaji',
+                //     'jenis' => 'Kredit',
+                // );
                 
-                // Bonus
-                $data_jurnal[] = array(
-                    'tanggal' => $tanggal_gaji,
-                    'debit' => $id_bonus,
-                    'keterangan' => 'Bonus dari detail gaji',
-                    'jenis' => 'Kredit',
-                );
+                // // Bonus
+                // $data_jurnal[] = array(
+                //     'tanggal' => $tanggal_gaji,
+                //     'debit' => $id_bonus,
+                //     'keterangan' => 'Bonus dari detail gaji',
+                //     'jenis' => 'Kredit',
+                // );
                 
                 // Gaji Bersih
                 $data_jurnal[] = array(
                     'tanggal' => $tanggal_gaji,
                     'debit' => $gaji_bersih,
-                    'keterangan' => 'Penerimaan gaji bersih dari detail gaji',
+                    'keterangan' => 'Hutang Gaji',
                     'jenis' => 'Debit',
+                );
+                $data_jurnal[] = array(
+                    'tanggal' => $tanggal_gaji,
+                    'kredit' => $gaji_bersih,
+                    'keterangan' => 'Kas',
+                    'jenis' => 'Kredit',
                 );
                 // Simpan semua entri ke dalam tabel jurnal_umum
                 foreach ($data_jurnal as $jurnal) {
