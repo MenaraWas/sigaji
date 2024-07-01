@@ -168,7 +168,7 @@
                     <select name="no_slip_gaji" class="form-control">
                         <option value="">--Pilih Slip Gaji--</option>
                         <?php foreach ($filter as $p) : ?>
-                        <option value="<?php echo $p->no_slip_gaji; ?>"><?php echo $p->nip; ?></option>
+                        <option value="<?php echo $p->no_slip_gaji; ?>"><?php echo $p->nama_pegawai; ?></option>
                         <?php endforeach; ?>
                     </select>
                     <?php echo form_error('no_slip_gaji', '<div class="text-small text-danger"> </div>')?>
