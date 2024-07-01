@@ -174,17 +174,6 @@
                     <?php echo form_error('no_slip_gaji', '<div class="text-small text-danger"> </div>')?>
                 </div>
 
-                <div class="form-group">
-                    <label>Jenis</label>
-                    <select name="id_tunjangan" class="form-control">
-                        <option value="">--Pilih Tunjangan--</option>
-                        <option value="">Tunjangan</option>
-                        <option value="">Bonus</option>
-                        <option value="">Potongan</option>
-
-                    </select>
-                    <?php echo form_error('id_tunjangan', '<div class="text-small text-danger"> </div>')?>
-                </div>
 
                 <div class="form-group">
                     <label>Tunjangan</label>
@@ -206,19 +195,6 @@
                         <?php endforeach; ?>
                     </select>
                 </div>
-
-                <div class="form-group">
-                    <label>Total Potongan</label>
-                    <input type="text" id="total_potongan" name="total_potongan" class="form-control" readonly>
-                </div>
-
-                <script>
-                function calculatePotongan() {
-                    var potonganGaji = document.getElementById('id_potongan').value;
-                    document.getElementById('total_potongan').value = potonganGaji;
-                }
-                </script>
-
 
                 <div class="form-group">
                     <label>Bonus</label>

@@ -40,9 +40,6 @@
                         <a class="nav-link" href="#Tentang">Informassi</a>
                      </li>
                      <li class="nav-item">
-                        <a class="nav-link" href="#AboutMe">About Me</a>
-                     </li>
-                     <li class="nav-item">
                         <a class="nav-link" href="<?php echo base_url('login');?>">Login</a>
                      </li>
                   </ul>
@@ -57,7 +54,7 @@
                         <div>
                            <h2><b><i>Penggajian Karyawan</i></b></h2>
                         </div>
-                        <p>Selmat datang di aplikasi Sistem Informasi Penggajian Karyawan <br>PT. Multimedia Adiautama Asia</p>
+                        <p>Selmat datang di aplikasi Sistem Informasi Penggajian Karyawan <br>PT. Pandam Adiwastra Janaloka</p>
                      </div>
                   </div>
                   <div class="col headerImg" style="background-image: url('<?php echo base_url()?>assets/img/uangg.svg');"></div>
@@ -80,7 +77,7 @@
                <p></p>
                <p></p>
                <div class="subHeading">
-                  Berikut informasi lebih lengkap tentang website <br>informasi penggajian karyawan PT. Multimedia Adiautama Asia</div>
+                  Berikut informasi lebih lengkap tentang website <br>informasi penggajian karyawan PT. Pandam Adiwastra Janaloka</div>
             </div>
 
             <script src="<?php echo base_url(); ?>assets/vendor/jquery/jquery.min.js"></script>
