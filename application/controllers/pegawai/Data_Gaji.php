@@ -21,7 +21,7 @@ class Data_Gaji extends CI_Controller {
 		$nip=$this->session->userdata('nip');
 		$data['potongan'] = $this->ModelPenggajian->get_data('potongan_gaji')->result();
 		$data['gaji'] = $this->db->query("SELECT data_pegawai.nama_pegawai,data_pegawai.nip,data_gaji.tot_gapok,data_gaji.id_tunjangan,data_gaji.id_bonus,
-			data_gaji.gaji_bersih,
+			data_gaji.gaji_bersih,data_gaji.id_potongan,
 			data_kehadiran.alpha,data_kehadiran.bulan,data_kehadiran.id_kehadiran
 			FROM data_pegawai
 			INNER JOIN data_kehadiran ON data_kehadiran.nip = data_pegawai.nip

@@ -29,7 +29,7 @@
   		<td>Rp. <?php echo number_format($g->id_tunjangan,0,',','.') ?></td>
   		<td>Rp. <?php echo number_format($g->id_bonus,0,',','.') ?></td>
   		<td>Rp. <?php echo number_format($g->id_potongan,0,',','.') ?></td>
-  		<td>Rp. <?php echo number_format($g->tot_gapok+$g->id_tunjangan+$g->id_bonus-$id_potongan,0,',','.') ?></td>
+  		<td>Rp. <?php echo number_format($g->gaji_bersih,0,',','.') ?></td>
   		<td>
   			<center>
   				<a class="btn btn-sm btn-primary" href="<?php echo base_url('pegawai/data_gaji/cetak_slip/'.$g->id_kehadiran)?>"><i class="fas fa-print"></i></a>
