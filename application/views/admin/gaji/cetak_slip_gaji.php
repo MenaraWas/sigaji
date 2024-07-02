@@ -4,118 +4,105 @@
 <head>
     <title>Slip Gaji</title>
     <style>
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #f0f0f0;
-    }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
 
-    .container {
-        width: 80%;
-        margin: 40px auto;
-        padding: 20px;
-        border: 1px solid #ddd;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        background-color: #fff;
-    }
+        .container {
+            width: 80%;
+            margin: 40px auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+        }
 
-    header {
-        background-color: #f0f0f0;
-        padding: 10px;
-        border-bottom: 1px solid #ddd;
-        text-align: center;
-    }
+        header {
+            background-color: #f0f0f0;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            text-align: center;
+        }
 
-    header h1,
-    header h2 {
-        margin: 5px 0;
-    }
+        header h1,
+        header h2 {
+            margin: 5px 0;
+        }
 
-    .employee-info {
-        margin-top: 20px;
-        padding-bottom: 20px;
-        border-bottom: 1px solid #ddd;
-    }
+        .employee-info {
+            margin-top: 20px;
+            margin-right: -650px;
+            overflow: auto;
+        }
 
-    .employee-info table {
-        width: 100%;
-        border-collapse: collapse;
-    }
+        .income,
+        .deduction,
+        .net-income {
+            margin-top: 20px;
+        }
 
-    .employee-info th,
-    .employee-info td {
-        padding: 8px;
-        text-align: left;
-        border: 1px solid #ddd;
-    }
+        .income table,
+        .deduction table,
+        .net-income table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
 
-    .income,
-    .deduction,
-    .net-income {
-        margin-top: 20px;
-        padding-bottom: 20px;
-        border-bottom: 1px solid #ddd;
-    }
+        .income th,
+        .deduction th,
+        .net-income th,
+        .income td,
+        .deduction td,
+        .net-income td {
+            text-align: left;
+        }
 
-    .income table,
-    .deduction table {
-        width: 100%;
-        border-collapse: collapse;
-    }
+        .income th,
+        .deduction th,
+        .net-income th {
+            background-color: #f0f0f0;
+        }
 
-    .income th,
-    .income td,
-    .deduction th,
-    .deduction td,
-    .net-income p {
-        padding: 8px;
-        border: 1px solid #ddd;
-    }
+        .net-income h3 {
+            margin-top: 10px;
+        }
 
-    .income th,
-    .deduction th,
-    .net-income p {
-        text-align: left;
-        background-color: #f0f0f0;
-    }
+        footer {
+            text-align: center;
+            margin-top: 20px;
+        }
 
-    .net-income h3 {
-        margin-top: 10px;
-    }
+        footer button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
 
-    footer {
-        text-align: center;
-        margin-top: 20px;
-    }
+        footer button:hover {
+            background-color: #45a049;
+        }
 
-    footer button {
-        padding: 10px 20px;
-        font-size: 16px;
-        background-color: #4CAF50;
-        color: #fff;
-        border: none;
-        cursor: pointer;
-    }
-
-    footer button:hover {
-        background-color: #45a049;
-    }
-
-    .address {
+        .address {
             float: left;
             width: 40%;
         }
+
         .address p {
             margin-bottom: 5px;
         }
+
         .details {
-            width: 60%;
             float: right;
+            width: 60%;
         }
-        .details table {
-            width: 100%;
-        } 
-        .details table td {
-            padding: 5px;
+
+        .details p {
+            margin: 5px 0;
         }
     </style>
 </head>
@@ -125,26 +112,25 @@
         <header>
             <h1>PT PANDAM ADIWASTRA JANALOKA</h1>
             <p><a href="http://www.pandamjanaloka.com">www.pandamjanaloka.com</a></p>
+            <hr>
             <h2>SLIP GAJI</h2>
         </header>
-        <?php foreach($print_slip as $ps) : ?>
+        <section class="employee-info">
+            <?php foreach ($print_slip as $ps) : ?>
+                <div class="details">
+                    <p>Nama Pegawai: <?php echo $ps->nama_pegawai ?> </p>
+                    <p>NIP: <?php echo $ps->nip ?> </p>
+                    <p>Jabatan: <?php echo $ps->jabatan ?> </p>
+                    <p>Bulan: <?php echo substr($ps->bulan, 5, 8) ?></p>
+                </div>
+                <div class="address">
+                    <p>JL. Langenarjan Kidul no.7A,<br> Panembahan, <br>Kecamatan Kraton,<br> D.I. Yogyakarta, 55131</p>
+                </div>
+            <?php endforeach; ?>
+        </section>
 
-        <div class="details">
-            <p>Nama Pegawai : <?php echo $ps->nama_pegawai?> <br>
-        NIP          : <?php echo $ps->nip?> <br>
-        Jabatan      : <?php echo $ps->jabatan?> <br>
-        Bulan        : <?php echo substr($ps->bulan, 5,8) ?><br>
-        </div>
- 
-        <div class="address">
-            <p>JL. Langenarjan Kidul no.7A,<br> Panembahan, <br>Kecamatan Kraton,<br> D.I. Yogyakarta, 55131</p>
-        </div>
-        
-
-        <?php endforeach ;?>
-
-        
-        <section class="income" style="margin-top:50px;">
+        <section class="income">
+            <hr>
             <h3>PENERIMAAN</h3>
             <table>
                 <tr>
@@ -159,10 +145,18 @@
                     <td>- Bonus</td>
                     <td>Rp. <?php echo number_format($ps->id_bonus, 0, ',', '.'); ?></td>
                 </tr>
+                <tr>
+                    <td colspan="2">
+                        <hr>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>Total Penghasilan Kotor</strong></td>
+                    <td><strong>Rp. <?php echo number_format($ps->gaji_kotor, 0, ',', '.'); ?></strong></td>
+                </tr>
             </table>
-            <h3>Total Penghasilan Kotor</h3>
-            <p>Rp. <?php echo number_format($ps->gaji_kotor, 0, ',', '.'); ?> </b></p>
         </section>
+
         <section class="deduction">
             <h3>PENGURANGAN</h3>
             <table>
@@ -171,17 +165,27 @@
                     <td>Rp. <?php echo number_format($ps->id_potongan, 0, ',', '.'); ?></td>
                 </tr>
                 <tr>
-                    <td>- Selisih Kasir</td>
-                    <td>-</td>
+                    <td colspan="2">
+                        <hr>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>Total Pengurangan</strong></td>
+                    <td><strong>Rp. <?php echo number_format($ps->id_potongan, 0, ',', '.'); ?></strong></td>
                 </tr>
             </table>
-            <h3>Total Pengurangan</h3>
-            <p>Rp. <?php echo number_format($ps->id_potongan, 0, ',', '.'); ?></p>
         </section>
+
         <section class="net-income">
-            <h3>TOTAL GAJI DITERIMA BERSIH</h3>
-            <p>Rp. <?php echo number_format($ps->gaji_bersih, 0, ',', '.'); ?></b></p>
+            <hr>
+            <table>
+                <tr>
+                    <td><h3>TOTAL GAJI DITERIMA BERSIH</h3></td>
+                    <td><strong>Rp. <?php echo number_format($ps->gaji_bersih, 0, ',', '.'); ?></strong></td>
+                </tr>
+            </table>
         </section>
+
         <footer>
             <button onclick="window.print()">Cetak Halaman</button>
         </footer>
