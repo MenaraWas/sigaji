@@ -164,9 +164,9 @@
                 </div>
 
                 <div class="form-group">
-                    <label>No Slip Gaji</label>
+                    <label>Pegawai</label>
                     <select name="no_slip_gaji" class="form-control">
-                        <option value="">--Pilih Slip Gaji--</option>
+                        <option value="">--Pilih Nama Pegawai--</option>
                         <?php foreach ($filter as $p) : ?>
                         <option value="<?php echo $p->no_slip_gaji; ?>"><?php echo $p->nama_pegawai; ?></option>
                         <?php endforeach; ?>
