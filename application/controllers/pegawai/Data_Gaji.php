@@ -14,7 +14,7 @@ class Data_Gaji extends CI_Controller {
 				</div>');
 				redirect('login');
 		}
-	}
+	} 
 	public function index() 
 	{
 		$data['title'] = "Data Gaji";

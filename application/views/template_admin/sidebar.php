@@ -79,12 +79,6 @@
           <span>Jurnal Umum</span></a>
       </li>
 
-      <!-- Nav Item - Charts -->
-      <li class="nav-item">
-        <a class="nav-link" href="<?php echo base_url('ganti_password') ?>">
-          <i class="fas fa-fw fa-lock"></i>
-          <span>Ubah Password</span></a>
-      </li>
 
       <!-- Nav Item - Tables -->
       <li class="nav-item">

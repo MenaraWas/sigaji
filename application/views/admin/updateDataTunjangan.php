@@ -13,16 +13,16 @@
 
     <div class="form-group">
         <label>Kode Tunjangan</label>
-        <input type="number" name="Tunjangan" class="form-control" value
-        ="<?php echo $t->Tunjangan ?>" readonly>
+        <input type="number" name="Kode_Tunjangan" class="form-control" value
+        ="<?php echo $t->Kode_Tunjangan ?>" readonly>
         <?php echo form_error('Tunjangan','<div 
         class="text-small text-danger"></div>') ?>
     </div>
 
     <div class="form-group">
         <label>Nama Tunjangan</label>
-        <input type="text" name="Tunjangan" class="form-control" value
-        ="<?php echo $t->Tunjangan ?>">
+        <input type="text" name="Nama_Tunjangan" class="form-control" value
+        ="<?php echo $t->Nama_Tunjangan ?>">
         <?php echo form_error('Tunjangan','<div 
         class="text-small text-danger"></div>') ?>
     </div>

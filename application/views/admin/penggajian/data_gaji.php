@@ -111,15 +111,53 @@
                             <td class="text-center"><?php echo $p->catatan ?></td>
                             <td>
                                 <center>
-                                    <a class="btn btn-sm btn-info"
-                                        href="<?php echo base_url('admin/input_gaji/update_data/'.$p->no_slip_gaji) ?>"><i
-                                            class="fas fa-edit"></i></a>
+                                <button class="btn btn-sm btn-info" data-toggle="modal"
+                                        data-target="#modal_edit_user_<?php echo $p->nip; ?>"><i
+                                            class="fas fa-edit"></i></button>
+
                                     <a onclick="return confirm('Yakin Hapus?')" class="btn btn-sm btn-danger"
                                         href="<?php echo base_url('admin/input_gaji/delete_data/'.$p->nip) ?>"><i
                                             class="fas fa-trash"></i></a>
                                 </center>
                             </td>
                         </tr>
+
+                       <!-- Modal Edit Jurnal Umum -->
+    <div class="modal fade" id="modal_edit_user_<?php echo $p->nip; ?>" tabindex="-1"
+        role="dialog" aria-labelledby="modal_edit_user_<?php echo $p->nip; ?>"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modal_edit_jurnalLabel_<?php echo $p->nip; ?>">
+                        Edit Gaji <?php echo $p->nama_pegawai; ?>
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" action="<?php echo base_url('admin/input_gaji/update_data_aksi'); ?>">
+                        <div class="form-group">
+                            <label for="nip">NIP</label>
+                            <input type="text" class="form-control" id="nip" name="nip"
+                                value="<?php echo $p->nip; ?>" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="gapok">Gaji Pokok</label>
+                            <input type="text" class="form-control" id="gapok" name="gapok"
+                                value="<?php echo $p->tot_gapok; ?>">
+                        </div>
+                        <div class="form-group">
+                            <label for="catatan">Catatan</label>
+                            <input type="text" name="catatan" class="form-control" value="<?php echo $p->catatan; ?>">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Simpan</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
                         <?php endforeach; ?>
                     </tbody>
 
@@ -167,6 +205,55 @@
                                 <?php endforeach; ?>
                             </select>
                             <?php echo form_error('nip', '<div class="text-small text-danger"> </div>')?>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success">Simpan</button>
+                        <button type="reset" class="btn btn-danger">Reset</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <!-- Tombol simpan -->
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal for Editing Data -->
+<div class="modal fade bd-example-modal-lg" id="modalEdit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Edit Data Gaji</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Isi modal -->
+                <form method="POST" action="<?php echo base_url('admin/input_gaji/edit_data_aksi')?>" enctype="multipart/form-data">
+                    <!-- Form input -->
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>NIP</label>
+                            <input type="text" name="nip" class="form-control" value="<?php echo set_value('nip', $gaji->nip); ?>" readonly>
+                            <?php echo form_error('nip', '<div class="text-small text-danger"> </div>')?>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>Nomor Gaji</label>
+                            <input type="text" name="nomor_gaji" class="form-control" value="<?php echo set_value('nomor_gaji', $gaji->nomor_gaji); ?>">
+                            <?php echo form_error('nomor_gaji', '<div class="text-small text-danger"> </div>')?>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>Gaji Pokok</label>
+                            <input type="text" name="gaji_pokok" class="form-control" value="<?php echo set_value('gaji_pokok', $gaji->gaji_pokok); ?>">
+                            <?php echo form_error('gaji_pokok', '<div class="text-small text-danger"> </div>')?>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>Catatan</label>
+                            <textarea name="catatan" class="form-control"><?php echo set_value('catatan', $gaji->catatan); ?></textarea>
+                            <?php echo form_error('catatan', '<div class="text-small text-danger"> </div>')?>
                         </div>
                     </div>
                     <div class="modal-footer">

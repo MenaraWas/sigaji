@@ -155,45 +155,61 @@ class Input_gaji extends CI_Controller {
 	
 	
 
-	public function update_data($no_slip_gaji){
-		$data['title'] = "Update Data Gaji Pegawai";
-		$data['pegawai'] = $this->ModelPenggajian->get_data('data_pegawai')->result();
-		$data['gaji'] = $this->ModelPenggajian->get_data_by_id($no_slip_gaji, 'data_gaji')->row();
-
-		$this->load->view('template_admin/header', $data);
-		$this->load->view('template_admin/sidebar');
-		$this->load->view('admin/penggajian/update_gaji', $data);
-		$this->load->view('template_admin/footer');
-	}
- 
-	public function update_data_aksi(){
-		$this->form_validation->set_rules('nip', 'NIP', 'required');
-		$this->form_validation->set_rules('tgl_gajian', 'Tanggal Gaji', 'required');
-
-		if ($this->form_validation->run() == FALSE) {
-			$this->update_data($this->input->post('nip'));
-		} else {
-			$nip = $this->input->post('nip');
-			$tgl_gaji = $this->input->post('tgl_gajian');
-
-			$data = array(
-				'tgl_gaji' => $tgl_gaji,
-			);
-
-			$where = array('nip' => $nip);
-
-			$this->ModelPenggajian->update_data('data_gaji', $data, $where);
-
-			$this->session->set_flashdata('pesan','<div class="alert alert-success alert-dismissible fade show" role="alert">
-				<strong>Data berhasil diupdate!</strong>
-				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-				<span aria-hidden="true">&times;</span>
-				</button>
-				</div>');
-
-			redirect('admin/input_gaji');
-		}  
-	}
+	public function update_data($id) {
+        $data['title'] = "Update Data Gaji Pegawai";
+        $where = array('nip' => $id);
+        // $data['gaji'] = $this->db->get_where('data_gaji', $where)->result();
+		$data['gaji'] = $this->db->query("SELECT * FROM data_gaji WHERE nip='$where'")->result();
+        $data['pegawai'] = $this->ModelPenggajian->get_data('data_pegawai')->result();
+    
+        $this->load->view('template_admin/header', $data);
+        $this->load->view('template_admin/sidebar');
+        $this->load->view('admin/penggajian/update_gaji', $data);
+        $this->load->view('template_admin/footer');
+    }
+    
+    public function update_data_aksi() {
+        $this->form_validation->set_rules('nip', 'NIP', 'required');
+        $this->form_validation->set_rules('gapok', 'Gaji Pokok', 'required');
+        // $this->form_validation->set_rules('catatan', 'Catatan', 'required');
+    
+        if ($this->form_validation->run() == FALSE) {
+            // Redirect back to the form with error messages
+            $this->update_data();
+        } else {
+            $nip = $this->input->post('nip');
+            $gapok = $this->input->post('gapok');
+            $catatan = $this->input->post('catatan');
+    
+            $data_gaji = array(
+                'tot_gapok' => $gapok,
+                'catatan' => $catatan,
+            );
+    
+            $data_pegawai = array(
+                'gaji_pokok' => $gapok
+            );
+    
+            $where = array('nip' => $nip);
+    
+            // Update data_gaji
+            $this->ModelPenggajian->update_data('data_gaji', $data_gaji, $where);
+    
+            // Update data_pegawai
+            $this->ModelPenggajian->update_data('data_pegawai', $data_pegawai, $where);
+    
+            $this->session->set_flashdata('pesan','<div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Data berhasil diupdate!</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+                </div>');
+    
+            redirect('admin/input_gaji');
+        }  
+    }
+	
+	
 
 	public function delete_data($nip){
 		$where = array('nip' => $nip);

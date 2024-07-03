@@ -33,6 +33,7 @@
                                     <button class="btn btn-sm btn-info" data-toggle="modal"
                                         data-target="#modal_edit_user_<?php echo $p->id_user; ?>"><i
                                             class="fas fa-edit"></i></button>
+                                            
                                             <a onclick="return confirm('Yakin Hapus?')" class="btn btn-sm btn-danger"
     href="<?php echo base_url('admin/data_user/delete_data/'.$p->nip) ?>"><i class="fas fa-trash"></i></a>
 

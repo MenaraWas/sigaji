@@ -19,7 +19,7 @@
       <th class="text-center">Keterangan</th>
       <th class="text-center">Action</th>
     </tr>
-
+ 
     <?php $no=1; foreach($tunjangan as $t) : ?>
       <tr>
         <td><?php echo $no++ ?></td>

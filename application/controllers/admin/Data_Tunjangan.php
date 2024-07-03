@@ -86,6 +86,7 @@ class Data_Tunjangan extends CI_Controller{
                 $where = array('Kode_Tunjangan' => $id);
                 $data['tunjangan'] = $this->db->query("SELECT * FROM data_tunjangan
                     WHERE Kode_Tunjangan ='$id'")->result();
+
                 $data['title'] = "Update Data Tunjangan";    
                 $this->load->view('template_admin/header',$data);
                 $this->load->view('template_admin/sidebar');
@@ -98,7 +99,6 @@ class Data_Tunjangan extends CI_Controller{
                 $this->_rules();
         
                 if($this->form_validation->run() == FALSE) {
-                    $id = $this->input->post('Kode_Tunjangan');
                     $this->updatedata($id);
                 }else{
                     $id				    =$this->input->post('Kode_Tunjangan');
@@ -117,6 +117,7 @@ class Data_Tunjangan extends CI_Controller{
                     );
         
                     $this->ModelPenggajian->update_data('data_tunjangan',$data,$where);
+
                     $this->session->set_flashdata('pesan','<div class="alert alert-success alert-dismissible fade show" role="alert">
                         <strong>Data berhasil diupdate!</strong>
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">

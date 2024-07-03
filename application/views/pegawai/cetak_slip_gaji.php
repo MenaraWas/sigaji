@@ -1,114 +1,195 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-	<title><?php echo $title?></title>
-	<style type="text/css">
-		body{
-			font-family: Arial;
-			color: black;
-		}
-	</style>
+    <title>Slip Gaji</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+
+        .container {
+            width: 80%;
+            margin: 40px auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+        }
+
+        header {
+            background-color: #f0f0f0;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            text-align: center;
+        }
+
+        header h1,
+        header h2 {
+            margin: 5px 0;
+        }
+
+        .employee-info {
+            margin-top: 20px;
+            margin-right: -650px;
+            overflow: auto;
+        }
+
+        .income,
+        .deduction,
+        .net-income {
+            margin-top: 20px;
+        }
+
+        .income table,
+        .deduction table,
+        .net-income table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        .income th,
+        .deduction th,
+        .net-income th,
+        .income td,
+        .deduction td,
+        .net-income td {
+            text-align: left;
+        }
+
+        .income th,
+        .deduction th,
+        .net-income th {
+            background-color: #f0f0f0;
+        }
+
+        .net-income h3 {
+            margin-top: 10px;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        footer button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        footer button:hover {
+            background-color: #45a049;
+        }
+
+        .address {
+            float: left;
+            width: 40%;
+        }
+
+        .address p {
+            margin-bottom: 5px;
+        }
+
+        .details {
+            float: right;
+            width: 60%;
+        }
+
+        .details p {
+            margin: 5px 0;
+        }
+    </style>
 </head>
+
 <body>
-	<center>
-		<h1>PT. Pandam Adiwastra Janaloka</h1>
-		<h2>Daftar Gaji Pegawai</h2>
-		<hr style="width: 50%; border-width: 5px; color: black">
-	</center>
+    <div class="container">
+        <header>
+            <h1>PT PANDAM ADIWASTRA JANALOKA</h1>
+            <p><a href="http://www.pandamjanaloka.com">www.pandamjanaloka.com</a></p>
+            <hr>
+            <h2>SLIP GAJI</h2>
+        </header>
+        <section class="employee-info">
+            <?php foreach ($print_slip as $ps) : ?>
+                <div class="details">
+                    <p>Nama Pegawai: <?php echo $ps->nama_pegawai ?> </p>
+                    <p>NIP: <?php echo $ps->nip ?> </p>
+                    <p>Jabatan: <?php echo $ps->jabatan ?> </p>
+                    <p>Bulan: <?php echo substr($ps->bulan, 5, 8) ?></p>
+                </div>
+				<?php endforeach; ?>
+                <div class="address">
+                    <p>JL. Langenarjan Kidul no.7A,<br> Panembahan, <br>Kecamatan Kraton,<br> D.I. Yogyakarta, 55131</p>
+                </div>
+        </section>
 
-	<?php foreach($potongan as $p) {
-	$potongan=$p->jml_potongan;
-	} ?>
-		
-
-	<?php foreach($print_slip as $ps) : ?>
-
-	<?php $potongan_gaji=$ps->alpha * $potongan; ?>
-
-	<table style="width: 100%">
-		<tr>
-			<td width="20%">Nama Pegawai</td>
-			<td width="2%">:</td>
-			<td><?php echo $ps->nama_pegawai?></td>
-		</tr>
-		<tr>
-			<td>NIP</td>
-			<td>:</td>
-			<td><?php echo $ps->nip?></td>
-		</tr>
-		<tr>
-			<td>Jabatan</td>
-			<td>:</td>
-			<td><?php echo $ps->jabatan?></td>
-		</tr>
-		<tr>
-			<td>Bulan</td>
-			<td>:</td>
-			<td><?php echo substr($ps->bulan, 0,2) ?></td>
-		</tr>
-		<tr>
-			<td>Tahun</td>
-			<td>:</td>
-			<td><?php echo substr($ps->bulan, 2,4) ?></td>
-		</tr>
-	</table>
-
-	<table class="table table-striped table-bordered mt-3">
-		<tr>
-			<th class="text-center" width="5%">No</th>
-			<th class="text-center" >Keterangan</th>
-			<th class="text-center" >Jumlah</th>
-		</tr>
-		<tr>
-                    <td>1</td>
-                    <td>Gaji Pokok</td>
-                    <td>Rp. <?php echo number_format($ps->tot_gapok,0,',','.') ?></td>
+        <section class="income">
+            <hr>
+            <h3>PENERIMAAN</h3>
+            <table>
+                <tr>
+                    <td>- Gaji Pokok</td>
+                    <td>Rp. <?php echo number_format($ps->tot_gapok, 0, ',', '.'); ?></td>
                 </tr>
                 <tr>
-                    <td>2</td>
-                    <td>Tunjangan</td>
-                    <td>Rp. <?php echo number_format($ps->id_tunjangan,0,',','.') ?></td>
+                    <td>- Tunjangan Jabatan</td>
+                    <td>Rp. <?php echo number_format($ps->id_tunjangan, 0, ',', '.'); ?></td>
                 </tr>
                 <tr>
-                    <td>3</td>
-                    <td>Bonus</td>
-                    <td>Rp. <?php echo number_format($ps->id_bonus,0,',','.') ?></td>
+                    <td>- Bonus</td>
+                    <td>Rp. <?php echo number_format($ps->id_bonus, 0, ',', '.'); ?></td>
                 </tr>
                 <tr>
-                    <td>4</td>
-                    <td>Potongan</td>
-                    <td>Rp. <?php echo number_format($ps->id_potongan,0,',','.') ?></td>
+                    <td colspan="2">
+                        <hr>
+                    </td>
                 </tr>
                 <tr>
-                    <th colspan="2" style="text-align: right;">Total Gaji : </th>
-                    <th>Rp. <?php echo number_format($ps->gaji_bersih,0,',','.') ?></th>
+                    <td><strong>Total Penghasilan Kotor</strong></td>
+                    <td><strong>Rp. <?php echo number_format($ps->gaji_kotor, 0, ',', '.'); ?></strong></td>
                 </tr>
-	</table>
+            </table>
+        </section>
 
-	<table width="100%">
-		<tr>
-			<td></td>
-			<td>
-				<p>Pegawai</p>
-				<br>
-				<br>
-				<p class="font-weight-bold"><?php echo $ps->nama_pegawai?></p>
-			</td>
+        <section class="deduction">
+            <h3>PENGURANGAN</h3>
+            <table>
+                <tr>
+                    <td>- Presensi Alpa</td>
+                    <td>Rp. <?php echo number_format($ps->id_potongan, 0, ',', '.'); ?></td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <hr>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>Total Pengurangan</strong></td>
+                    <td><strong>Rp. <?php echo number_format($ps->id_potongan, 0, ',', '.'); ?></strong></td>
+                </tr>
+            </table>
+        </section>
 
-			<td width="200px">
-				<p>Yogyakarta, <?php echo date("d M Y")?> <br> Finance,</p>
-				<br>
-				<br>
-				<p>___________________</p>
-			</td>
-		</tr>
-	</table>
+        <section class="net-income">
+            <hr>
+            <table>
+                <tr>
+                    <td><h3>TOTAL GAJI DITERIMA BERSIH</h3></td>
+                    <td><strong>Rp. <?php echo number_format($ps->gaji_bersih, 0, ',', '.'); ?></strong></td>
+                </tr>
+            </table>
+        </section>
 
-	<?php endforeach ;?>
-
+        <footer>
+            <button onclick="window.print()">Cetak Halaman</button>
+        </footer>
+    </div>
 </body>
-</html>
 
-<script type="text/javascript">
-	window.print();
-</script>
+</html>
