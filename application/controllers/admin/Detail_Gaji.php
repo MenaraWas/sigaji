@@ -11,7 +11,7 @@ class Detail_Gaji extends CI_Controller {
         $data['bonus'] = $this->ModelPenggajian->get_data('data_bonus')->result();
         $data['potongan'] = $this->ModelPenggajian->get_data('potongan_gaji')->result();
         $data['dg'] = $this->ModelPenggajian->get_data('detail_gaji')->result();
-        $data['filter'] = $this->db->query("SELECT * FROM data_gaji where id_tunjangan = 0")->result();
+        $data['filter'] = $this->db->query("SELECT data_gaji.*, data_pegawai.nama_pegawai FROM data_gaji INNER JOIN data_pegawai ON data_pegawai.nip = data_gaji.nip  where id_tunjangan = 0")->result();
     
         // // Ambil nilai no_slip_gaji dari form
         // $no_slip_gaji = $this->input->post('no_slip_gaji');
