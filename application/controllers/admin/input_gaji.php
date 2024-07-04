@@ -224,38 +224,42 @@ class Input_gaji extends CI_Controller {
 	}
 
 	public function input_ke_jurnal() {
-		// Tentukan bulan dan tahun yang ingin dihitung
-		$bulan = date('Y-m'); // Misalnya, bulan ini
-		// Bisa juga menggunakan input dari form:
-		// $bulan = $this->input->get('bulan');
-	
-		// Query untuk menghitung total gaji pada bulan tertentu
-		$this->db->select_sum('gaji_bersih');
+		// Ambil semua bulan yang ada di data gaji
+		$this->db->select('DISTINCT DATE_FORMAT(tgl_gaji, "%Y-%m") as bulan', FALSE);
 		$this->db->from('data_gaji');
-		$this->db->like('tgl_gaji', $bulan); 
-		$total_gaji_bulan = $this->db->get()->row()->gaji_bersih;
+		$bulan_list = $this->db->get()->result();
 	
-		// Data yang akan dimasukkan ke jurnal umum untuk debit
-		$data_jurnal_debit = array(
-			'tanggal' => date('Y-m-d'), // Tanggal input ke jurnal
-			'keterangan' => 'Hutang gaji bulan ' . $bulan,
-			'debit' => $total_gaji_bulan,
-			'kredit' => 0,
-			'jenis' => 'Debit' // Sesuaikan dengan skema jurnal umum
-		);
+		foreach ($bulan_list as $bulan_data) {
+			$bulan = $bulan_data->bulan;
 	
-		// Data yang akan dimasukkan ke jurnal umum untuk kredit
-		$data_jurnal_kredit = array(
-			'tanggal' => date('Y-m-d'), // Tanggal input ke jurnal
-			'keterangan' => 'Kas',
-			'debit' => 0,
-			'kredit' => $total_gaji_bulan,
-			'jenis' => 'Kredit' // Sesuaikan dengan skema jurnal umum
-		);
+			// Query untuk menghitung total gaji pada bulan tertentu
+			$this->db->select_sum('gaji_bersih');
+			$this->db->from('data_gaji');
+			$this->db->like('tgl_gaji', $bulan);
+			$total_gaji_bulan = $this->db->get()->row()->gaji_bersih;
 	
-		// Masukkan data ke jurnal umum
-		$this->ModelPenggajian->insert_data($data_jurnal_debit, 'jurnal_umum');
-		$this->ModelPenggajian->insert_data($data_jurnal_kredit, 'jurnal_umum');
+			// Data yang akan dimasukkan ke jurnal umum untuk debit
+			$data_jurnal_debit = array(
+				'tanggal' => date('Y-m-d'), // Tanggal input ke jurnal
+				'keterangan' => 'Hutang gaji bulan ' . $bulan,
+				'debit' => $total_gaji_bulan,
+				'kredit' => 0,
+				'jenis' => 'Debit' // Sesuaikan dengan skema jurnal umum
+			);
+	
+			// Data yang akan dimasukkan ke jurnal umum untuk kredit
+			$data_jurnal_kredit = array(
+				'tanggal' => date('Y-m-d'), // Tanggal input ke jurnal
+				'keterangan' => 'Kas',
+				'debit' => 0,
+				'kredit' => $total_gaji_bulan,
+				'jenis' => 'Kredit' // Sesuaikan dengan skema jurnal umum
+			);
+	
+			// Masukkan data ke jurnal umum
+			$this->ModelPenggajian->insert_data($data_jurnal_debit, 'jurnal_umum');
+			$this->ModelPenggajian->insert_data($data_jurnal_kredit, 'jurnal_umum');
+		}
 	
 		// Redirect kembali dengan pesan sukses
 		$this->session->set_flashdata('pesan','<div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -267,6 +271,7 @@ class Input_gaji extends CI_Controller {
 	
 		redirect('admin/input_gaji');
 	}
+	
 	
 	
 }
