@@ -232,7 +232,7 @@ class Input_gaji extends CI_Controller {
 		// Query untuk menghitung total gaji pada bulan tertentu
 		$this->db->select_sum('gaji_bersih');
 		$this->db->from('data_gaji');
-		$this->db->like('tgl_gaji', $bulan);
+		$this->db->like('tgl_gaji', $bulan); 
 		$total_gaji_bulan = $this->db->get()->row()->gaji_bersih;
 	
 		// Data yang akan dimasukkan ke jurnal umum untuk debit

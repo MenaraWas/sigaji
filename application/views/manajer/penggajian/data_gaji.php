@@ -4,6 +4,8 @@
     </div>
     <a class="btn btn-sm btn-success mb-3" href="#" data-toggle="modal" data-target="#modalTambah"><i
             class="fas fa-plus"></i> Tambah Data Gaji</a>
+            <a class="btn btn-sm btn-primary mb-3" href="<?= base_url('manajer/input_gaji/input_ke_jurnal') ?>">Input data ke Jurnal Umum</a>
+
     <?php echo $this->session->flashdata('pesan')?>
 </div>
 
@@ -99,7 +101,6 @@
                             <th class="text-center">Gaji Bersih</th>
                             <th class="text-center">Total Presensi</th>
                             <th class="text-center">Status Pengajuan</th>
-                            <th class="text-center">Catatan</th>
                             <th class="text-center">Actions</th>
                         </tr>
                     </thead>
@@ -119,7 +120,7 @@
                             <td class="text-center"><?php echo $p->gaji_bersih ?></td>
 
                             <td class="text-center">
-                                <?php echo "Hadir: " . $p->hadir . ", Sakit: " . $p->sakit . ", Alpha: " . $p->alpha; ?>
+                                <?php echo "Hadir: " . $p->hadir . ", Sakit: " . $p->sakit . ", Ijin: " . $p->ijin . ", Alpha: " . $p->alpha; ?>
                             </td>
                             <td class="text-center">
                                 <?php 
@@ -134,7 +135,6 @@
                                     }
                                 ?>
                             </td>
-                            <td class="text-center"><?php echo $p->catatan ?></td>
                             <td>
                                 <center>
                                     <button class="btn btn-sm btn-info" data-toggle="modal"
