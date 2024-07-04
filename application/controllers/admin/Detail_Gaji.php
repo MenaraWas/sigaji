@@ -236,7 +236,6 @@ class Detail_Gaji extends CI_Controller {
     }
 
     public function update_data_aksi() {
-        $this->_rules();
 
         if ($this->form_validation->run() == FALSE) {
             $this->update_data($this->input->post('id_detail'));

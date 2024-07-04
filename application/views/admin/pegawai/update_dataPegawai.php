@@ -61,11 +61,6 @@
                 <?php echo form_error('tgl_lahir', '<div class="text-small text-danger"> </div>')?>
             </div>
 
-            <div class="form-group">
-                <label>Photo</label>
-                <input type="file" name="photo" class="form-control">
-            </div>
-
             <button type="submit" class="btn btn-success">Simpan</button>
             <a href="<?php echo base_url('admin/data_pegawai')?>" class="btn btn-warning">Kembali</a>
 

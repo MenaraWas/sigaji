@@ -96,25 +96,43 @@
           <div class="row">
 
             <!-- Area Chart -->
-            <div class="col-xl-8 col-lg-7">
-              <div class="card shadow mb-4">
-                <!-- Card Header - Dropdown -->
-                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-primary">Data Pegawai Berdasarkan Jenis Kelamin</h6>
-                  <div class="dropdown no-arrow">
-                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                    </a>
-                  </div>
-                </div>
-                <!-- Card Body -->
-                <div class="card-body">
-                  <div class="chart-bar">
-                    <canvas id="myBarChart"></canvas>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <canvas id="gajiChart" width="50" height="10"></canvas>
+<script>
+    // Ambil data dari PHP
+    var dataGaji = <?php echo json_encode($data_gaji); ?>;
+
+    // Format data untuk Chart.js
+    var labels = [];
+    var data = [];
+
+    dataGaji.forEach(function(item) {
+        labels.push("Bulan " + item.bulan);
+        data.push(item.total_gaji);
+    });
+
+    var ctx = document.getElementById('gajiChart').getContext('2d');
+    var gajiChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Total Gaji',
+                data: data,
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
+
 
             <!-- Pie Chart -->
             

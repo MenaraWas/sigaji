@@ -99,19 +99,6 @@
                                                     </select>
                                                 </div>
 
-                                                <div class="form-group">
-                                                    <label>Total Potongan</label>
-                                                    <input type="text" id="total_potongan" name="total_potongan"
-                                                        class="form-control" readonly>
-                                                </div>
-
-                                                <script>
-                                                function calculatePotongan() {
-                                                    var potonganGaji = document.getElementById('id_potongan').value;
-                                                    document.getElementById('total_potongan').value = potonganGaji;
-                                                }
-                                                </script>
-
 
                                                 <div class="form-group">
                                                     <label>Bonus</label>
