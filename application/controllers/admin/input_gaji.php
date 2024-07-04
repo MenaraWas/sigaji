@@ -224,53 +224,72 @@ class Input_gaji extends CI_Controller {
 	}
 
 	public function input_ke_jurnal() {
-		// Ambil semua bulan yang ada di data gaji
-		$this->db->select('DISTINCT DATE_FORMAT(tgl_gaji, "%Y-%m") as bulan', FALSE);
-		$this->db->from('data_gaji');
-		$bulan_list = $this->db->get()->result();
+		// Ambil bulan dari input form
+		$bulan = $this->input->post('bulan');
 	
-		foreach ($bulan_list as $bulan_data) {
-			$bulan = $bulan_data->bulan;
-	
+		if ($bulan) {
 			// Query untuk menghitung total gaji pada bulan tertentu
 			$this->db->select_sum('gaji_bersih');
 			$this->db->from('data_gaji');
 			$this->db->like('tgl_gaji', $bulan);
 			$total_gaji_bulan = $this->db->get()->row()->gaji_bersih;
 	
-			// Data yang akan dimasukkan ke jurnal umum untuk debit
-			$data_jurnal_debit = array(
-				'tanggal' => date('Y-m-d'), // Tanggal input ke jurnal
-				'keterangan' => 'Hutang gaji bulan ' . $bulan,
-				'debit' => $total_gaji_bulan,
-				'kredit' => 0,
-				'jenis' => 'Debit' // Sesuaikan dengan skema jurnal umum
-			);
+			if ($total_gaji_bulan) {
+				// Set tanggal sesuai dengan bulan yang dipilih (gunakan format Y-m-01 untuk tanggal awal bulan)
+				$tanggal_jurnal = $bulan . '-01';
 	
-			// Data yang akan dimasukkan ke jurnal umum untuk kredit
-			$data_jurnal_kredit = array(
-				'tanggal' => date('Y-m-d'), // Tanggal input ke jurnal
-				'keterangan' => 'Kas',
-				'debit' => 0,
-				'kredit' => $total_gaji_bulan,
-				'jenis' => 'Kredit' // Sesuaikan dengan skema jurnal umum
-			);
+				// Data yang akan dimasukkan ke jurnal umum untuk debit
+				$data_jurnal_debit = array(
+					'tanggal' => $tanggal_jurnal, // Tanggal input ke jurnal
+					'keterangan' => 'Hutang gaji bulan ' . $bulan,
+					'debit' => $total_gaji_bulan,
+					'kredit' => 0,
+					'jenis' => 'Debit' // Sesuaikan dengan skema jurnal umum
+				);
 	
-			// Masukkan data ke jurnal umum
-			$this->ModelPenggajian->insert_data($data_jurnal_debit, 'jurnal_umum');
-			$this->ModelPenggajian->insert_data($data_jurnal_kredit, 'jurnal_umum');
+				// Data yang akan dimasukkan ke jurnal umum untuk kredit
+				$data_jurnal_kredit = array(
+					'tanggal' => $tanggal_jurnal, // Tanggal input ke jurnal
+					'keterangan' => 'Kas',
+					'debit' => 0,
+					'kredit' => $total_gaji_bulan,
+					'jenis' => 'Kredit' // Sesuaikan dengan skema jurnal umum
+				);
+	
+				// Masukkan data ke jurnal umum
+				$this->ModelPenggajian->insert_data($data_jurnal_debit, 'jurnal_umum');
+				$this->ModelPenggajian->insert_data($data_jurnal_kredit, 'jurnal_umum');
+	
+				// Redirect kembali dengan pesan sukses
+				$this->session->set_flashdata('pesan','<div class="alert alert-success alert-dismissible fade show" role="alert">
+					<strong>Data berhasil dimasukkan ke jurnal umum!</strong>
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+					</button>
+					</div>');
+			} else {
+				// Redirect kembali dengan pesan error jika tidak ada data gaji
+				$this->session->set_flashdata('pesan','<div class="alert alert-danger alert-dismissible fade show" role="alert">
+					<strong>Data gaji tidak ditemukan untuk bulan ' . $bulan . '!</strong>
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+					</button>
+					</div>');
+			}
+		} else {
+			// Redirect kembali dengan pesan error jika bulan tidak dipilih
+			$this->session->set_flashdata('pesan','<div class="alert alert-danger alert-dismissible fade show" role="alert">
+				<strong>Bulan tidak dipilih!</strong>
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+				</button>
+				</div>');
 		}
-	
-		// Redirect kembali dengan pesan sukses
-		$this->session->set_flashdata('pesan','<div class="alert alert-success alert-dismissible fade show" role="alert">
-			<strong>Data berhasil dimasukkan ke jurnal umum!</strong>
-			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-			<span aria-hidden="true">&times;</span>
-			</button>
-			</div>');
 	
 		redirect('admin/input_gaji');
 	}
+	
+	
 	
 	
 	
