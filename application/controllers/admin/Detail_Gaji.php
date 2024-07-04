@@ -145,30 +145,7 @@ class Detail_Gaji extends CI_Controller {
                  
                 $data_jurnal = array();
 
-                // $data_jurnal[] = array(
-                //     'tanggal' => $tanggal_gaji,
-                //     'kredit' => $id_potongan,
-                //     'keterangan' => 'Potongan gaji dari detail gaji',
-                //     'jenis' => 'Debit',
-                // );
-                
-                // // Tunjangan
-                // $data_jurnal[] = array(
-                //     'tanggal' => $tanggal_gaji,
-                //     'debit' => $id_tunjangan,
-                //     'keterangan' => 'Tunjangan dari detail gaji',
-                //     'jenis' => 'Kredit',
-                // );
-                
-                // // Bonus
-                // $data_jurnal[] = array(
-                //     'tanggal' => $tanggal_gaji,
-                //     'debit' => $id_bonus,
-                //     'keterangan' => 'Bonus dari detail gaji',
-                //     'jenis' => 'Kredit',
-                // );
-                
-                // Gaji Bersih
+                // Gaji Bersih 
                 $data_jurnal[] = array(
                     'tanggal' => $tanggal_gaji,
                     'debit' => $gaji_bersih,
@@ -227,7 +204,8 @@ class Detail_Gaji extends CI_Controller {
         $data['tunjangan'] = $this->ModelPenggajian->get_data('data_tunjangan')->result();
         $data['bonus'] = $this->ModelPenggajian->get_data('data_bonus')->result();
         $data['potongan'] = $this->ModelPenggajian->get_data('potongan_gaji')->result();
-        $data['detail_gaji'] = $this->ModelPenggajian->get_data_by_id('detail_gaji', 'id_detail_gaji', $id)->row();
+        $data['detail_gaji'] = $this->db->query("SELECT * FROM detail_gaji WHERE id_detail_gaji='$id'")->row();
+        // $data['detail_gaji'] = $this->ModelPenggajian->get_data_by_id('detail_gaji', 'id_detail_gaji', $id)->row();
 
         $this->load->view('template_admin/header', $data);
         $this->load->view('template_admin/sidebar');
@@ -236,6 +214,7 @@ class Detail_Gaji extends CI_Controller {
     }
 
     public function update_data_aksi() {
+        $this->_rules();
 
         if ($this->form_validation->run() == FALSE) {
             $this->update_data($this->input->post('id_detail'));
@@ -270,6 +249,7 @@ class Detail_Gaji extends CI_Controller {
                 );
 
                 $where_detail = array('id_detail_gaji' => $id_detail);
+                
                 $this->ModelPenggajian->update_data('detail_gaji', $data_detail_gaji, $where_detail);
 
                 $data_to_gaji = array(

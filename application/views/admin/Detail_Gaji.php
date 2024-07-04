@@ -34,7 +34,7 @@
                             <td class="text-center">Rp. <?php echo number_format($p->id_bonus,0,',','.') ?></td>
                             <td class="text-center">
                                 <a class="btn btn-sm btn-info" data-toggle="modal"
-                                    data-target="#modalUpdate<?php echo $p->no_slip_gaji; ?>">
+                                    data-target="#modalUpdate<?php echo $p->id_detail_gaji; ?>">
                                     <i class="fas fa-edit"></i>
                                 </a>
                                 <a class="btn btn-sm btn-danger"
@@ -44,14 +44,14 @@
                                 </a>
 
                                 <!-- Modal -->
-                                <div class="modal fade" id="modalUpdate<?php echo $p->no_slip_gaji; ?>" tabindex="-1"
-                                    role="dialog" aria-labelledby="modalUpdateLabel<?php echo $p->no_slip_gaji; ?>"
+                                <div class="modal fade" id="modalUpdate<?php echo $p->id_detail_gaji; ?>" tabindex="-1"
+                                    role="dialog" aria-labelledby="modalUpdateLabel<?php echo $p->id_detail_gaji; ?>"
                                     aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <h5 class="modal-title"
-                                                    id="modalUpdateLabel<?php echo $p->no_slip_gaji; ?>">Update Detail
+                                                    id="modalUpdateLabel<?php echo $p->id_detail_gaji; ?>">Update Detail
                                                     Gaji</h5>
                                                 <button type="button" class="close" data-dismiss="modal"
                                                     aria-label="Close">
@@ -74,7 +74,7 @@
                                                         value="<?php echo $p->no_slip_gaji; ?>" readonly>
                                                     <?php echo form_error('no_slip_gaji', '<div class="text-small text-danger"> </div>')?>
                                                 </div>
-
+ 
                                                 <div class="form-group">
                                                     <label>Tunjangan</label>
                                                     <select name="id_tunjangan" class="form-control">

@@ -4,6 +4,7 @@
     </div>
     <a class="btn btn-sm btn-success mb-3" href="#" data-toggle="modal" data-target="#modalTambah"><i
             class="fas fa-plus"></i> Tambah Data Gaji</a>
+            <a class="btn btn-sm btn-primary mb-3" href="<?= base_url('admin/input_gaji/input_ke_jurnal') ?>">Input data ke Jurnal Umum</a>
     <?php echo $this->session->flashdata('pesan')?>
 </div>
 
@@ -73,7 +74,6 @@
                             <th class="text-center">Gaji Bersih</th>
                             <th class="text-center">Total Presensi</th>
                             <th class="text-center">Status Pengajuan</th>
-                            <th class="text-center">Catatan</th>
                             <th class="text-center">Actions</th>
                         </tr>
                     </thead> 
@@ -93,7 +93,7 @@
                             <td class="text-center">Rp. <?php echo number_format($p->gaji_bersih,0,',','.') ?></td>
                             
                             <td class="text-center">
-                                <?php echo "Hadir: " . $p->hadir . ", Sakit: " . $p->sakit . ", Alpha: " . $p->alpha; ?>
+                                <?php echo "Hadir: " . $p->hadir . ", Sakit: " . $p->sakit . ", Ijin: " . $p->ijin . ", Alpha: " . $p->alpha; ?>
                             </td>
                             <td class="text-center">
                                 <?php 
@@ -108,7 +108,6 @@
                                     }
                                 ?>
                             </td>
-                            <td class="text-center"><?php echo $p->catatan ?></td>
                             <td>
                                 <center>
                                 <button class="btn btn-sm btn-info" data-toggle="modal"
@@ -147,10 +146,6 @@
                             <label for="gapok">Gaji Pokok</label>
                             <input type="text" class="form-control" id="gapok" name="gapok"
                                 value="<?php echo $p->tot_gapok; ?>">
-                        </div>
-                        <div class="form-group">
-                            <label for="catatan">Catatan</label>
-                            <input type="text" name="catatan" class="form-control" value="<?php echo $p->catatan; ?>">
                         </div>
                         <button type="submit" class="btn btn-primary">Simpan</button>
                     </form>
