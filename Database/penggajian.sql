@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 30, 2024 at 12:31 PM
+-- Generation Time: Jul 04, 2024 at 12:21 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 7.4.33
 
@@ -67,8 +67,10 @@ CREATE TABLE `data_gaji` (
 --
 
 INSERT INTO `data_gaji` (`no_slip_gaji`, `tgl_gaji`, `tot_gapok`, `id_tunjangan`, `id_potongan`, `id_bonus`, `gaji_bersih`, `gaji_kotor`, `status_pengajuan`, `catatan`, `nip`) VALUES
-(35, '2024-06-01', '1500000', 15000, 200000, 25000, '1340000', '1540000', 'Proses', '', 215610058),
-(36, '2024-06-07', '0', 15000, 0, 25000, '40000', '40000', 'Proses', '', 215610053);
+(35, '2024-06-01', '1500000', 15000, 200000, 25000, '1340000', '1540000', 'Diterima', '', 215610058),
+(37, '2024-07-01', '250000', 15000, 200000, 500000, '565000', '765000', 'Proses', '', 215610054),
+(38, '2024-07-01', '23123213', 0, 0, 0, '23123213', '23123213', 'Proses', '', 215610055),
+(39, '2024-07-01', '4', 15000, 0, 25000, '40004', '40004', 'Proses', '', 215610053);
 
 -- --------------------------------------------------------
 
@@ -119,7 +121,8 @@ INSERT INTO `data_kehadiran` (`id_kehadiran`, `bulan`, `nip`, `nama_pegawai`, `h
 (95, '2024-07', 215610057, 'alex', 34, 2, 33, 1),
 (96, '2024-06', 215610056, 'blo', 11, 3, 2, 4),
 (97, '2024-06', 215610059, 'anderson', 12, 10, 11, 11),
-(98, '2024-05', 215610053, 'wanto', 12, 2, 11, 0);
+(98, '2024-05', 215610053, 'wanto', 12, 2, 11, 0),
+(99, '2024-06', 215610054, 'ww', 12, 10, 11, 2);
 
 -- --------------------------------------------------------
 
@@ -149,7 +152,7 @@ CREATE TABLE `data_pegawai` (
 
 INSERT INTO `data_pegawai` (`nip`, `nama_pegawai`, `email`, `password`, `jenis_kelamin`, `jabatan`, `tgl_lahir`, `photo`, `hak_akses`, `status`, `alamat`, `gaji_pokok`, `no_telp`) VALUES
 (215610052, 'wwe', 'ww@mail.com', '202cb962ac59075b964b07152d234b70', 'Perempuan', 'HRD', '2024-06-08', '', 3, 'Karyawan Tidak Tetap', 'shadhdsh', '0', '123'),
-(215610053, 'wanto', 'wan@wan.com', '7363a0d0604902af7b70b271a0b96480', 'Perempuan', 'Admin', '2024-06-01', '', 1, 'Karyawan Tidak Tetap', '23213123', '0', '23213123'),
+(215610053, 'wanto', 'wan@wan.com', '7363a0d0604902af7b70b271a0b96480', 'Perempuan', 'Admin', '2024-06-01', '', 1, 'Karyawan Tidak Tetap', '23213123', '4', '23213123'),
 (215610054, 'ww', 'waa@mas.com', '202cb962ac59075b964b07152d234b70', 'Perempuan', 'Staff Marketing', '2024-06-01', '', 2, 'Karyawan Tetap', 'sleman', '250000', '2222'),
 (215610055, 'heh', '', '', 'Laki-Laki', 'Admin', '2024-06-01', '', 0, 'Karyawan Tetap', 'sjsjdja', '23123213', '1231'),
 (215610056, 'blo', '', '', 'Laki-Laki', 'Staff Marketing', '2024-06-08', '', 0, 'Karyawan Tetap', 'heheh', '2121', '222'),
@@ -175,7 +178,7 @@ CREATE TABLE `data_tunjangan` (
 --
 
 INSERT INTO `data_tunjangan` (`Kode_Tunjangan`, `Nama_Tunjangan`, `Jumlah_Tunjangan`, `Keterangan`) VALUES
-(5, 'Lembur', '50000', 'Tambahan Uang Lembur'),
+(5, 'Lembur update', '50000', 'Tambahan Uang Lembur'),
 (6, 'Uang Makan', '15000', 'Tambahan Uang Makan'),
 (7, 'Tunjangan Jabatan', '15000', 'Tunjangan Jabatan'),
 (8, 'Tunjangan Transportasi', '50000', 'Transportasi'),
@@ -227,7 +230,9 @@ CREATE TABLE `detail_gaji` (
 
 INSERT INTO `detail_gaji` (`id_detail_gaji`, `no_slip_gaji`, `id_tunjangan`, `id_potongan`, `id_bonus`) VALUES
 (1, 35, 15000, 200000, 25000),
-(2, 36, 15000, 0, 25000);
+(2, 36, 15000, 0, 25000),
+(3, 37, 15000, 200000, 500000),
+(4, 39, 15000, 0, 25000);
 
 -- --------------------------------------------------------
 
@@ -272,7 +277,17 @@ CREATE TABLE `jurnal_umum` (
 
 INSERT INTO `jurnal_umum` (`id_jurnal`, `tanggal`, `keterangan`, `debit`, `kredit`, `no_slip_gaji`, `jenis`) VALUES
 (63, '2024-06-07', 'Hutang Gaji', '40000.00', '0.00', 0, 'Debit'),
-(64, '2024-06-07', 'Kas', '0.00', '40000.00', 0, 'Kredit');
+(64, '2024-06-07', 'Kas', '0.00', '40000.00', 0, 'Kredit'),
+(65, '2024-07-01', 'Hutang Gaji', '565000.00', '0.00', 0, 'Debit'),
+(66, '2024-07-01', 'Kas', '0.00', '565000.00', 0, 'Kredit'),
+(67, '2024-07-01', 'Hutang Gaji', '40004.00', '0.00', 0, 'Debit'),
+(68, '2024-07-01', 'Kas', '0.00', '40004.00', 0, 'Kredit'),
+(69, '2024-07-04', 'Hutang gaji bulan 2024-07', '23728217.00', '0.00', 0, 'Debit'),
+(70, '2024-07-04', 'Kas', '0.00', '23728217.00', 0, 'Kredit'),
+(71, '2024-07-04', 'Hutang gaji bulan 2024-07', '23728217.00', '0.00', 0, 'Debit'),
+(72, '2024-07-04', 'Kas', '0.00', '23728217.00', 0, 'Kredit'),
+(73, '2024-07-04', 'Hutang gaji bulan 2024-07', '23728217.00', '0.00', 0, 'Debit'),
+(74, '2024-07-04', 'Kas', '0.00', '23728217.00', 0, 'Kredit');
 
 -- --------------------------------------------------------
 
@@ -378,7 +393,7 @@ ALTER TABLE `data_bonus`
 -- AUTO_INCREMENT for table `data_gaji`
 --
 ALTER TABLE `data_gaji`
-  MODIFY `no_slip_gaji` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `no_slip_gaji` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT for table `data_jabatan`
@@ -390,7 +405,7 @@ ALTER TABLE `data_jabatan`
 -- AUTO_INCREMENT for table `data_kehadiran`
 --
 ALTER TABLE `data_kehadiran`
-  MODIFY `id_kehadiran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=99;
+  MODIFY `id_kehadiran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
 
 --
 -- AUTO_INCREMENT for table `data_tunjangan`
@@ -420,7 +435,7 @@ ALTER TABLE `hak_akses`
 -- AUTO_INCREMENT for table `jurnal_umum`
 --
 ALTER TABLE `jurnal_umum`
-  MODIFY `id_jurnal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
+  MODIFY `id_jurnal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
 
 --
 -- AUTO_INCREMENT for table `potongan_gaji`
