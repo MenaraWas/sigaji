@@ -17,9 +17,6 @@
   <div class="card-body">
   	<div class="row">
 	  	<div>
-	  		<img style="width: 250px" src="<?php echo base_url('photo/'.$p->photo) ?>">
-	  	</div>
-	  	<div>
 	  		<table class="table">
 	  			<tr>
 	  				<td>Nama Pegawai</td>
@@ -33,11 +30,6 @@
 	  				<td><?php echo $p->jabatan?></td>
 	  			</tr>
 
-	  			<tr>
-	  				<td>Tanggal Masuk</td>
-	  				<td>:</td>
-	  				<td><?php echo $p->tanggal_masuk?></td>
-	  			</tr>
 
 	  		</table>
 	  	</div>

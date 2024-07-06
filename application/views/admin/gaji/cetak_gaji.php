@@ -34,13 +34,10 @@
 	</style>
 </head>
 <body>
-
-<div class="title"><?php echo $title;?></div>
-
-<?php foreach ($gaji as $row) : ?>
-    <p>Bulan : <?php echo date('F', strtotime($row->tgl_gaji)); ?></p>
-<?php endforeach; ?>
-
+<div class="title">
+	<p>LAPORAN PENGGAJIAN PEGAWAI <br>PT Pandam Adiwastra Janaloka</p>
+	<a href="www.pandamjanaloka.com">www.pandamjanaloka.com</a>
+</div>
 
 
 <table class="table">

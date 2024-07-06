@@ -4,13 +4,42 @@
 <head>
     <meta charset="UTF-8">
     <title><?php echo $title; ?></title>
-    <style>
-        /* CSS untuk format cetak jurnal umum */
-        /* Misalnya, atur tata letak, warna, dan ukuran font untuk mencetak */
-    </style>
+    <style type="text/css">
+		body {
+			font-family: Arial, sans-serif;
+			font-size: 14px;
+		}
+		.table {
+			width: 100%;
+			border-collapse: collapse;
+			margin-top: 20px;
+		}
+		.table, .table th, .table td {
+			border: 1px solid #ddd;
+			padding: 8px;
+		}
+		.table th, .table td {
+			text-align: left;
+		}
+		.text-center {
+			text-align: center;
+		}
+		.text-right {
+			text-align: right;
+		}
+		.title {
+			text-align: center;
+			font-size: 18px;
+			font-weight: bold;
+			margin-bottom: 20px;
+		}
+	</style>
 </head>
 <body>
-    <h2><?php echo $title; ?></h2>
+<div class="title">
+	<p>LAPORAN PENGGAJIAN PEGAWAI <br>PT Pandam Adiwastra Janaloka</p>
+	<a href="www.pandamjanaloka.com">www.pandamjanaloka.com</a>
+</div>
     <table border="1" cellpadding="5" cellspacing="0">
         <thead>
             <tr>

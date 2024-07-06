@@ -33,7 +33,7 @@ class Data_Pegawai extends CI_Controller {
 
 		$this->load->view('template_manager/header', $data);
 		$this->load->view('template_manager/sidebar');
-		$this->load->view('admin/pegawai/data_pegawai', $data);
+		$this->load->view('manajer/pegawai/data_pegawai', $data);
 		$this->load->view('template_manager/footer');
 	} 
 
@@ -52,8 +52,8 @@ class Data_Pegawai extends CI_Controller {
     }
 
     $this->load->view('template_manager/header', $data);
-    $this->load->view('template_manager/sidebar');
-    $this->load->view('admin/pegawai', $data);
+    $this->load->view('template_manager/sidebar'); 
+    $this->load->view('manajer/pegawai', $data);
     $this->load->view('template_manager/footer');
 }
 
@@ -128,7 +128,7 @@ public function tambah_data_aksi()
             </button>
             </div>');
 
-        redirect('admin/data_pegawai');
+        redirect('manajer/data_pegawai');
     }
 }
 
@@ -156,7 +156,7 @@ public function tambah_data_aksi()
 	// 			</button>
 	// 			</div>');
 			
-	// 		redirect('admin/data_user');
+	// 		redirect('manajer/data_user');
 		
 	// }
 	
@@ -170,7 +170,7 @@ public function tambah_data_aksi()
 		
 		$this->load->view('template_manager/header', $data);
 		$this->load->view('template_manager/sidebar');
-		$this->load->view('admin/pegawai/update_dataPegawai', $data);
+		$this->load->view('manajer/pegawai/update_dataPegawai', $data);
 		$this->load->view('template_manager/footer');
 	}
 
@@ -246,7 +246,7 @@ public function tambah_data_aksi()
 				<span aria-hidden="true">&times;</span>
 				</button>
 				</div>');
-			redirect('admin/data_pegawai');
+			redirect('manajer/data_pegawai');
 		}
 	}
 
@@ -268,7 +268,7 @@ public function tambah_data_aksi()
 				<span aria-hidden="true">&times;</span>
 				</button>
 				</div>');
-			redirect('admin/data_pegawai');
+			redirect('manajer/data_pegawai');
 	}
 }
 ?>

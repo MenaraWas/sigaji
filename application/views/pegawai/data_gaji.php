@@ -10,8 +10,8 @@
   	<tr>
   		<th>Bulan/Tahun</th>
   		<th>Gaji Pokok</th>
-  		<th>Tunjangan Transportasi</th>
-  		<th>Uang Makan</th>
+  		<th>Tunjangan</th>
+  		<th>Bonus</th>
   		<th>Potongan</th>
   		<th>Total Gaji</th>
   		<th>Cetak Slip</th>

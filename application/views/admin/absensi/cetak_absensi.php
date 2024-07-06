@@ -11,7 +11,7 @@
 </head>
 <body>
 	<center>
-		<h1>PT. Multimedia Adiautama Asia</h1>
+		<h1>PT. Pandam Adiwastra Janaloka</h1>
 		<h2>Laporan Kehadiran Pegawai</h2>
 	</center>
 

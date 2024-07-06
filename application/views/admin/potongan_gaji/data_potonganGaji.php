@@ -1,32 +1,34 @@
-<button type="button" class="tambah btn-sm btn-success mb-3" data-toggle="modal" data-target="#myModal"><i class="fas fa-plus"></i> Tambah Potongan</button>
-    <div class="modal fade" id="myModal">
-        <div class="modal-dialog">
-            <div class="modal-content">
+<div class="d-flex justify-content-between mb-3">
+    <button type="button" class="tambah btn-sm btn-success" data-toggle="modal" data-target="#myModal">
+        <i class="fas fa-plus"></i> Tambah Potongan
+    </button>
+    <div class="col-lg-4">
+        <input id="myInput" class="form-control" type="text" placeholder="Search..">
+    </div>
+</div>
+
+<div class="modal fade" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
             <!-- Modal Header -->
-                <div class="modal-header">
-                    <h4 class="modal-title" id="judul"></h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <div class="modal-header">
+                <h4 class="modal-title" id="judul"></h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div id="tampil_modal">
+                    <!-- Data akan di tampilkan disini-->
                 </div>
-                <!-- Modal body -->
-                <div class="modal-body">
-                    <div id="tampil_modal">
-                            <!-- Data akan di tampilkan disini-->
-                    </div>
-                </div>
-                <!-- Modal footer -->
-                <div class="modal-footer">
-                    <button type="button" class="btn btn btn-sm btn-danger" data-dismiss="modal">Batal</button>
-                </div>
+            </div>
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn btn-sm btn-danger" data-dismiss="modal">Batal</button>
             </div>
         </div>
     </div>
-
-<div class="row">
-    <div class="col-lg-4 col-lg-offset-4">
-        <input id="myInput" class="form-control" type="text"placeholder="Search..">
-    </div>
 </div>
-<br>
+
 
 <div class="card shadow mb-4">
     <div class="card-body">
@@ -57,7 +59,7 @@
                         <button type="button" potongan="<?php echo $item->potongan; ?>" class="hapus btn btn-sm btn-danger"><i class="fas fa-trash"></i></button></td>
                     </tr>
                     <?php
-                        $no++;
+                        $no++; 
                         }
                     ?>
                 </tbody>

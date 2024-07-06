@@ -16,7 +16,7 @@
               <th class="text-center">Nama Akses</th>
               <th class="text-center">Actions</th>
            </tr>
-         </thead>
+         </thead> 
          <tbody>
            <?php $no=1; foreach($akses as $j) : ?>
             <tr>
@@ -25,8 +25,7 @@
               
               <td>
                 <center>
-                  <a class="btn btn-sm btn-info" href="<?php echo base_url('admin/data_jabatan/update_data/'.$j->id) ?>"><i class="fas fa-edit"></i></a>
-                  <a onclick="return confirm('Yakin Hapus?')" class="btn btn-sm btn-danger" href="<?php echo base_url('admin/data_jabatan/delete_data/'.$j->id_jabatan) ?>"><i class="fas fa-trash"></i></a>
+                  <a onclick="return confirm('Yakin Hapus?')" class="btn btn-sm btn-danger" href="<?php echo base_url('admin/data_akses/delete_data/'.$j->id_jabatan) ?>"><i class="fas fa-trash"></i></a>
                 </center>
               </td>
             </tr>

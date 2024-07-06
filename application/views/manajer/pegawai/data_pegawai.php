@@ -41,10 +41,10 @@
                             <td>
                                 <center>
                                     <a class="btn btn-sm btn-info"
-                                        href="<?php echo base_url('admin/data_pegawai/update_data/'.$p->nip) ?>"><i
+                                        href="<?php echo base_url('manajer/data_pegawai/update_data/'.$p->nip) ?>"><i
                                             class="fas fa-edit"></i></a>
                                     <a onclick="return confirm('Yakin Hapus?')" class="btn btn-sm btn-danger"
-                                        href="<?php echo base_url('admin/data_pegawai/delete_data/'.$p->nip) ?>"><i
+                                        href="<?php echo base_url('manajer/data_pegawai/delete_data/'.$p->nip) ?>"><i
                                             class="fas fa-trash"></i></a>
                                 </center>
                             </td>
@@ -70,7 +70,7 @@
             </div>
             <div class="modal-body">
                 <!-- Isi modal -->
-                <form method="POST" action="<?php echo base_url('admin/data_pegawai/tambah_data_aksi')?>"
+                <form method="POST" action="<?php echo base_url('manajer/data_pegawai/tambah_data_aksi')?>"
                     enctype="multipart/form-data"> 
                     <!-- Form input -->
                     <div class="form-row">
