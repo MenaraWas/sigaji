@@ -42,7 +42,7 @@ class Data_Gaji extends CI_Controller {
 		$data['potongan'] = $this->ModelPenggajian->get_data('potongan_gaji')-> result();
 
 		$data['print_slip'] = $this->db->query("SELECT data_pegawai.nip,data_pegawai.nama_pegawai,
-			data_pegawai.jabatan,data_gaji.tot_gapok,data_gaji.id_tunjangan,data_gaji.id_bonus,data_gaji.id_potongan, data_gaji.gaji_bersih,data_kehadiran.alpha,data_kehadiran.bulan
+			data_pegawai.jabatan,data_gaji.tot_gapok,data_gaji.id_tunjangan,data_gaji.id_bonus,data_gaji.id_potongan,data_gaji.gaji_kotor, data_gaji.gaji_bersih,data_kehadiran.alpha,data_kehadiran.bulan
 			FROM data_pegawai
 			INNER JOIN data_kehadiran ON data_kehadiran.nip=data_pegawai.nip
 			INNER JOIN data_jabatan ON data_jabatan.nama_jabatan=data_pegawai.jabatan

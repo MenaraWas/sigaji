@@ -21,7 +21,7 @@
                     <option value="11" <?php echo ($bulan == '11') ? 'selected' : ''; ?>>November</option>
                     <option value="12" <?php echo ($bulan == '12') ? 'selected' : ''; ?>>Desember</option>
                 </select>
-            </div>
+            </div> 
             <div class="col-auto">
                 <label class="sr-only" for="tahun">Tahun</label>
                 <select class="form-control" id="tahun" name="tahun">
@@ -33,7 +33,7 @@
             </div>
             <div class="col-auto">
                 <button type="submit" class="btn btn-primary">Filter</button>
-            </div>
+            </div> 
         </div>
     </form>
 
@@ -55,8 +55,8 @@
                     <td class="text-center"><?php echo $no++; ?></td>
                     <td class="text-center"><?php echo $ju->tanggal; ?></td>
                     <td class="text-center"><?php echo $ju->keterangan; ?></td>
-                    <td class="text-center"><?php echo $ju->debit; ?></td>
-                    <td class="text-center"><?php echo $ju->kredit; ?></td>
+                    <td><?php echo 'Rp ' . number_format($ju->debit, 2, ',', '.'); ?></td>
+<td><?php echo 'Rp ' . number_format($ju->kredit, 2, ',', '.'); ?></td>
                         
                 </tr>
 

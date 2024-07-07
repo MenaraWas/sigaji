@@ -13,7 +13,7 @@
     <div class="card-body">
 
         <?php foreach ($pegawai as $p)  : ?>
-        <form method="POST" action="<?php echo base_url('admin/data_pegawai/update_data_aksi')?>"
+        <form method="POST" action="<?php echo base_url('manajer/data_pegawai/update_data_aksi')?>"
             enctype="multipart/form-data">
 
             <div class="form-group">
@@ -28,6 +28,7 @@
                 <input type="text" name="nama_pegawai" class="form-control" value="<?php echo $p->nama_pegawai?>">
                 <?php echo form_error('nama_pegawai', '<div class="text-small text-danger"> </div>')?>
             </div>
+
             <div class="form-group">
                 <label>gaji</label>
                 <input type="text" name="gaji_pokok" class="form-control" value="<?php echo $p->gaji_pokok?>">
@@ -43,6 +44,7 @@
                 <input type="text" name="no_telp" class="form-control" value="<?php echo $p->no_telp?>">
                 <?php echo form_error('no_telp', '<div class="text-small text-danger"> </div>')?>
             </div>
+
             <div class="form-group">
                 <label>Jabatan</label>
                 <select name="jabatan" class="form-control">
@@ -59,9 +61,8 @@
                 <?php echo form_error('tgl_lahir', '<div class="text-small text-danger"> </div>')?>
             </div>
 
-
             <button type="submit" class="btn btn-success">Simpan</button>
-            <a href="<?php echo base_url('admin/data_pegawai')?>" class="btn btn-warning">Kembali</a>
+            <a href="<?php echo base_url('manajer/data_pegawai')?>" class="btn btn-warning">Kembali</a>
 
         </form>
         <?php endforeach; ?>
