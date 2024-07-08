@@ -111,7 +111,7 @@
     <div class="container">
         <header>
             <h1>PT PANDAM ADIWASTRA JANALOKA</h1>
-            <p><a href="http://www.pandamjanaloka.com">www.pandamjanaloka.com</a></p>
+            <p><a href="http://www.pandamjanaloka.com" target="_blank">www.pandamjanaloka.com</a></p>
             <hr>
             <h2>SLIP GAJI</h2>
         </header>

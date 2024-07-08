@@ -41,15 +41,6 @@
 							</select>
 							</div>
 						</div>
-						<div class="form-group col-md-4">
-							<label>Status Pengajuan</label>
-							<select name="status_pengajuan" class="form-control">
-								<option value="">-- Pilih Status --</option>
-								<option value="Proses" <?php echo ($this->input->get('status_pengajuan') == 'Proses') ? 'selected' : ''; ?>>Proses</option>
-								<option value="Disetujui" <?php echo ($this->input->get('status_pengajuan') == 'Disetujui') ? 'selected' : ''; ?>>Disetujui</option>
-								<option value="Ditolak" <?php echo ($this->input->get('status_pengajuan') == 'Ditolak') ? 'selected' : ''; ?>>Ditolak</option>
-							</select>
-						</div>
 					</div>
 					<button type="submit" class="btn btn-primary">Filter</button>
 					<a href="<?php echo base_url('manajer/laporan_gaji'); ?>" class="btn btn-secondary">Reset</a>

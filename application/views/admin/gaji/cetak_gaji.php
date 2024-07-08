@@ -36,7 +36,7 @@
 <body>
 <div class="title">
 	<p>LAPORAN PENGGAJIAN PEGAWAI <br>PT Pandam Adiwastra Janaloka</p>
-	<a href="www.pandamjanaloka.com">www.pandamjanaloka.com</a>
+	<a href="http://www.pandamjanaloka.com" target="_blank">www.pandamjanaloka.com</a>
 </div>
 
 
