@@ -44,7 +44,6 @@
           <div class="bg-white py-2 collapse-inner rounded">
             <a class="collapse-item" href="<?php echo base_url('manajer/laporan_gaji') ?>">Laporan Gaji</a>
             <a class="collapse-item" href="<?php echo base_url('manajer/laporan_absensi') ?>">Laporan Absensi</a>
-            <a class="collapse-item" href="<?php echo base_url('manajer/slip_gaji') ?>">Slip Gaji</a>
           </div>
         </div>
       </li>

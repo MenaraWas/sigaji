@@ -63,7 +63,6 @@
 								<th class="text-center">Gaji Bersih</th>
 								<th class="text-center">Total Presensi</th>
 								<th class="text-center">Status Pengajuan</th>
-								<th class="text-center">Catatan</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -85,7 +84,6 @@
 									<?php echo "Hadir: " . $p->hadir . ", Sakit: " . $p->sakit . ", Alpha: " . $p->alpha; ?>
 								</td>
 								<td class="text-center"><?php echo $p->status_pengajuan ?></td>
-								<td class="text-center"><?php echo $p->catatan ?></td>
 							</tr>
 							<?php endforeach; ?>
 						</tbody>
